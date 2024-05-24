@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { Container } from 'semantic-ui-react';
-import Hero from '../components/hero'
+
 
 const Layout = (props) => {
   return (
