@@ -1,6 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@layer components {
+  .navbar-active .hamburger div:first-child {
+  @apply rotate-45 translate-y-1.5;
+  }
+  .navbar-active .hamburger div:last-child {
+  @apply -rotate-45 -translate-y-1;
+  }
+  .navbar-active div:first-child div:first-child div:last-child{
+      @apply block lg:flex
+  }
+}
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
