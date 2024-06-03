@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Button } from 'semantic-ui-react';
-import Layout from '../app/components/Layout';
+import Layout from '../src/app/components/Layout';
 import Link from 'next/link'; // Import Link from Next.js
-import factory from '../../ethereum/factory';
-import Campaign from '../../ethereum/campaign';
+import factory from '../ethereum/factory';
+import Campaign from '../ethereum/campaign';
 
 class Campaigns extends React.Component {
   static async getInitialProps() {

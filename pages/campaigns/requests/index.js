@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'semantic-ui-react';
-import Layout from '../../../app/components/Layout';
-import Campaign from '../../../../ethereum/campaign';
-import RequestRow from '../../../app/components/RequestRow';
+import Layout from '../../../src/app/components/Layout';
+import Campaign from '../../../ethereum/campaign';
+import RequestRow from '../../../src/app/components/RequestRow';
 import Link from 'next/link'; // Import Link from Next.js
 import { useRouter } from 'next/router'; // Import useRouter hook from Next.js
 

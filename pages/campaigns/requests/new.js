@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Layout from "../../../app/components/Layout";
+import Layout from "../../../src/app/components/Layout";
 import { Form, Button, Message, Input } from "semantic-ui-react";
-import web3 from "../../../../ethereum/web3";
-import Campaign from "../../../../ethereum/campaign";
+import web3 from "../../../ethereum/web3";
+import Campaign from "../../../ethereum/campaign";
 import { useRouter } from "next/router"; // Import useRouter hook
 
 export default function RequestNew(props) {

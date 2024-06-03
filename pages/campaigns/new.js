@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Layout from '../../app/components/Layout';
+import Layout from '../../src/app/components/Layout';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
-import factory from '../../../ethereum/factory';
-import web3 from '../../../ethereum/web3';
+import factory from '../../ethereum/factory';
+import web3 from '../../ethereum/web3';
 import { useRouter } from 'next/router'; // Import useRouter hook
 
 export default function CampaignNew() {

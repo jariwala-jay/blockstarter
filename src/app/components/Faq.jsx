@@ -1,13 +1,11 @@
-import React from 'react';
+import React from 'react'
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Container, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Layout from '../app/components/Layout';
 
-export default function App() {
-  return (
-    <Layout>
-      <Container>
-        <Typography variant="h3" align="center" gutterBottom>
+const FaqComp = () => {
+    return (
+        <div>
+            <Typography variant="h3" align="center" gutterBottom>
           FAQ Page
         </Typography>
         <Box sx={{ width: '100%' }}>
@@ -45,7 +43,8 @@ export default function App() {
           </Accordion>
           {/* Add more Accordion items as needed */}
         </Box>
-      </Container>
-    </Layout>
-  );
+        </div>
+    )
 }
+
+export default FaqComp

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { Container } from 'semantic-ui-react';
+import Footer from './Footer';
 
 
 const Layout = (props) => {
@@ -13,8 +14,8 @@ const Layout = (props) => {
         <div>
           {props.children}
         </div>
-        <div className="footer absolute bottom-0 w-full">
-       
+        <div className="bottom-0 w-full">
+        <Footer/>
         </div>
       </div>
     </>

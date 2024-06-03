@@ -1,30 +1,28 @@
 import React from 'react';
 import { Container, Button, Typography, Grid, Link } from '@mui/material';
-
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import GitHubIcon from '@mui/icons-material/GitHub';
 const Footer = () => {
   return (
-    <footer style={{ backgroundColor: '#4056a1', color: 'white', padding: '20px 0' }}>
-      <Container>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Typography variant="body1">
-              Create Your Campaign Now
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={6} style={{ textAlign: 'right' }}>
-            <Button variant="outlined" color="primary" href="http://localhost:3000/campaigns/new">
-              Create Campaign
-            </Button>
-          </Grid>
-        </Grid>
-      </Container>
-
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <Typography variant="body2">
-          © 2022 Copyright : <Link href="http://localhost:3000" color="inherit" underline="always">bitstart.com</Link>
-        </Typography>
+    <div className='bg-[#eefdfe] h-[400px]'>
+      <p className='text-black text-[1.3rem] pt-[5rem] font-sofia text-center font-semibold'>Blockstarter</p>
+      <div className='flex gap-[4rem] justify-center'>
+      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>PROJECTS</p>
+      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>FAQ</p>
+      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>COMMUNITY</p>
+      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>UPDATES</p>
       </div>
-    </footer>
+
+      <div className='flex gap-[4rem] justify-center text-black mt-[3rem]'>
+      <FacebookIcon/>
+      <XIcon/>
+      <InstagramIcon/>
+      <GitHubIcon/>
+      </div>
+      <p className='text-black text-[0.9rem] pt-[2rem] font-nanum text-center'>©2024 BLOCKSTARTER |  ALL RIGHTS RESERVED </p>
+    </div>
   );
 };
 

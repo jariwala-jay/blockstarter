@@ -27,7 +27,7 @@ const Header = () => {
         <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '20px' }} className='font-nanum'>
           Projects
         </Button>
-        <Button color="inherit" component={Link} href="/faq" sx={{ marginX: '20px' }} className='font-nanum'>
+        <Button color="inherit" component={Link} href="/Faq" sx={{ marginX: '20px' }} className='font-nanum'>
           FAQ
         </Button>
         <Button color="inherit" component={Link} href="/community" sx={{ marginX: '20px' }} className='font-nanum'>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from './Layout'
 import {Button} from '@mui/material';
 import Link from 'next/link';
 

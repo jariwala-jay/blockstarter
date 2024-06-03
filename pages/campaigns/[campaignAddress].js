@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '../../app/components/Layout';
-import Campaign from '../../../ethereum/campaign';
+import Layout from '../../src/app/components/Layout';
+import Campaign from '../../ethereum/campaign';
 import { Grid, Card, Button } from 'semantic-ui-react';
-import web3 from '../../../ethereum/web3';
-import ContributeForm from '../../app/components/ContributeForm';
+import web3 from '../../ethereum/web3';
+import ContributeForm from '../../src/app/components/ContributeForm';
 import Link from 'next/link'; // Import Link from Next.js
 
 export default function CampaignShow(props) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../app/components/Layout'
+import Layout from '../src/app/components/Layout'
 import styles from './CommunityPage.module.css';
 
 export default function CommunityPage() {
