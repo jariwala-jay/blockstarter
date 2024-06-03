@@ -1,11 +1,11 @@
 "use client"
 
 import React from 'react';
-import factory from '../../ethereum/factory';
+import factory from '../ethereum/factory';
 import { Card, Button } from 'semantic-ui-react'; // Import Semantic UI React components
-import Layout from '../app/components/Layout';
+import Layout from '../src/app/components/Layout';
 import Link from 'next/link'; // Import Link from Next.js
-import Campaign from '../../ethereum/campaign';
+import Campaign from '../ethereum/campaign';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 class CampaignIndex extends React.Component {
