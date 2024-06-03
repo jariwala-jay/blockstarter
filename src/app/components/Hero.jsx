@@ -5,19 +5,19 @@ import Link from 'next/link';
 
 const Hero = () => {
     return (
-      <Layout>
-        <div className="relative">
-          <p className="text-[#000000] text-right absolute top-[4rem] right-5 font-nanum">
+      <>
+        <div className="relative justify-center max-w-[1440px] w-[100%] bg-[#eefdfe] h-[600px] mt-[-50px] mx-auto">
+          <p className="text-[#000000] text-right absolute top-[4rem] right-10 font-nanum">
             THU 2 DEC / 16:30 / 30C
           </p>
-          <div className="text-[#000000] text-[140px] ml-[6rem] font-sofia font-semibold leading-tight ml-[6rem] mt-[3rem]">
+          <div className="text-[#000000] text-[8.5rem] ml-[6rem] font-sofia font-semibold leading-tight ml-[6rem] mt-[3rem]">
             <p>Investing early</p>
             <p>on the blockchain</p>
             <p>project</p>
           </div>
           
-          <div className="text-[#000000] text-left text-[16px] absolute bottom-[2rem] right-[25rem] font-nanum">
-            <p>Highly vetted ideas and teams you can trust.</p>
+          <div className="text-[#000000] text-left text-[16px] absolute bottom-[8rem] right-[22rem] font-nanum ">
+            <p >Highly vetted ideas and teams you can trust.</p>
             <p>Supported by industry-leading creators and funds.</p>
             <Button
           component={Link}
@@ -42,7 +42,7 @@ const Hero = () => {
         </Button>
           </div>
         </div>
-      </Layout>
+      </>
     );
 }
 

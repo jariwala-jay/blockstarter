@@ -2,12 +2,11 @@
 import Layout from '../app/components/Layout'
 import Hero from '../app/components/Hero'
 import ProjectsHome from './components/ProjectsHome';
-
-export default function Home() {
+import Home from '../pages/Home'
+export default function Index() {
   return (
     <>
-    <Hero/>
-    <ProjectsHome/>
+    <Home/>
     </>
   );
 }

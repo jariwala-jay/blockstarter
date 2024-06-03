@@ -4,7 +4,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 const Header = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#000000', boxShadow: 'unset' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#000000', boxShadow: 'unset' ,maxWidth:'1440px' , marginX:'auto'}}>
       <Toolbar>
         <Typography
           variant="h5"
@@ -12,7 +12,7 @@ const Header = () => {
           sx={{
             flexGrow: 1,
             backgroundColor: '#eefdfe',
-            marginRight: '90px',
+            marginRight: '20px',
             color: '#000000', // Set text color explicitly
             paddingY: '42px',
             marginLeft: '-25px',

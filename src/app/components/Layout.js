@@ -8,11 +8,11 @@ const Layout = (props) => {
     < >
 
       
-      <div className="min-h-screen bg-[#eefdfe]">
+      <div className="max-w-[1440x]">
         <Header />
-        <Container className='pt-[10px] pb-[140px] '>
+        <div>
           {props.children}
-        </Container>
+        </div>
         <div className="footer absolute bottom-0 w-full">
        
         </div>
