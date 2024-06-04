@@ -8,11 +8,11 @@ import { CardActionArea } from '@mui/material';
 const LearnMore = () => {
     return (
       <div className='h-[700px] '>
-        <p className="mt-[15rem] text-[#f36128] font-nanum ml-[47%]">
-          Learn More
+        <p className="mt-[15rem] text-[#f36128] font-nanum text-center">
+          LEARN MORE
         </p>
-        <div className="ml-[1%] text-center text-[#ffffff] text-[4rem] ml-[6rem] font-sofia font-medium leading-tight mt-[2rem]">
-          <p>Learn more about Blockstarter</p>
+        <div className="text-[#ffffff] text-[4rem] font-sofia font-medium leading-tight mt-[2rem]">
+          <p className='text-center'>Learn more about Blockstarter</p>
         </div>
         <div className="text-[#808080] text-center  font-nanum">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>

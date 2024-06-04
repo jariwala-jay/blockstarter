@@ -33,7 +33,7 @@ class CampaignIndex extends React.Component {
                     </Link>
                 ),
                 fluid: true,
-                style: { backgroundColor: '#f5f5f5', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' },
+                style: { backgroundColor: '#eefdfe', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' ,color:'black'},
                 key: index,
             };
         });
