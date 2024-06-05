@@ -77,7 +77,7 @@ export default function CampaignShow(props) {
 
   return (
     <Layout>
-    <div className='max-w-[1440px] mx-auto'>
+    <div className='max-w-[1440px] mx-auto '>
       <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Campaign Details</h1>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>

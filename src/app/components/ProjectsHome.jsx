@@ -3,6 +3,7 @@ import React from "react";
 const ProjectsHome = () => {
   return (
     <>
+      <div className='absolute right-0 bg-[#eefdfe] h-[160px] w-1/2'></div>
       <div className="relative max-w-[1440px] bg-black overflow-hidden mx-auto">
         <div className="w-[1440px] ml-[6rem]">
           <p className="font-sofia text-[1.2rem] mt-[2rem]">Supported networks by</p>
@@ -27,7 +28,7 @@ const ProjectsHome = () => {
               alt="Polkadot logo"
               className="w-[11rem] h-auto mr-7"
             />
-
+            
             <div className="absolute h-[100px] w-[1200px] bg-[#eefdfe] top-[-30px] right-[-100px] rounded-[100px]"></div>
             <div className="absolute h-[160px] w-[650px] bg-[#eefdfe] top-[0px] right-[-100px] rounded-[120px] text-[#000000]">
               <div className="mt-[5rem] text-right pr-[10rem] font-nanum">

@@ -58,27 +58,34 @@ const Header = () => {
 
 
   return (
+    <>
+    <div className='relative bg-[#eefdfe] h-[122px] '>
+    <div className='absolute top-0 right-0 bg-black h-[122px] w-1/2  '>
+    </div>
+    <div className='max-w-[1440px] mx-auto '>
     <ThirdwebProvider client={client}>
-      <AppBar position="static" sx={{ backgroundColor: '#000000', boxShadow: 'unset', maxWidth: '1440px', marginX: 'auto' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#000000', boxShadow: 'unset', height:'125px'}}>
         <Toolbar>
           <Typography
-            variant="h5"
+            variant="h4"
             component="div"
             sx={{
               flexGrow: 1,
               backgroundColor: '#eefdfe',
               marginRight: '20px',
               color: '#000000',
-              paddingY: '42px',
+              paddingY: '40px',
               marginLeft: '-25px',
               paddingLeft: '65px',
+              fontFamily:'sofia',
+              fontWeight:'bold'
             }}
           >
             <Link href="/" passHref>
               Blockstarter
             </Link>
           </Typography>
-
+          
           <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '20px' }} className='font-nanum'>
             Projects
           </Button>
@@ -105,8 +112,10 @@ const Header = () => {
         </Toolbar>
       </AppBar>
 
-        </ThirdwebProvider>
-
+        </ThirdwebProvider> 
+        </div>
+        </div>
+        </>
   );
 };
 

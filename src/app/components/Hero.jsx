@@ -5,7 +5,8 @@ import Link from 'next/link';
 const Hero = () => {
     return (
       <>
-        <div className="relative justify-center max-w-[1440px] w-[100%] bg-[#eefdfe] h-[600px] mt-[-50px] mx-auto">
+      <div className=' bg-[#eefdfe] w-full'>
+        <div className="relative justify-center max-w-[1440px] w-[100%] bg-[#eefdfe] h-[600px] mt-[-48px] mx-auto">
           <p className="text-[#000000] text-right absolute top-[4rem] right-10 font-nanum">
             THU 2 DEC / 16:30 / 30C
           </p>
@@ -40,6 +41,7 @@ const Hero = () => {
           See Upcoming Projects
         </Button>
           </div>
+        </div>
         </div>
       </>
     );
