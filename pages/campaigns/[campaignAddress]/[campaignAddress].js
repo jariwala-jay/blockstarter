@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '../../src/app/components/Layout';
-import Campaign from '../../ethereum/campaign';
+import Layout from '../../../src/app/components/Layout';
+import Campaign from '../../../ethereum/campaign';
 import { Grid, Card, Typography, Button , CardContent } from '@mui/material';
-import web3 from '../../ethereum/web3';
-import ContributeForm from '../../src/app/components/ContributeForm';
+import web3 from '../../../ethereum/web3';
+import ContributeForm from '../../../src/app/components/ContributeForm';
 import Link from 'next/link';
 
 export default function CampaignShow(props) {
@@ -114,8 +114,9 @@ export default function CampaignShow(props) {
   );
 }
 
-CampaignShow.getInitialProps = async (props) => {
-    const campaign = Campaign(props.query.campaignAddress);
+CampaignShow.getInitialProps = async ({ query }) => {
+    const { campaignAddress } = query;
+    const campaign = Campaign(campaignAddress);
   
     const summary = await campaign.methods.getSummary().call();
     const title = await campaign.methods.CampaignTitle().call();
@@ -130,12 +131,11 @@ CampaignShow.getInitialProps = async (props) => {
     return {
       title: title,
       Description: Description,
-      address: props.query.campaignAddress,
+      address: campaignAddress,
       minimumContribution: minimumContribution,
       contractBalance: contractBalance,
       requestCount: requestCount,
       approversCount: approversCount,
       manager: summary[4]
     };
-  };
-  
+};
