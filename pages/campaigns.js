@@ -33,8 +33,8 @@ class Campaigns extends React.Component {
 
   renderCampaigns() {
     return this.state.campaigns.map((campaign, index) => (
-      <Grid item xs={12} sm={6} md={4} key={index}>
-        <Card style={{ backgroundColor: '#eefdfe', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)', color: 'black', height:'500px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Grid item xs={12} sm={6} md={4} key={index} >
+        <Card style={{ backgroundColor: '#eefdfe', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)', color: 'black', height:'500px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' , border:'5px solid' , borderColor:'#eefdfe'}}>
           <CardMedia
             component="img"
             alt="Campaign Image"
@@ -70,8 +70,8 @@ class Campaigns extends React.Component {
     return (
       
       <Layout >
-      <div className="max-w-[1440px] mx-auto">
-        <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Listed Projects</h1>
+      <div className="max-w-[1440px] mx-auto px-[4rem]">
+        <h1 className="text-3xl mt-6 mb-6 font-sofia font-semibold text-center">Listed Projects</h1>
         <Grid container spacing={3}>
           {this.renderCampaigns()}
         </Grid>
