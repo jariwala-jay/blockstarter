@@ -1,3 +1,6 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
@@ -11,11 +14,23 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
 
   ],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
         'sofia': ['Sofia Sans', 'sans-serif'],
         'nanum': ['Nanum Gothic Coding', 'monospace'],
+      },
+      animation: {
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+      },
+      keyframes: {
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
     },
   },

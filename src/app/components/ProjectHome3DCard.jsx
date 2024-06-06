@@ -36,7 +36,7 @@ const ProjectHome3DCard = () => {
             translateZ={20}
             as={Link}
             href="/campaigns"
-            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+            className="px-4 py-2 rounded-xl text-xs font-normal text-[#808080]"
           >
             Try now →
           </CardItem>

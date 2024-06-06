@@ -1,9 +1,10 @@
 import React from 'react';
-import { Grid, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import Layout from '../src/app/components/Layout';
 import Link from 'next/link';
 import factory from '../ethereum/factory';
 import Campaign from '../ethereum/campaign';
+import { BentoGrid, BentoGridItem } from "../src/app/components/ui/bento-grid";
+import { Button } from '@mui/material';
 
 const getRandomImage = () => {
   const randomNum = Math.floor(Math.random() * 1000) + 1;
@@ -33,51 +34,38 @@ class Campaigns extends React.Component {
 
   renderCampaigns() {
     return this.state.campaigns.map((campaign, index) => (
-      <Grid item xs={12} sm={6} md={4} key={index} >
-        <Card style={{ backgroundColor: '#eefdfe', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)', color: 'black', height:'500px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' , border:'5px solid' , borderColor:'#eefdfe'}}>
-          <CardMedia
-            component="img"
+      <BentoGridItem
+        key={index}
+        title={campaign.title}
+        description={campaign.description}
+        header={
+          <img
+            src={getRandomImage()}
             alt="Campaign Image"
-            height="100"
-            image={getRandomImage()}
-            title="Campaign Image"
-            className='h-[300px]'
+            className="w-full h-40 object-cover rounded-t-lg"
           />
-          <CardContent style={{ padding: '16px', flexGrow: 1 }}>
-            <Typography gutterBottom variant="h5" component="h2" style={{ marginBottom: '0.5rem' }}>
-              {campaign.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {campaign.description}
-            </Typography>
-          </CardContent>
-
-          <Button
-            variant="contained"
-            style={{ backgroundColor: 'black', color: 'white', alignSelf: 'center'}}
-            component={Link}
-            href={`/campaigns/${campaign.address}`}
-            className='text-center rounded-[20px] text-[1rem] mb-4'
-          >
+        }
+        className={index === 3 || index === 6 ? "md:col-span-2" : ""}
+      >
+        <div className="p-4">
+          <Button variant="contained" color="primary">
             View Campaign
           </Button>
-        </Card>
-      </Grid>
+        </div>
+      </BentoGridItem>
     ));
   }
 
   render() {
     return (
-      
-      <Layout >
-      <div className="max-w-[1440px] mx-auto px-[4rem]">
-        <h1 className="text-3xl mt-6 mb-6 font-sofia font-semibold text-center">Listed Projects</h1>
-        <Grid container spacing={3}>
-          {this.renderCampaigns()}
-        </Grid>
+      <Layout>
+        <div className="max-w-[1440px] mx-auto px-[4rem]">
+          <h1 className="text-3xl mt-6 mb-6 font-sofia font-semibold text-center">Listed Projects</h1>
+          <BentoGrid className="max-w-4xl mx-auto ">
+            {this.renderCampaigns()}
+          </BentoGrid>
         </div>
       </Layout>
-      
     );
   }
 }
