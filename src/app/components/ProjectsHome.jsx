@@ -1,12 +1,16 @@
+"use client";
+
+
 import React from "react";
+import ProjectHome3DCard from './ProjectHome3DCard';
 
 const ProjectsHome = () => {
   return (
     <>
       <div className='absolute right-0 bg-[#eefdfe] h-[160px] w-full md:w-1/2'></div>
       <div className="relative max-w-[100%] md:max-w-[1440px] bg-black overflow-hidden mx-auto px-4">
-        <div className="mt-[40%] xs:mt-[1%] md:mt-[10%] lg:mt-[10%] xl:mt-[0px] max-w-[100%] md:max-w-[1440px] mx-auto">
-          <p className="font-sofia text-[1.2rem] mt-[2rem] text-center md:text-left">Supported networks by</p>
+        <div className="mt-[40%] xs:mt-[5%] md:mt-[10%] lg:mt-[10%] xl:mt-[0px] max-w-[100%] md:max-w-[1440px] mx-auto">
+          <p className="font-sofia text-[1.2rem] mt-[2.5rem] text-center md:text-left">Supported networks by</p>
           <div className="flex flex-wrap justify-center md:justify-start mt-[4rem]">
             <img
               src="/bsc.png"
@@ -48,6 +52,10 @@ const ProjectsHome = () => {
         </div>
         <div className="text-[#808080] text-center absolute top-[30%] sm:top-[40%] md:top-[50%] lg:top-[60%] xl:top-[12rem] right-[10%] lg:right-[24%] font-nanum">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
+        </div>
+        <div className='flex justify-center gap-8 px-[2rem]'>
+        <ProjectHome3DCard/>
+        <ProjectHome3DCard/>
         </div>
       </div>
     </>
