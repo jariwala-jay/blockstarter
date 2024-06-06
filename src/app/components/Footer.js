@@ -8,11 +8,11 @@ const Footer = () => {
   return (
     <div className='bg-[#eefdfe] h-[300px] mx-auto mt-[30px] w-full'>
       <p className='text-black text-[1.3rem] pt-[3rem] font-sofia text-center font-semibold'>Blockstarter</p>
-      <div className='flex gap-[4rem] justify-center'>
-      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>PROJECTS</p>
-      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>FAQ</p>
-      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>COMMUNITY</p>
-      <p className='text-black text-[1rem] pt-[2rem] font-nanum text-center'>UPDATES</p>
+      <div className='flex gap-[2rem] md:gap-[4rem] justify-center text-black text-[1rem]  font-nanum text-center '>
+      <p className='pt-[2rem] '>PROJECTS</p>
+      <p  className='pt-[2rem] '>FAQ</p>
+      <p className='pt-[2rem] '>COMMUNITY</p>
+      <p className='pt-[2rem] '>UPDATES</p>
       </div>
 
       <div className='flex gap-[4rem] justify-center text-black mt-[3rem]'>

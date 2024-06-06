@@ -211,8 +211,17 @@ const ConnectWalletButton = ({ client, wallets, onFailure }) => {
       connectButton={{
         label: "Connect Wallet",
         style: {
-          fontSize: '0.75rem', // Smaller font size
-          padding: '4px 8px',  // Smaller padding
+          fontSize: '0.9rem', // Smaller font size
+          padding: '15px 18px',  // Smaller padding
+          fontFamily:'nanum',
+          backgroundColor: '#f36128',
+            color: '#ffffff',
+            borderRadius: '30px',
+            transition: 'all 0.3s ease-in-out',
+            '&:hover': {
+              color: '#f36128',
+              borderColor: '#f36128',
+            },
         }
       }}
       connectModal={{

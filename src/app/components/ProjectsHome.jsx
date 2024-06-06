@@ -30,7 +30,7 @@ const ProjectsHome = () => {
             />
             <div className="absolute h-[100px] w-[1200px] bg-[#eefdfe] top-[-30px] right-[-100px] rounded-[100px]"></div>
             <div className="absolute h-[160px] w-[650px] bg-[#eefdfe] top-[0px] right-[-100px] rounded-[120px] text-[#000000]">
-              <div className="mt-[5rem] text-right pr-[10rem] font-nanum">
+              <div className="mt-[5rem] text-right pr-[8rem] md:pr-[10rem] font-nanum">
                 <p>SCROLL TO SEE ONGOING BLOCKCHAIN PROJECT</p>
                 <p>AND GIVE THEM YOUR SUPPORT</p>
               </div>
