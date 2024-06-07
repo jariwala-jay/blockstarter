@@ -6,7 +6,7 @@ export default () => {
     return (
         <Layout>
             <div className="flex flex-col items-center font-nanum mb-[30px]">
-                <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold">Updates Page</h1>
+                <h1 className="text-3xl mt-6 mb-4 font-kanit font-semibold">Updates Page</h1>
                 <div className="flex flex-col flex-wrap overflow-x-auto no-scrollbar">
                     <div className="flex flex-col items-center bg-[#eefdfe] rounded-lg p-4 m-4 min-w-[200px] max-w-[800px] shadow-md">
                         <h3 className="text-xl mb-2 text-black">Update #1: Project Milestone Reached</h3>

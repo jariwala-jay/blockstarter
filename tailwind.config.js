@@ -22,13 +22,14 @@ module.exports = {
         'nanum': ['Nanum Gothic Coding', 'monospace'],
         'tomorrow': ['Tomorrow', 'sans-serif'],
         "teko": ['Teko', 'sans-serif'],
+        'kanit' : ['Kanit', 'sans-serif'],
       },
       animation: {
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-          slidein : "slidein 1s ease 700ms",
-          slideup : "slideup 1s ease 700ms",
-          slideleft : "slideleft 1s ease 700ms"
+          slidein : "slidein ease 700ms",
+          slideup : "slideup ease 700ms",
+          slideleft : "slideleft ease 700ms"
       },
       keyframes: {
         slidein: {
