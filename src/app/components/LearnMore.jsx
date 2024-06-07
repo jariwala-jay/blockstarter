@@ -5,13 +5,13 @@ import InfiniteCards from './InfiniteCards'
 const LearnMore = () => {
     return (
       <div className='max-w-[1440px] mx-auto w-full'>
-        <p className="mt-[15rem] text-[#f36128] font-nanum text-center">
+        <p className="mt-[3rem] text-[#f36128] font-nanum text-center">
           LEARN MORE
         </p>
         <div className="text-[#ffffff] text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4.3rem] xl:text-[4rem] font-sofia font-semibold leading-tight mt-[2%]">
           <p className='text-center'>Learn more about Blockstarter</p>
         </div>
-        <div className="text-[#808080] text-center  font-nanum mt-[1%]">
+        <div className="text-[#808080] text-center  font-nanum mt-[1%] text-[0.7rem] md:text-[1rem]">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
         </div>
         

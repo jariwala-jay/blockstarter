@@ -42,7 +42,7 @@ const ProjectsHome = () => {
           </div>
         </div>
       </div>
-      <div className="relative max-w-[100%] md:max-w-[1440px] h-[700px] mt-[-150px] mx-auto">
+      <div className="relative max-w-[100%] md:max-w-[1440px] mt-[-150px] mx-auto">
         <p className="ml-[40%] lg:ml-[7%] mt-[15rem] text-[#f36128] font-nanum">
           FUNDRAISING
         </p>
@@ -50,7 +50,7 @@ const ProjectsHome = () => {
           <p>Futuristic Work shows us what's possible.</p>
           <p>Help Fund it here.</p>
         </div>
-        <div className="text-[#808080] text-center absolute top-[30%] sm:top-[40%] md:top-[50%] lg:top-[60%] xl:top-[12rem] right-[10%] lg:right-[24%] font-nanum">
+        <div className="text-[#808080] text-[0.7rem] md:text-[1rem] text-center absolute top-[28%] sm:top-[30%] md:top-[35%] lg:top-[40%] xl:top-[12rem] right-[20%] sm:right-[25%] md:right-[30%] lg:right-1/4 xl:right-[24%] font-nanum pb-[1rem]">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
         </div>
         <div className='flex justify-center gap-8 px-[2rem]'>

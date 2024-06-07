@@ -5,6 +5,7 @@ import factory from '../ethereum/factory';
 import Campaign from '../ethereum/campaign';
 import { BentoGrid, BentoGridItem } from "../src/app/components/ui/bento-grid";
 import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 const getRandomImage = () => {
   const randomNum = Math.floor(Math.random() * 1000) + 1;
@@ -37,7 +38,21 @@ class Campaigns extends React.Component {
       <BentoGridItem
         key={index}
         title={campaign.title}
-        description={campaign.description}
+        description={
+          <div>
+            
+            <p className="text-gray-700 mb-4">{campaign.description}</p>
+            <Link href={`/campaigns/${campaign.address}`} passHref>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: 'black', color: 'white', alignSelf: 'center'}}
+                className='text-center rounded-[20px] text-[0.7rem] mx-auto'
+              >
+                View Campaign
+              </Button>
+            </Link>
+        </div>
+        }
         header={
           <img
             src={getRandomImage()}
@@ -47,10 +62,8 @@ class Campaigns extends React.Component {
         }
         className={index === 3 || index === 6 ? "md:col-span-2" : ""}
       >
-        <div className="p-4">
-          <Button variant="contained" color="primary">
-            View Campaign
-          </Button>
+        <div className="flex flex-col justify-between h-full">
+          
         </div>
       </BentoGridItem>
     ));
@@ -60,8 +73,47 @@ class Campaigns extends React.Component {
     return (
       <Layout>
         <div className="max-w-[1440px] mx-auto px-[4rem]">
-          <h1 className="text-3xl mt-6 mb-6 font-sofia font-semibold text-center">Listed Projects</h1>
-          <BentoGrid className="max-w-4xl mx-auto ">
+        <div className="flex text-center justify-center items-center">
+      <h1 className="text-[1.2rem] md:text-3xl mt-6 mb-6 font-sofia font-semibold">
+        Listed Projects
+      </h1>
+      <Button
+        component={Link}
+        href="/campaigns/new"
+        sx={{
+          fontFamily: 'nanum',
+          backgroundColor: '#f36128',
+          color: '#ffffff',
+          padding: {
+            xs: '10px 20px', // Small devices
+            sm: '15px 25px', // Small to medium devices
+            md: '20px 30px', // Medium to large devices
+          },
+          border: '3px solid',
+          borderColor: 'black',
+          borderRadius: '30px',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            color: '#f36128',
+            borderColor: '#f36128',
+          },
+          marginLeft: {
+            xs: '35%', // Small devices
+            sm:'35%',
+            md: '35%', // Medium to large devices
+            lg: '35%'
+          },
+        }}
+      >
+        <span className="block md:hidden">
+          <AddIcon />
+        </span>
+        <span className="hidden md:block">
+          Create New Project
+        </span>
+      </Button>
+    </div>
+          <BentoGrid className="max-w-4xl mx-auto">
             {this.renderCampaigns()}
           </BentoGrid>
         </div>
