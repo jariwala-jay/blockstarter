@@ -1,12 +1,28 @@
 "use client";
 
 
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import ProjectHome3DCard from './ProjectHome3DCard';
 import ProjectHome3DCard2 from './ProjectHome3DCard2';
-import FlipText from '../components/ui/flip-text'
 
-const ProjectsHome = () => {
+
+const ProjectsHome = ({ scrollPosition }) => {
+  const [animationParams, setAnimationParams] = useState({ translateX: 0, opacity: 0 });
+
+  useEffect(() => {
+    const calculateAnimationParams = () => {
+      const threshold = 800; // Adjust the threshold as needed
+      if (scrollPosition > threshold) {
+        const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
+        const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
+        setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
+      }
+    };
+
+    // Calculate animation params when the scroll position exceeds the threshold
+    calculateAnimationParams();
+  }, [scrollPosition]);
+
   return (
     <>
       <div className='absolute right-0 bg-[#eefdfe] h-[160px] w-full md:w-1/2'></div>
@@ -48,7 +64,13 @@ const ProjectsHome = () => {
         <p className="ml-[40%] lg:ml-[7%] mt-[15rem] text-[#f36128] font-nanum">
           FUNDRAISING
         </p>
-        <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem]  md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight">
+        <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem]  md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight"
+        style={{
+            transform: `translateX(${animationParams.translateX}px)`,
+            opacity: animationParams.opacity,
+            transition: 'transform 0.3s ease, opacity 0.3s ease',
+          }}
+        >
           <p>Futuristic Work shows us what's possible.</p>
           <p>Help Fund it here.</p>
         </div>

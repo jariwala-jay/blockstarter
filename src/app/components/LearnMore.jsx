@@ -1,15 +1,38 @@
+"use client";
 
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import InfiniteCards from './InfiniteCards'
 
-const LearnMore = () => {
+const LearnMore = ({ scrollPosition }) => {
+  const [animationParams, setAnimationParams] = useState({ translateX: 0, opacity: 0 });
+
+  useEffect(() => {
+    const calculateAnimationParams = () => {
+      const threshold = 1800; // Adjust the threshold as needed
+      if (scrollPosition > threshold) {
+        const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
+        const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
+        setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
+      }
+    };
+
+    // Calculate animation params when the scroll position exceeds the threshold
+    calculateAnimationParams();
+  }, [scrollPosition]);
+
     return (
       <div className='max-w-[1440px] mx-auto w-full'>
         <p className="mt-[3rem] text-[#f36128] font-nanum text-center">
           LEARN MORE
         </p>
         <div className="text-[#ffffff] text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4.3rem] xl:text-[4rem] font-sofia font-semibold leading-tight mt-[2%]">
-          <p className='text-center'>Learn more about Blockstarter</p>
+          <p className='text-center'
+           style={{
+            transform: `translateX(${animationParams.translateX}px)`,
+            opacity: animationParams.opacity,
+            transition: 'transform 0.3s ease, opacity 0.3s ease',
+          }}
+          >Learn more about Blockstarter</p>
         </div>
         <div className="text-[#808080] text-center  font-nanum mt-[1%] text-[0.7rem] md:text-[1rem]">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
