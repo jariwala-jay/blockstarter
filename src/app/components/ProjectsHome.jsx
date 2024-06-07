@@ -3,6 +3,7 @@
 
 import React from "react";
 import ProjectHome3DCard from './ProjectHome3DCard';
+import FlipText from '../components/ui/flip-text'
 
 const ProjectsHome = () => {
   return (
@@ -46,7 +47,7 @@ const ProjectsHome = () => {
         <p className="ml-[40%] lg:ml-[7%] mt-[15rem] text-[#f36128] font-nanum">
           FUNDRAISING
         </p>
-        <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight">
+        <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem]  md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight">
           <p>Futuristic Work shows us what's possible.</p>
           <p>Help Fund it here.</p>
         </div>

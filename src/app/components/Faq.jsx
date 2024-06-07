@@ -16,12 +16,12 @@ const FaqComp = () => {
               id="panel1a-header"
             >
               <Typography sx={{ fontSize: 15, fontWeight: 'regular'}} className='font-nanum'>
-                What is BitStart?
+                What is Blockstarter?
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography className='font-nanum'>
-                Kickstarter is a launchpad for creators to raise funds for the initial production of their inventions. Backers (that's you!) can support the creator by pledging and receiving in exchange a reward.
+                Blockstarter is a launchpad for creators to raise funds for the initial production of their inventions. Backers (that's you!) can support the creator by pledging and receiving in exchange a reward.
               </Typography>
             </AccordionDetails>
           </Accordion>

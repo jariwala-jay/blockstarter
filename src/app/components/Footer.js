@@ -8,11 +8,19 @@ const Footer = () => {
   return (
     <div className='bg-[#eefdfe] h-[300px] mx-auto mt-[30px] w-full'>
       <p className='text-black text-[1.3rem] pt-[3rem] font-sofia text-center font-semibold'>Blockstarter</p>
-      <div className='flex gap-[2rem] md:gap-[4rem] justify-center text-black text-[1rem]  font-nanum text-center '>
-      <p className='pt-[2rem] '>PROJECTS</p>
-      <p  className='pt-[2rem] '>FAQ</p>
-      <p className='pt-[2rem] '>COMMUNITY</p>
-      <p className='pt-[2rem] '>UPDATES</p>
+      <div className='flex gap-[2rem] md:gap-[4rem] justify-center text-black text-[1rem]  font-nanum text-center'>
+      <Link href="/campaigns" passHref>
+  <p className='pt-[2rem] text-black no-underline'>PROJECTS</p>
+</Link>
+<Link href="/Faq" passHref>
+      <p  className='pt-[2rem] text-black no-underline '>FAQ</p>
+      </Link>
+      <Link href="/community" passHref>
+      <p className='pt-[2rem] text-black no-underline'>COMMUNITY</p>
+      </Link>
+      <Link href="/updates" passHref>
+      <p className='pt-[2rem] text-black no-underline'  >UPDATES</p>
+      </Link>
       </div>
 
       <div className='flex gap-[4rem] justify-center text-black mt-[3rem]'>

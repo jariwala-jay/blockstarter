@@ -11,18 +11,19 @@ const Hero = () => {
           <p className="text-[#000000] text-right absolute top-[6%] right-[4%] font-nanum text-[13px] md:text-[14px] lg:text-[15px] xl:text-[17px]" >
             THU 2 DEC / 16:30 / 30C
           </p>
-          <div className="flex flex-col text-[#000000] text-[3.2rem] sm:text-[3.7rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[8rem] ml-[7%] lg:ml-[5%] font-sofia font-black xs:font-semibold mt-[3rem] leading-normal md:leading-tight pt-[100px] lg:pt-[0px] ">
-            <p>Investing early</p>
-            <p>on the blockchain</p>
-            <p>project</p>
+          <div className="flex flex-col text-[#000000] text-[2.8rem] sm:text-[3.7rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[8rem] ml-[7%] lg:ml-[5%] font-teko font-bold xs:font-semibold mt-[3rem] leading-normal md:leading-tight pt-[100px] lg:pt-[0px] ">
+          <p className="animate-slidein">Investing early</p>
+          <p className="animate-slidein">on the blockchain</p>
+          <p className="animate-slidein">project</p>
           </div>
-          
+           
           <div className="text-[#000000] text-center xl:text-left  text-[14px] md:text-[16px] xl:pl-[40%] absolute bottom-[8rem] font-nanum w-full">
-            <p >Highly vetted ideas and teams you can trust.</p>
-            <p>Supported by industry-leading creators and funds.</p>
+            <p className="animate-slideleft">Highly vetted ideas and teams you can trust.</p>
+            <p className="animate-slideleft">Supported by industry-leading creators and funds.</p>
             <Button
           component={Link}
           href="/campaigns"
+          className='animate-slideup'
           sx={{
             fontFamily:'nanum',
             backgroundColor: '#f36128',
