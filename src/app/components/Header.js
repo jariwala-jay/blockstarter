@@ -48,7 +48,7 @@ const Header = () => {
     };
 
     initializeThirdweb();
-  }, []);
+  }, [isInitialized]);
 
   const onFailure = (error) => {
     console.error('Connection error:', error);
@@ -64,18 +64,18 @@ const Header = () => {
   const drawer = (
     <div>
       <List>
-        <ListItem button >
-        <div className='mr-[15%] max-h-[10%] max-w-[30%]'>
-                    {showConnectButton ? (
-                      <ConnectWalletButton
-                        client={client}
-                        wallets={wallets}
-                        onFailure={onFailure}
-                      />
-                    ) : (
-                      <div style={{ width: '195px', height: '40px' }} />
-                    )}
-                  </div>
+        <ListItem button>
+          <div className='mr-[15%] max-h-[10%] max-w-[30%]'>
+            {showConnectButton ? (
+              <ConnectWalletButton
+                client={client}
+                wallets={wallets}
+                onFailure={onFailure}
+              />
+            ) : (
+              <div style={{ width: '195px', height: '40px' }} />
+            )}
+          </div>
         </ListItem>
         <ListItem button component={Link} href="/">
           <ListItemText primary="Home" />
@@ -115,9 +115,8 @@ const Header = () => {
         }
       `}</style>
       <div className='relative bg-[#eefdfe] h-[12%]'>
-        <div className='absolute top-0 right-0 bg-black h-[100%] w-1/2'>
-        </div>
-        <div className='max-w-[1440px] mx-auto'>
+        <div className='absolute top-0 right-0 bg-black h-[100%] w-1/2'></div>
+        <div className='max-w-[1440px] mx-auto transition-transform duration-500 transform translate-x-0'>
           <ThirdwebProvider client={client}>
             <AppBar position="static" sx={{ backgroundColor: '#000000', boxShadow: 'unset' }}>
               <Toolbar>
@@ -142,49 +141,53 @@ const Header = () => {
                   </Link>
                 </Typography>
 
-                <div className="desktop-nav">
-                  <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
-                    Projects
-                  </Button>
-                  <Button color="inherit" component={Link} href="/Faq" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
-                    FAQ
-                  </Button>
-                  <Button color="inherit" component={Link} href="/community" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
-                    Community
-                  </Button>
-                  <Button color="inherit" component={Link} href="/updates" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' , marginRight:'4%' }} className='font-nanum'>
-                    Updates
-                  </Button>
-                  <div className='pr-[300px] max-h-[10%] max-w-[30%]'>
-                    {showConnectButton ? (
-                      <ConnectWalletButton
-                        client={client}
-                        wallets={wallets}
-                        onFailure={onFailure}
-                      />
-                    ) : (
-                      <div style={{ width: '195px', height: '40px' }} />
-                    )}
-                  </div>
-                </div>
+                {isInitialized && (
+                  <>
+                    <div className="desktop-nav">
+                      <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
+                        Projects
+                      </Button>
+                      <Button color="inherit" component={Link} href="/Faq" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
+                        FAQ
+                      </Button>
+                      <Button color="inherit" component={Link} href="/community" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
+                        Community
+                      </Button>
+                      <Button color="inherit" component={Link} href="/updates" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)', marginRight: '4%' }} className='font-nanum'>
+                        Updates
+                      </Button>
+                      <div className='pr-[300px] max-h-[10%] max-w-[30%]'>
+                        {showConnectButton ? (
+                          <ConnectWalletButton
+                            client={client}
+                            wallets={wallets}
+                            onFailure={onFailure}
+                          />
+                        ) : (
+                          <div style={{ width: '195px', height: '40px' }} />
+                        )}
+                      </div>
+                    </div>
 
-                <div className="mobile-nav">
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="end"
-                    onClick={handleDrawerToggle}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Drawer
-                    anchor="right"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                  >
-                    {drawer}
-                  </Drawer>
-                </div>
+                    <div className="mobile-nav">
+                      <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="end"
+                        onClick={handleDrawerToggle}
+                      >
+                        <MenuIcon />
+                      </IconButton>
+                      <Drawer
+                        anchor="right"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                      >
+                        {drawer}
+                      </Drawer>
+                    </div>
+                  </>
+                )}
               </Toolbar>
             </AppBar>
           </ThirdwebProvider>
@@ -213,15 +216,15 @@ const ConnectWalletButton = ({ client, wallets, onFailure }) => {
         style: {
           fontSize: '0.9rem', // Smaller font size
           padding: '15px 18px',  // Smaller padding
-          fontFamily:'nanum',
+          fontFamily: 'nanum',
           backgroundColor: '#f36128',
-            color: '#ffffff',
-            borderRadius: '30px',
-            transition: 'all 0.3s ease-in-out',
-            '&:hover': {
-              color: '#f36128',
-              borderColor: '#f36128',
-            },
+          color: '#ffffff',
+          borderRadius: '30px',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            color: '#f36128',
+            borderColor: '#f36128',
+          },
         }
       }}
       connectModal={{

@@ -73,7 +73,7 @@ class Campaigns extends React.Component {
     return (
       <Layout>
         <div className="max-w-[1440px] mx-auto px-[4rem]">
-        <div className="flex text-center justify-center items-center">
+        <div className="flex text-center justify-center items-center pb-[1rem]">
       <h1 className="text-[1.2rem] md:text-3xl mt-6 mb-6 font-sofia font-semibold">
         Listed Projects
       </h1>

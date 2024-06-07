@@ -3,6 +3,7 @@
 
 import React from "react";
 import ProjectHome3DCard from './ProjectHome3DCard';
+import ProjectHome3DCard2 from './ProjectHome3DCard2';
 import FlipText from '../components/ui/flip-text'
 
 const ProjectsHome = () => {
@@ -56,7 +57,7 @@ const ProjectsHome = () => {
         </div>
         <div className='flex justify-center gap-8 px-[2rem]'>
         <ProjectHome3DCard/>
-        <ProjectHome3DCard/>
+        <ProjectHome3DCard2/>
         </div>
       </div>
     </>
