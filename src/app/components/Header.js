@@ -1,11 +1,29 @@
 "use client";
 import { ThirdwebProvider, ConnectButton, darkTheme } from 'thirdweb/react';
 import { useEffect, useState } from 'react';
-import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText, styled, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import { createThirdwebClient } from "thirdweb";
 import { createWallet, walletConnect, inAppWallet } from "thirdweb/wallets";
+
+const CustomAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  boxShadow: 'unset',
+}));
+const RoundedBackground = styled(Box)(({ theme }) => ({
+  backgroundColor: '#000000',
+  borderRadius: '0 0 0 200px',
+  height: '100%',
+  width: '100%', // Default width to cover the entire app bar
+  position: 'absolute',
+  top: 0,
+  left: 'calc(27% + 20px)', // Adjust this to start after the Blockstarter text
+  zIndex: -1,
+  '@media (max-width: 600px)': {
+    width: '0', // Set width to 0 on mobile devices
+  },
+}));
 
 const Header = () => {
   const [client, setClient] = useState(null);
@@ -115,15 +133,15 @@ const Header = () => {
         }
       `}</style>
       <div className='relative bg-[#eefdfe] h-[12%]'>
-        <div className='absolute top-0 right-0 bg-black h-[100%] w-1/2'></div>
+        <div className='absolute top-0 right-0 bg-black h-[100%] w-[10%] sm:w-1/2'></div>
         <div className='max-w-[1440px] mx-auto transition-transform duration-500 transform translate-x-0'>
           <ThirdwebProvider client={client}>
-            <AppBar position="static" sx={{ backgroundColor: '#000000', boxShadow: 'unset' }}>
-              <Toolbar>
+            <CustomAppBar position="static">
+              <Toolbar sx={{ position: 'relative' }}>
                 <Typography
                   component="div"
                   sx={{
-                    flexGrow: 1,
+                    flexGrow: 0,
                     backgroundColor: '#eefdfe',
                     marginRight: '2%',
                     color: '#000000',
@@ -141,10 +159,12 @@ const Header = () => {
                   </Link>
                 </Typography>
 
+                <RoundedBackground />
+
                 {isInitialized && (
                   <>
-                    <div className="desktop-nav">
-                      <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
+                    <div className="desktop-nav" style={{ zIndex: 1, flexGrow: 1,  justifyContent: 'flex-end' }}>
+                      <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)', backgroundColor: 'transparent' }} className='font-nanum'>
                         Projects
                       </Button>
                       <Button color="inherit" component={Link} href="/Faq" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
@@ -169,7 +189,7 @@ const Header = () => {
                       </div>
                     </div>
 
-                    <div className="mobile-nav">
+                    <div className="absolute mobile-nav right-4">
                       <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -189,7 +209,7 @@ const Header = () => {
                   </>
                 )}
               </Toolbar>
-            </AppBar>
+            </CustomAppBar>
           </ThirdwebProvider>
         </div>
       </div>
