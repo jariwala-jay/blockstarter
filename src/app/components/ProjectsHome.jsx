@@ -1,13 +1,11 @@
 "use client";
 
-
 import React, { useEffect, useState } from 'react';
 import ProjectHome3DCard from './ProjectHome3DCard';
 import ProjectHome3DCard2 from './ProjectHome3DCard2';
 
-
 const ProjectsHome = ({ scrollPosition }) => {
-  const [animationParams, setAnimationParams] = useState({ translateX: 0, opacity: 0 });
+  const [animationParams, setAnimationParams] = useState({  opacity: 1 });
 
   useEffect(() => {
     const calculateAnimationParams = () => {
@@ -16,10 +14,11 @@ const ProjectsHome = ({ scrollPosition }) => {
         const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
         const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
         setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
+      } else {
+        setAnimationParams({ opacity: 1 });
       }
     };
 
-    // Calculate animation params when the scroll position exceeds the threshold
     calculateAnimationParams();
   }, [scrollPosition]);
 
@@ -65,7 +64,7 @@ const ProjectsHome = ({ scrollPosition }) => {
           FUNDRAISING
         </p>
         <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem]  md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight"
-        style={{
+          style={{
             transform: `translateX(${animationParams.translateX}px)`,
             opacity: animationParams.opacity,
             transition: 'transform 0.3s ease, opacity 0.3s ease',
@@ -78,8 +77,8 @@ const ProjectsHome = ({ scrollPosition }) => {
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
         </div>
         <div className='flex justify-center gap-8 px-[2rem]'>
-        <ProjectHome3DCard/>
-        <ProjectHome3DCard2/>
+          <ProjectHome3DCard/>
+          <ProjectHome3DCard2/>
         </div>
       </div>
     </>

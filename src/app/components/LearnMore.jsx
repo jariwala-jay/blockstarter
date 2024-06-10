@@ -4,15 +4,17 @@ import React, { useEffect, useState } from 'react';
 import InfiniteCards from './InfiniteCards'
 
 const LearnMore = ({ scrollPosition }) => {
-  const [animationParams, setAnimationParams] = useState({ translateX: 0, opacity: 0 });
+  const [animationParams, setAnimationParams] = useState({ translateX: 0, opacity: 1 });
 
   useEffect(() => {
     const calculateAnimationParams = () => {
-      const threshold = 1800; // Adjust the threshold as needed
+      const threshold = 1700; // Adjust the threshold as needed
       if (scrollPosition > threshold) {
         const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
         const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
         setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
+      }else {
+        setAnimationParams({ opacity: 1 });
       }
     };
 
