@@ -26,7 +26,7 @@ const ProjectsHome = ({ scrollPosition }) => {
     <>
       <div className='absolute right-0 bg-[#eefdfe] h-[160px] w-full md:w-1/2'></div>
       <div className="relative max-w-[100%] md:max-w-[1440px] bg-black overflow-hidden mx-auto px-4">
-        <div className="mt-[40%] xs:mt-[5%] md:mt-[10%] lg:mt-[10%] xl:mt-[0px] max-w-[100%] md:max-w-[1440px] mx-auto">
+        <div className="mt-[40%] xs:mt-[5%] md:mt-[10%] lg:mt-[10%] xl:mt-[0px] max-w-[100%] md:max-w-[1440px] mx-auto md:ml-[2rem]">
           <p className="font-sofia text-[1.2rem] mt-[2.5rem] text-center md:text-left">Supported networks by</p>
           <div className="flex flex-wrap justify-center md:justify-start mt-[4rem]">
             <img

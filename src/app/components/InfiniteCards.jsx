@@ -18,32 +18,33 @@ const InfiniteCards = () =>{
 const testimonials = [
   {
     quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+      "Blockstarter has revolutionized the way we launch new products. The support from backers has been incredible, allowing us to bring our vision to life faster than we ever imagined.",
+    name: "Emily Rogers",
+    title: "Founder, EcoTech Innovations",
   },
   {
     quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
-  },
-  {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
+      "Thanks to Blockstarter, our community-driven project gained the funding it needed to get off the ground. The platform made it easy to connect with supporters who truly believe in our mission.",
+    name: "Michael Thompson",
+    title: "CEO, GreenFuture",
   },
   {
     quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
+      "Launching our campaign on Blockstarter was a game-changer. The user-friendly interface and supportive community helped us exceed our funding goals in no time.",
+    name: "Sarah Mitchell",
+    title: "Co-Founder, Solar Solutions",
   },
   {
     quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+      "Blockstarter is more than just a crowdfunding platform. It's a vibrant community of innovators and supporters working together to make dreams a reality.",
+    name: "David Kim",
+    title: "Project Manager, Tech For Good",
+  },
+  {
+    quote:
+      "Our experience with Blockstarter has been nothing short of amazing. The exposure and backing we received have set us on a path to success we could never have achieved alone.",
+    name: "Aisha Khan",
+    title: "Creative Director, Artistry Unlimited",
   },
 ];
 
