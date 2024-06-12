@@ -1,27 +1,39 @@
 "use client";
-import { ThirdwebProvider, ConnectButton, darkTheme } from 'thirdweb/react';
-import { useEffect, useState } from 'react';
-import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText, styled, Box } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import Link from 'next/link';
+import { ThirdwebProvider, ConnectButton, darkTheme } from "thirdweb/react";
+import { useEffect, useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  styled,
+  Box,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
 import { createThirdwebClient } from "thirdweb";
 import { createWallet, walletConnect, inAppWallet } from "thirdweb/wallets";
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: 'transparent',
-  boxShadow: 'unset',
+  backgroundColor: "transparent",
+  boxShadow: "unset",
 }));
 const RoundedBackground = styled(Box)(({ theme }) => ({
-  backgroundColor: '#000000',
-  borderRadius: '0 0 0 200px',
-  height: '100%',
-  width: '100%', // Default width to cover the entire app bar
-  position: 'absolute',
+  backgroundColor: "#000000",
+  borderRadius: "0 0 0 200px",
+  height: "100%",
+  width: "100%", // Default width to cover the entire app bar
+  position: "absolute",
   top: 0,
-  left: 'calc(27% + 20px)', // Adjust this to start after the Blockstarter text
+  left: "calc(27% + 20px)", // Adjust this to start after the Blockstarter text
   zIndex: -1,
-  '@media (max-width: 600px)': {
-    width: '0', // Set width to 0 on mobile devices
+  "@media (max-width: 600px)": {
+    width: "0", // Set width to 0 on mobile devices
   },
 }));
 
@@ -46,13 +58,7 @@ const Header = () => {
         walletConnect(),
         inAppWallet({
           auth: {
-            options: [
-              "email",
-              "google",
-              "apple",
-              "facebook",
-              "phone",
-            ],
+            options: ["email", "google", "apple", "facebook", "phone"],
           },
         }),
         createWallet("me.rainbow"),
@@ -69,9 +75,9 @@ const Header = () => {
   }, [isInitialized]);
 
   const onFailure = (error) => {
-    console.error('Connection error:', error);
+    console.error("Connection error:", error);
     if (error?.response?.data) {
-      console.error('Error details:', error.response.data);
+      console.error("Error details:", error.response.data);
     }
   };
 
@@ -83,7 +89,7 @@ const Header = () => {
     <div>
       <List>
         <ListItem button>
-          <div className='mr-[15%] max-h-[10%] max-w-[30%]'>
+          <div className="mr-[15%] max-h-[10%] max-w-[30%]">
             {showConnectButton ? (
               <ConnectWalletButton
                 client={client}
@@ -91,7 +97,7 @@ const Header = () => {
                 onFailure={onFailure}
               />
             ) : (
-              <div style={{ width: '195px', height: '40px' }} />
+              <div style={{ width: "195px", height: "40px" }} />
             )}
           </div>
         </ListItem>
@@ -132,51 +138,100 @@ const Header = () => {
           }
         }
       `}</style>
-      <div className='relative bg-[#eefdfe] h-[12%]'>
-        <div className='absolute top-0 right-0 bg-black h-[100%] w-[10%] sm:w-1/2'></div>
-        <div className='max-w-[1440px] mx-auto transition-transform duration-500 transform translate-x-0'>
+      <div className="relative bg-[#eefdfe] h-[12%]">
+        <div className="absolute top-0 right-0 bg-black h-[100%] w-[10%] sm:w-1/2"></div>
+        <div className="max-w-[1440px] mx-auto transition-transform duration-500 transform translate-x-0">
           <ThirdwebProvider client={client}>
             <CustomAppBar position="static">
-              <Toolbar sx={{ position: 'relative' }}>
-                <Typography
-                  component="div"
-                  sx={{
-                    flexGrow: 0,
-                    backgroundColor: '#eefdfe',
-                    marginRight: '2%',
-                    color: '#000000',
-                    paddingY: '3.3%',
-                    paddingX: '3.5%',
-                    marginLeft: '-5%',
-                    paddingLeft: '5.5%',
-                    fontFamily: 'sofia',
-                    fontWeight: 'bold',
-                    fontSize: 'clamp(1.7rem, 2vw, 3rem)'
-                  }}
-                >
-                  <Link href="/" passHref>
-                    Blockstarter
-                  </Link>
-                </Typography>
+              <Toolbar sx={{ position: "relative" }}>
+              <Typography
+      component="div"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: '#eefdfe',
+        color: '#000000',
+        py: '3.3%',
+        px: '3.5%',
+        ml: '-5%',
+        pl: '5.5%',
+        fontFamily: 'sofia',
+        fontWeight: 'bold',
+      }}
+    >
+      <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+        <img
+          src="/fav.png"
+          alt="Logo"
+          style={{ width: '50px', maxWidth: '50px', height: 'auto', marginRight: '5px' }}
+        />
+        <span className="text-[2rem]">Blockstarter</span>
+      </Link>
+    </Typography>
 
                 <RoundedBackground />
 
                 {isInitialized && (
                   <>
-                    <div className="desktop-nav" style={{ zIndex: 1, flexGrow: 1,  justifyContent: 'flex-end' }}>
-                      <Button color="inherit" component={Link} href="/campaigns" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)', backgroundColor: 'transparent' }} className='font-nanum'>
+                    <div
+                      className="desktop-nav"
+                      style={{
+                        zIndex: 1,
+                        flexGrow: 1,
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <Button
+                        color="inherit"
+                        component={Link}
+                        href="/campaigns"
+                        sx={{
+                          marginX: "2%",
+                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                          backgroundColor: "transparent",
+                        }}
+                        className="font-nanum"
+                      >
                         Projects
                       </Button>
-                      <Button color="inherit" component={Link} href="/Faq" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
+                      <Button
+                        color="inherit"
+                        component={Link}
+                        href="/Faq"
+                        sx={{
+                          marginX: "2%",
+                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                        }}
+                        className="font-nanum"
+                      >
                         FAQ
                       </Button>
-                      <Button color="inherit" component={Link} href="/community" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)' }} className='font-nanum'>
+                      <Button
+                        color="inherit"
+                        component={Link}
+                        href="/community"
+                        sx={{
+                          marginX: "2%",
+                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                        }}
+                        className="font-nanum"
+                      >
                         Community
                       </Button>
-                      <Button color="inherit" component={Link} href="/updates" sx={{ marginX: '2%', fontSize: 'clamp(0.5rem, 1vw, 0.9rem)', marginRight: '4%' }} className='font-nanum'>
+                      <Button
+                        color="inherit"
+                        component={Link}
+                        href="/updates"
+                        sx={{
+                          marginX: "2%",
+                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                          marginRight: "4%",
+                        }}
+                        className="font-nanum"
+                      >
                         Updates
                       </Button>
-                      <div className='pr-[300px] max-h-[10%] max-w-[30%]'>
+                      <div className="pr-[300px] max-h-[10%] max-w-[30%]">
                         {showConnectButton ? (
                           <ConnectWalletButton
                             client={client}
@@ -184,7 +239,7 @@ const Header = () => {
                             onFailure={onFailure}
                           />
                         ) : (
-                          <div style={{ width: '195px', height: '40px' }} />
+                          <div style={{ width: "195px", height: "40px" }} />
                         )}
                       </div>
                     </div>
@@ -219,7 +274,7 @@ const Header = () => {
 
 const ConnectWalletButton = ({ client, wallets, onFailure }) => {
   return (
-    <ConnectButton 
+    <ConnectButton
       client={client}
       wallets={wallets}
       theme={darkTheme({
@@ -234,18 +289,18 @@ const ConnectWalletButton = ({ client, wallets, onFailure }) => {
       connectButton={{
         label: "Connect Wallet",
         style: {
-          fontSize: '0.9rem', // Smaller font size
-          padding: '15px 18px',  // Smaller padding
-          fontFamily: 'nanum',
-          backgroundColor: '#f36128',
-          color: '#ffffff',
-          borderRadius: '30px',
-          transition: 'all 0.3s ease-in-out',
-          '&:hover': {
-            color: '#f36128',
-            borderColor: '#f36128',
+          fontSize: "0.9rem", // Smaller font size
+          padding: "15px 18px", // Smaller padding
+          fontFamily: "nanum",
+          backgroundColor: "#f36128",
+          color: "#ffffff",
+          borderRadius: "30px",
+          transition: "all 0.3s ease-in-out",
+          "&:hover": {
+            color: "#f36128",
+            borderColor: "#f36128",
           },
-        }
+        },
       }}
       connectModal={{
         size: "wide",

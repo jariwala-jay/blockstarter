@@ -5,9 +5,7 @@ import web3 from '../../ethereum/web3';
 import { useRouter } from 'next/router';
 import { TextField, Button, CircularProgress, Snackbar, Typography, Box } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
-import { create } from 'ipfs-http-client'; // Import IPFS client library
-
-const ipfsClient = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }); // Initialize IPFS client
+import axios from 'axios'; // Import axios for HTTP requests
 
 const CampaignNew = () => {
   const router = useRouter();
@@ -51,16 +49,26 @@ const CampaignNew = () => {
         description: '',
         photo: null // Reset photo state
       });
-      router.push('/');
+      router.push('/campaigns');
     } catch (err) {
       setState({ ...state, errorMessage: err.message, loading: false });
     }
   };
 
   const uploadPhotoToPinata = async (photo) => {
+    const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+    const data = new FormData();
+    data.append('file', photo);
+
     try {
-      const { cid } = await ipfsClient.add(photo); // Upload photo to IPFS
-      return cid.toString(); // Return IPFS hash
+      const response = await axios.post(url, data, {
+        headers: {
+          'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+          pinata_api_key: '4442aaee1749f3e75c4c',
+          pinata_secret_api_key: '2da855f1fc11f97134c1e261ff17dc5a84698ac015d4bfec1fad08e8e2fbb431'
+        }
+      });
+      return response.data.IpfsHash; // Return IPFS hash from Pinata response
     } catch (error) {
       console.error('Error uploading photo to Pinata:', error.message);
       throw error;
@@ -77,7 +85,82 @@ const CampaignNew = () => {
         <Box sx={{ maxWidth: '600px', mx: 'auto', mt: 4 }}>
           <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Create New Project</h1>
           <form onSubmit={onSubmit}>
-            {/* Other form fields */}
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                label="Title"
+                fullWidth
+                value={state.title}
+                required
+                onChange={event => setState({ ...state, title: event.target.value })}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                label="Description"
+                fullWidth
+                value={state.description}
+                required
+                onChange={event => setState({ ...state, description: event.target.value })}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                label="Minimum Contribution (ether)"
+                fullWidth
+                value={state.minimumContribution}
+                required
+                onChange={event => setState({ ...state, minimumContribution: event.target.value })}
+                InputProps={{
+                  endAdornment: 'Ether',
+                  style: { color: 'white' }
+                }}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
             <Box sx={{ mb: 2 }}>
               <input
                 type="file"
@@ -85,9 +168,31 @@ const CampaignNew = () => {
                 onChange={event => setState({ ...state, photo: event.target.files[0] })}
               />
             </Box>
+            {state.errorMessage && (
+              <Typography variant="body2" color="error" gutterBottom className='text-center mt-[8px]'>
+                {state.errorMessage}
+              </Typography>
+            )}
             <Button
               variant="contained"
-              // Other button styles
+              sx={{
+                fontFamily: 'nanum',
+                backgroundColor: '#f36128',
+                color: '#ffffff',
+                padding: '20px',
+                width: '190px',
+                border: '2px solid',
+                borderColor: '#f36128',
+                borderRadius: '30px',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  color: '#f36128',
+                  borderColor: '#f36128',
+                  backgroundColor: 'transparent'
+                },
+                marginTop: '10px',
+                marginLeft: '30%'
+              }}
               type="submit"
               disabled={state.loading}
             >
