@@ -56,9 +56,9 @@ const LearnMore = ({ scrollPosition }) => {
               <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-[#eefdfe] translate-y-44 transition duration-300 ease-in-out group-hover:translate-y-0">
                 <div>
                   <h4 className="text-xl font-semibold text-black">Jay Jariwala</h4>
-                  <span className="block text-sm text-gray-500 pb-[10px]">CEO-Founder</span>
+                  <span className="block text-sm text-gray-500 pb-[10px]">Founder</span>
                 </div>
-                <p className="mt-8 text-black">Jay Jariwala, the visionary behind Blockstarter, leads the charge in revolutionizing crowdfunding with cutting-edge technology and a commitment to fostering community-driven support.</p>
+                <p className="mt-4 text-black">Jay Jariwala, the visionary behind Blockstarter, leads the charge in revolutionizing crowdfunding with cutting-edge technology and a commitment to fostering community-driven support.</p>
               </div>
             </div>
             <div className="col-span-2">

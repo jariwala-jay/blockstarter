@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import ProjectHome3DCard from './ProjectHome3DCard';
 import ProjectHome3DCard2 from './ProjectHome3DCard2';
 
 const ProjectsHome = ({ scrollPosition }) => {
-  const [animationParams, setAnimationParams] = useState({  opacity: 1 });
+  const [animationParams, setAnimationParams] = useState({ opacity: 1 });
 
   useEffect(() => {
     const calculateAnimationParams = () => {
@@ -21,6 +24,27 @@ const ProjectsHome = ({ scrollPosition }) => {
 
     calculateAnimationParams();
   }, [scrollPosition]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768, // Adjust based on your requirements
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      }
+    ]
+  };
+
+  const isMobile = window.innerWidth <= 768; // Define the breakpoint for mobile devices
 
   return (
     <>
@@ -63,7 +87,7 @@ const ProjectsHome = ({ scrollPosition }) => {
         <p className="ml-[40%] lg:ml-[7%] mt-[15rem] text-[#f36128] font-nanum">
           FUNDRAISING
         </p>
-        <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem]  md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight"
+        <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold mt-[3rem] leading-tight"
           style={{
             transform: `translateX(${animationParams.translateX}px)`,
             opacity: animationParams.opacity,
@@ -76,10 +100,19 @@ const ProjectsHome = ({ scrollPosition }) => {
         <div className="text-[#808080] text-[0.7rem] md:text-[1rem] text-center absolute top-[28%] sm:top-[30%] md:top-[35%] lg:top-[40%] xl:top-[12rem] right-[20%] sm:right-[25%] md:right-[30%] lg:right-1/4 xl:right-[24%] font-nanum pb-[1rem]">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
         </div>
-        <div className='flex justify-center gap-8 px-[2rem]'>
-          <ProjectHome3DCard/>
-          <ProjectHome3DCard2/>
-        </div>
+        {isMobile ? (
+          <div className="mx-4 px-8 md:px-8">
+            <Slider {...settings}>
+              <ProjectHome3DCard />
+              <ProjectHome3DCard2 />
+            </Slider>
+          </div>
+        ) : (
+          <div className="flex flex-col md:flex-row justify-center gap-8 mx-4 px-4 md:px-8">
+            <ProjectHome3DCard />
+            <ProjectHome3DCard2 />
+          </div>
+        )}
       </div>
     </>
   );

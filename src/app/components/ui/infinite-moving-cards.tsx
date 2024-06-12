@@ -89,25 +89,24 @@ export const InfiniteMovingCards = ({
           <li
             className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
             style={{
-              background:
-                "#eefdfe",
+              background: "#eefdfe",
             }}
             key={item.name}
           >
-            <blockquote>
+            <blockquote className="h-full flex flex-col justify-between">
               <div
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
-              <span className=" relative z-20 text-sm leading-[1.6] text-black font-normal">
+              <span className="relative z-20 text-sm leading-[1.6] text-black font-normal">
                 {item.quote}
               </span>
-              <div className="relative z-20 mb-0 flex flex-row items-center">
+              <div className="relative mt-auto z-20 flex flex-row items-center pt-4">
                 <span className="flex flex-col gap-1">
-                  <span className=" text-sm leading-[1.6] text-black font-semibold">
+                  <span className="text-sm leading-[1.6] text-black font-semibold">
                     {item.name}
                   </span>
-                  <span className=" text-sm leading-[1.6] text-gray-700 font-normal">
+                  <span className="text-sm leading-[1.6] text-gray-700 font-normal">
                     {item.title}
                   </span>
                 </span>
