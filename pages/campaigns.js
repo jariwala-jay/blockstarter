@@ -14,7 +14,7 @@ const getRandomImage = () => {
 
 class Campaigns extends React.Component {
   static async getInitialProps() {
-    const campaignAddresses = await factory.methods.getDeployedCampaign().call();
+    const campaignAddresses = await factory.methods.getDeployedCampaigns().call();
     const campaignDetails = await Promise.all(
       campaignAddresses.map(async (address) => {
         const title = await Campaign(address).methods.CampaignTitle().call();
