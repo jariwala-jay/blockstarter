@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -12,13 +11,15 @@ const ProjectsHome = ({ scrollPosition }) => {
 
   useEffect(() => {
     const calculateAnimationParams = () => {
-      const threshold = 800; // Adjust the threshold as needed
-      if (scrollPosition > threshold) {
-        const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
-        const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
-        setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
-      } else {
-        setAnimationParams({ opacity: 1 });
+      const threshold = 900; // Adjust the threshold as needed
+      if (typeof window !== 'undefined') {
+        if (scrollPosition > threshold) {
+          const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
+          const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
+          setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
+        } else {
+          setAnimationParams({ opacity: 1 });
+        }
       }
     };
 
@@ -44,7 +45,7 @@ const ProjectsHome = ({ scrollPosition }) => {
     ]
   };
 
-  const isMobile = window.innerWidth <= 768; // Define the breakpoint for mobile devices
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768; // Define the breakpoint for mobile devices
 
   return (
     <>
@@ -100,14 +101,15 @@ const ProjectsHome = ({ scrollPosition }) => {
         <div className="text-[#808080] text-[0.7rem] md:text-[1rem] text-center absolute top-[28%] sm:top-[30%] md:top-[35%] lg:top-[40%] xl:top-[12rem] right-[20%] sm:right-[25%] md:right-[30%] lg:right-1/4 xl:right-[24%] font-nanum pb-[1rem]">
           <p>WE BRING NEW TECHNOLOGIES TO OUR COMMUNITY</p>
         </div>
-        {isMobile ? (
+        {isMobile && (
           <div className="mx-4 px-8 md:px-8">
             <Slider {...settings}>
               <ProjectHome3DCard />
               <ProjectHome3DCard2 />
             </Slider>
           </div>
-        ) : (
+        )}
+        {!isMobile && (
           <div className="flex flex-col md:flex-row justify-center gap-8 mx-4 px-4 md:px-8">
             <ProjectHome3DCard />
             <ProjectHome3DCard2 />
