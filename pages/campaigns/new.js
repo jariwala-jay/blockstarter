@@ -5,7 +5,7 @@ import web3 from '../../ethereum/web3';
 import { useRouter } from 'next/router';
 import { TextField, Button, CircularProgress, Snackbar, Typography, Box } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
-import axios from 'axios'; // Import axios for HTTP requests
+import axios from 'axios';
 
 const CampaignNew = () => {
   const router = useRouter();
@@ -16,25 +16,27 @@ const CampaignNew = () => {
     loading: false,
     title: '',
     description: '',
-    photo: null, // Add state for photo
+    photo: null,
     successMessage: '',
     openSnackbar: false
   });
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    if (!state.photo) {
+      setState({ ...state, errorMessage: 'Please upload a photo.' });
+      return;
+    }
     setState({ ...state, loading: true, errorMessage: '' });
 
     try {
-      // Upload photo to Pinata
       const ipfsHash = await uploadPhotoToPinata(state.photo);
 
-      // Create campaign with photo IPFS hash
       await factory.methods.createCampaign(
         state.title,
         state.description,
         web3.utils.toWei(state.minimumContribution, 'ether'),
-        ipfsHash // Pass the IPFS hash to your smart contract
+        ipfsHash
       ).send({
         from: ethereum.selectedAddress
       });
@@ -47,7 +49,7 @@ const CampaignNew = () => {
         minimumContribution: '',
         title: '',
         description: '',
-        photo: null // Reset photo state
+        photo: null
       });
       router.push('/campaigns');
     } catch (err) {
@@ -68,7 +70,7 @@ const CampaignNew = () => {
           pinata_secret_api_key: '2da855f1fc11f97134c1e261ff17dc5a84698ac015d4bfec1fad08e8e2fbb431'
         }
       });
-      return response.data.IpfsHash; // Return IPFS hash from Pinata response
+      return response.data.IpfsHash;
     } catch (error) {
       console.error('Error uploading photo to Pinata:', error.message);
       throw error;
@@ -162,9 +164,12 @@ const CampaignNew = () => {
               />
             </Box>
             <Box sx={{ mb: 2 }}>
+            <label class="block mb-2 text-md font-sofia font-medium text-white pl-[12px]" for="file_input">Cover Image*</label>
               <input
+                className='block w-full text-md text-white pl-[10px] py-[0.8rem] border border-transparent hover:border-[#f36128] rounded-md cursor-pointer  focus:outline-none '
                 type="file"
                 accept="image/*"
+                required
                 onChange={event => setState({ ...state, photo: event.target.files[0] })}
               />
             </Box>

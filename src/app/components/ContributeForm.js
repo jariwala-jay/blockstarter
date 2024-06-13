@@ -47,34 +47,35 @@ const ContributeForm = ({ address }) => {
   };
 
   return (
-    <>
+    <div className='text-center'>
+
       <form onSubmit={onSubmit}>
       <TextField
-    label="Amount to Contribute"
+    label="Investment Amount"
     variant="outlined"
     value={value}
     required
     onChange={(event) => setValue(event.target.value)}
     InputProps={{
         endAdornment: 'Ether',
-        style: { color: 'white' }, // Style for the input text
+        style: { color: 'black' }, // Style for the input text
     }}
     InputLabelProps={{
-        style: { color: 'white' }, // Style for the label text
+        style: { color: 'black' }, // Style for the label text
     }}
     style={{ marginBottom: '10px' }}
     sx={{
         '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
-                borderColor: '#f36128', // Color when focused
+                borderColor: 'black', // Color when focused
             },
             '&:hover fieldset': {
-                borderColor: '#f36128', // Color when hovered
+                borderColor: 'black', // Color when hovered
             },
-            borderColor: '#f36128', // Default border color
+            borderColor: 'black', // Default border color
         },
     }}
-    className='text-[#eefdfe] w-[90%]'
+    className='text-[#eefdfe] w-[100%]'
 />
 
         <Button
@@ -83,8 +84,8 @@ const ContributeForm = ({ address }) => {
             fontFamily: "nanum",
             backgroundColor: "#f36128",
             color: "#ffffff",
-            padding: "20px",
-            width:'190px',
+            padding: "15px",
+            width:"100%",
             border: "2px solid",
             borderColor: "#f36128",
             borderRadius: "30px",
@@ -95,12 +96,12 @@ const ContributeForm = ({ address }) => {
               backgroundColor: "transparent",
             },
             marginTop: "10px", // Adjusted from '1rem' for consistency
-            marginLeft: "30%", // Adjusted from '2rem' for consistency
+            
           }}
           type="submit" // Added to specify button type
           disabled={loading} // Added to disable the button when loading
         >
-          {loading ? <CircularProgress size={24}  className='text-[#f36128]'/> : "Contribute"}{" "}
+          {loading ? <CircularProgress size={24}  className='text-[#f36128]'/> : "INVEST"}{" "}
           {/* Conditional rendering for loading state */}
         </Button>
 
@@ -128,7 +129,7 @@ const ContributeForm = ({ address }) => {
           {successMessage}
         </Typography>
       )}
-    </>
+    </div>
   );
 };
 

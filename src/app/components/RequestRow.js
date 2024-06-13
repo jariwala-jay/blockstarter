@@ -16,7 +16,7 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
       await campaign.methods.approveRequest(id).send({
         from: ethereum.selectedAddress,
       });
-      router.push(`/campaigns/${address}/requests`);
+      router.push(`/campaigns/${address}/`);
     } catch (err) {
       console.error(err);
     }
@@ -30,7 +30,7 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
       await campaign.methods.finalizeRequest(id).send({
         from: ethereum.selectedAddress,
       });
-      router.push(`/campaigns/${address}/requests`);
+      router.push(`/campaigns/${address}/`);
     } catch (err) {
       console.error(err);
     }
@@ -40,18 +40,34 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
   const readyToFinalize = request.approvalCount > totalApproversCount / 2;
 
   return (
-    <TableRow disabled={request.complete} sx={{ backgroundColor: request.complete ? '#dddddd' : readyToFinalize && !request.complete ? '#dff0d8' : 'inherit' }}>
-      <TableCell>{id + 1}</TableCell>
-      <TableCell>{request.description}</TableCell>
+    <TableRow
+      disabled={request.complete}
+      sx={{
+        backgroundColor: request.complete
+          ? "#eefdfe"
+          : readyToFinalize && !request.complete
+          ? "#dff0d8"
+          : "inherit",
+      }}
+    >
+       <TableCell>{id + 1}</TableCell>
+      <TableCell style={{ maxWidth: "300px", overflowWrap: "break-word" }}>
+        {request.description}
+      </TableCell>
       <TableCell>{web3.utils.fromWei(request.value, "ether")}</TableCell>
-      <TableCell>{request.recipient}</TableCell>
+      <TableCell style={{ maxWidth: "200px", overflowWrap: "break-word" }}>
+        {request.recipient}
+      </TableCell>
       <TableCell>{`${request.approvalCount}/${totalApproversCount}`}</TableCell>
       <TableCell>
-        {request.complete ? "Approved" : (
+        {request.complete ? (
+          "Approved"
+        ) : (
           <Button
             disabled={aLoading} // Disable the button when loading
             color="success"
             variant="contained"
+            size="small" // Adjust button size
             onClick={onApprove}
           >
             Approve
@@ -59,11 +75,14 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
         )}
       </TableCell>
       <TableCell>
-        {request.complete ? "Finalized" : (
+        {request.complete ? (
+          "Finalized"
+        ) : (
           <Button
             disabled={fLoading} // Disable the button when loading
             color="primary"
             variant="contained"
+            size="small" // Adjust button size
             onClick={onFinalize}
           >
             Finalize

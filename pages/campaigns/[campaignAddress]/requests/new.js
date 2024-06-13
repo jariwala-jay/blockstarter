@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import Layout from "../../../../src/app/components/Layout";
-import { Button, TextField, Typography, Grid, CircularProgress } from "@mui/material";
+import { Button, TextField, Typography, Grid, CircularProgress, Paper } from "@mui/material";
+import { useRouter } from "next/router";
 import web3 from "../../../../ethereum/web3";
 import Campaign from "../../../../ethereum/campaign";
-import { useRouter } from "next/router";
 
 export default function RequestNew(props) {
-  const router =useRouter()
+  const router = useRouter();
   const address = router.query.campaignAddress;
-
 
   const [state, setState] = useState({
     value: "",
@@ -20,18 +18,18 @@ export default function RequestNew(props) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-  
+
     const campaign = Campaign(address);
     const { description, value, recipient } = state;
     setState({ ...state, loading: true, errorMessage: "" });
     try {
-      const accounts = await web3.eth.getAccounts(); // Get available accounts
-      const senderAddress = accounts[0]; // Assuming the first account is the sender
-  
+      const accounts = await web3.eth.getAccounts();
+      const senderAddress = accounts[0];
+
       await campaign.methods
         .createRequest(description, web3.utils.toWei(value, "ether"), recipient)
         .send({
-          from: senderAddress // Use sender's address obtained from getAccounts
+          from: senderAddress,
         });
       router.push(`/campaigns/${address}/requests`);
     } catch (err) {
@@ -39,156 +37,161 @@ export default function RequestNew(props) {
     }
     setState({ ...state, loading: false });
   };
-  
 
   return (
-    <Layout>
-      <div className="max-w-[1440px] mx-auto">
-        <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">
-          Create a Request
-        </h1>
-        <form onSubmit={onSubmit}>
-          <Grid container spacing={2} className="mx-auto w-[50%]">
-            <Grid item xs={12}>
-              <TextField
-                required
-                label="Description"
-                variant="outlined"
-                fullWidth
-                value={state.description}
-                onChange={(event) =>
-                  setState({ ...state, description: event.target.value })
-                }
-                InputProps={{
-                  style: { color: "#ffffff" },
-                }}
-                InputLabelProps={{
-                  style: { color: "#ffffff" },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#f36128",
+    <>
+      <div className="max-w-[800px] mx-auto mt-6 py-6">
+        <Paper
+          elevation={3}
+          style={{
+            padding: "20px",
+            backgroundColor: "#eefdfe",
+            borderRadius: "15px",
+
+          }}
+        >
+          <Typography variant="h5" className="text-center mb-4 font-semibold">
+            Create a Request
+          </Typography>
+
+          <form onSubmit={onSubmit}>
+            <Grid container spacing={2} className="mx-auto w-[90%]">
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  label="Description"
+                  variant="outlined"
+                  fullWidth
+                  value={state.description}
+                  onChange={(event) =>
+                    setState({ ...state, description: event.target.value })
+                  }
+                  InputProps={{
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    "&:hover fieldset": {
-                      borderColor: "#f36128",
+                  }}
+                  className="text-[#000000]"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  type="number"
+                  label="Amount In Ether"
+                  variant="outlined"
+                  fullWidth
+                  value={state.value}
+                  onChange={(event) =>
+                    setState({ ...state, value: event.target.value })
+                  }
+                  InputProps={{
+                    endAdornment: "Ether",
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    borderColor: "#f36128",
-                  },
-                }}
-                className="text-[#eefdfe] w-[90%]"
-              />
+                  }}
+                  className="text-[#000000]"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  label="Recipient Address"
+                  variant="outlined"
+                  fullWidth
+                  value={state.recipient}
+                  onChange={(event) =>
+                    setState({ ...state, recipient: event.target.value })
+                  }
+                  InputProps={{
+                    style: { color: "#000000", borderColor: "#f36128" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                    },
+                  }}
+                  className="text-[#000000]"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                type="number"
-                label="Amount In Ether"
-                variant="outlined"
-                fullWidth
-                value={state.value}
-                onChange={(event) =>
-                  setState({ ...state, value: event.target.value })
-                }
-                InputProps={{
-                  endAdornment: "Ether",
-                  style: { color: "#ffffff" },
-                }}
-                InputLabelProps={{
-                  style: { color: "#ffffff" },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#f36128",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "#f36128",
-                    },
-                    borderColor: "#f36128",
-                  },
-                }}
-                className="text-[#eefdfe] w-[90%]"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                label="Recipient Address"
-                variant="outlined"
-                fullWidth
-                value={state.recipient}
-                onChange={(event) =>
-                  setState({ ...state, recipient: event.target.value })
-                }
-                InputProps={{
-                  style: { color: "#ffffff", borderColor: "#f36128" }, // Border color added here
-                }}
-                InputLabelProps={{
-                  style: { color: "#ffffff" },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#f36128",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "#f36128",
-                    },
-                  },
-                }}
-                className="text-[#eefdfe] w-[90%]"
-              />
-            </Grid>
-          </Grid>
-          {state.errorMessage && (
-            <Typography
-              variant="body2"
-              color="error"
-              gutterBottom
-              className="text-center mt-[8px]"
-            >
-              {state.errorMessage}
-            </Typography>
-          )}
-          <Button
-            className="mx-[43%]"
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={state.loading}
-            sx={{
-              fontFamily: "nanum",
-              backgroundColor: "#f36128",
-              color: "#ffffff",
-              padding: "20px",
-              width: "190px",
-              border: "2px solid",
-              borderColor: "#f36128",
-              borderRadius: "30px",
-              transition: "all 0.3s ease-in-out",
-              "&:hover": {
-                color: "#f36128",
-                borderColor: "#f36128",
-                backgroundColor: "transparent",
-              },
-              marginTop: "10px",
-              marginLeft: "30%",
-            }}
-          >
-            {state.loading ? (
-              <CircularProgress size={24} className="text-[#f36128]" />
-            ) : (
-              "Create Request"
+            {state.errorMessage && (
+              <Typography
+                variant="body2"
+                color="error"
+                gutterBottom
+                className="text-center mt-[8px]"
+              >
+                {state.errorMessage}
+              </Typography>
             )}
-          </Button>
-        </form>
+            <div className="text-center">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={state.loading}
+                sx={{
+                  fontFamily: "nanum",
+                  backgroundColor: "#f36128",
+                  color: "#ffffff",
+                  padding: "10px 20px",
+                  width: "200px",
+                  border: "2px solid",
+                  borderColor: "#f36128",
+                  borderRadius: "30px",
+                  transition: "all 0.3s ease-in-out",
+                  "&:hover": {
+                    color: "#f36128",
+                    borderColor: "#f36128",
+                    backgroundColor: "transparent",
+                  },
+                  marginTop: "20px",
+                }}
+              >
+                {state.loading ? (
+                  <CircularProgress size={24} className="text-[#f36128]" />
+                ) : (
+                  "Create Request"
+                )}
+              </Button>
+            </div>
+          </form>
+        </Paper>
       </div>
-    </Layout>
+    </>
   );
 }
-
-RequestNew.getInitialProps = async (props) => {
-  let { address } = props.query;
-  return { address };
-};
