@@ -3,6 +3,11 @@ import CampaignFactory from './build/CampaignFactory.json';
 
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
+if (!CONTRACT_ADDRESS) {
+  console.error('Contract address is not defined. Please check the environment variable NEXT_PUBLIC_CONTRACT_ADDRESS.');
+}
+
+
 const instance = new web3.eth.Contract(JSON.parse(CampaignFactory.interface),CONTRACT_ADDRESS);
 
 export default instance;
