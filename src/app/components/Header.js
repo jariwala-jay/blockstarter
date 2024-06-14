@@ -252,7 +252,7 @@ const Header = () => {
                         edge="end"
                         onClick={handleDrawerToggle}
                       >
-                        <MenuIcon />
+                        <MenuIcon className='text-black'/>
                       </IconButton>
                       <Drawer
                         anchor="right"
