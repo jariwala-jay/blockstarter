@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TableBody } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import Layout from '../../../../src/app/components/Layout';
 import Campaign from '../../../../ethereum/campaign';
 import RequestRow from '../../../../src/app/components/RequestRow';
@@ -7,19 +7,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import RequestNew from './new';
 
-const NewRequestForm = ({ address, onCancel }) => {
-  // Placeholder for the new request form component
-  return (
-    <div>
+const NewRequestForm = ({ address, onCancel }) => (
+  <div>
     <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'flex-end' }}>
-     <Button variant="contained" onClick={onCancel} >
+      <Button variant="contained" onClick={onCancel}>
         Back
       </Button>
-      </div>
-     <RequestNew/>
     </div>
-  );
-};
+    <RequestNew />
+  </div>
+);
 
 export default function RequestIndex() {
   const router = useRouter();
@@ -27,7 +24,7 @@ export default function RequestIndex() {
   const [requests, setRequests] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [totalApproversCount, setTotalApproversCount] = useState(0);
-  const [showNewRequestForm, setShowNewRequestForm] = useState(false); // State to track form visibility
+  const [showNewRequestForm, setShowNewRequestForm] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +66,7 @@ export default function RequestIndex() {
 
   return (
     <>
-      <div className="max-w-[800px] mx-auto px-4">
+      <div className="max-w-[1000px] mx-auto px-4">
         {showNewRequestForm ? (
           <NewRequestForm address={address} onCancel={() => setShowNewRequestForm(false)} />
         ) : (
@@ -79,25 +76,10 @@ export default function RequestIndex() {
                 Add Request
               </Button>
             </div>
-            <TableContainer component={Paper} style={{ overflowX: 'auto', maxWidth: '800px', margin: '50px auto' ,backgroundColor:'#eefdfe' ,borderRadius:'15px'}}>
-              <Table stickyHeader>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Id</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Recipient</TableCell>
-                    <TableCell>Approval Count</TableCell>
-                    <TableCell>Approve</TableCell>
-                    <TableCell>Finalize</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {renderRow()}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Typography variant="body2" className="mt-4">
+            <div className="mt-12">
+              {renderRow()}
+            </div>
+            <Typography variant="body2" className="mt-2">
               Found {requestCount} Requests
             </Typography>
           </>

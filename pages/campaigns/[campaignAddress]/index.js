@@ -108,7 +108,7 @@ export default function CampaignShow(props) {
                 <Typography
                   
                   gutterBottom
-                  className="text-[1rem] font-semibold"
+                  className="text-[0.8rem] md:text-[1rem] font-semibold"
                 >
                   {item.title}
                 </Typography>
@@ -132,13 +132,13 @@ export default function CampaignShow(props) {
     <Layout>
       <div className="max-w-[1440px] mx-auto px-4">
         <Box sx={{ textAlign: "center", my: 2 }}>
-          <Typography variant="h3" className="font-sofia font-semibold">
+          <Typography  className="text-[2rem] md:text-[rem] font-sofia font-semibold">
             {title}
           </Typography>
         </Box>
         <Grid container spacing={8}>
         <Grid item xs={12} md={8}>
-        <Box sx={{ width: "100%", height: "auto", overflow: "hidden", mb: 4 }}>
+        <Box sx={{ width: "100%", height: "auto", overflow: "hidden" }}>
           <img
             src={getIPFSImageURL(imageHash)}
             alt="Campaign Image"
@@ -237,7 +237,7 @@ export default function CampaignShow(props) {
           </Grid>
         </Grid>
 
-        <Grid container spacing={8} className='mt-[-330px]'>
+        <Grid container spacing={8} className='mt-[2%] lg:mt-[-20%]'>
           <Grid item xs={12} md={8}>
             <Paper className="bg-transparent border-none">
               <Tabs

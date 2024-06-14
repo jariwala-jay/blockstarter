@@ -31,7 +31,7 @@ export default function RequestNew(props) {
         .send({
           from: senderAddress,
         });
-      router.push(`/campaigns/${address}/requests`);
+      router.push(`/campaigns/${address}/`);
     } catch (err) {
       setState({ ...state, errorMessage: err.message });
     }

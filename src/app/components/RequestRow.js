@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TableRow, TableCell, Button } from "@mui/material";
+import { Card, CardContent, CardActions, Button, Typography, Grid } from "@mui/material";
 import web3 from "../../../ethereum/web3";
 import Campaign from "../../../ethereum/campaign";
 import { useRouter } from "next/router";
@@ -16,7 +16,7 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
       await campaign.methods.approveRequest(id).send({
         from: ethereum.selectedAddress,
       });
-      router.push(`/campaigns/${address}/`);
+      
     } catch (err) {
       console.error(err);
     }
@@ -30,7 +30,7 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
       await campaign.methods.finalizeRequest(id).send({
         from: ethereum.selectedAddress,
       });
-      router.push(`/campaigns/${address}/`);
+      
     } catch (err) {
       console.error(err);
     }
@@ -40,56 +40,98 @@ const RequestRow = ({ id, request, totalApproversCount, address }) => {
   const readyToFinalize = request.approvalCount > totalApproversCount / 2;
 
   return (
-    <TableRow
-      disabled={request.complete}
-      sx={{
-        backgroundColor: request.complete
-          ? "#eefdfe"
-          : readyToFinalize && !request.complete
-          ? "#dff0d8"
-          : "inherit",
-      }}
-    >
-       <TableCell>{id + 1}</TableCell>
-      <TableCell style={{ maxWidth: "300px", overflowWrap: "break-word" }}>
-        {request.description}
-      </TableCell>
-      <TableCell>{web3.utils.fromWei(request.value, "ether")}</TableCell>
-      <TableCell style={{ maxWidth: "200px", overflowWrap: "break-word" }}>
-        {request.recipient}
-      </TableCell>
-      <TableCell>{`${request.approvalCount}/${totalApproversCount}`}</TableCell>
-      <TableCell>
-        {request.complete ? (
-          "Approved"
-        ) : (
-          <Button
-            disabled={aLoading} // Disable the button when loading
-            color="success"
-            variant="contained"
-            size="small" // Adjust button size
-            onClick={onApprove}
-          >
-            Approve
-          </Button>
-        )}
-      </TableCell>
-      <TableCell>
-        {request.complete ? (
-          "Finalized"
-        ) : (
-          <Button
-            disabled={fLoading} // Disable the button when loading
-            color="primary"
-            variant="contained"
-            size="small" // Adjust button size
-            onClick={onFinalize}
-          >
-            Finalize
-          </Button>
-        )}
-      </TableCell>
-    </TableRow>
+    <div className='flex flex-col'>
+      <Card
+        className=' rounded-[15px] w-full'
+        sx={{
+          backgroundColor: request.complete
+            ? "#808080" : "#eefdfe"
+            ,
+          marginBottom: "20px",
+          
+        }}
+      >
+        <CardContent className='sm:pl-[10%]'>
+          <Typography variant="caption">Request {id + 1}</Typography>
+          <Typography className='text-[0.65rem] sm:text-[1rem] font-nanum' gutterBottom>Description: &nbsp;
+          <span className='font-semibold'>
+          {request.description}
+          </span>
+          </Typography>
+          <Typography  gutterBottom className='text-[0.65rem] sm:text-[1rem] font-nanum'>Amount:  &nbsp;
+           <span className='font-semibold'>
+           {web3.utils.fromWei(request.value, "ether")} Ether
+           </span>
+           </Typography>
+          <Typography  gutterBottom className='text-[0.65rem] sm:text-[1rem] font-nanum'>Recipient: 
+          <span className='font-semibold'>
+          {request.recipient}
+          </span>
+          </Typography>
+          <Typography  gutterBottom className='text-[0.65rem] sm:text-[1rem] font-nanum'>Approval Count:  &nbsp;
+          <span className='font-semibold'>
+          {`${request.approvalCount}/${totalApproversCount}`}
+          </span>
+          </Typography>
+        </CardContent>
+        <CardActions className='justify-center gap-[4rem]'>
+          {request.complete ? (
+            <Button
+              disabled
+              color="success"
+              variant="contained"
+              size="small"
+              onClick={onApprove}
+            >
+              Approved
+            </Button>
+          ) : (
+            <Button
+              disabled={aLoading}
+              color="success"
+              variant="contained"
+              size="small"
+              onClick={onApprove}
+            >
+              Approve
+            </Button>
+          )}
+          {readyToFinalize ? ( 
+            request.complete ? (
+            <Button
+              disabled
+              color="error"
+              variant="contained"
+              size="small"
+              onClick={onFinalize}
+            >
+              Finalized
+            </Button>
+            ) : 
+            <Button
+              disabled={fLoading}
+              color="error"
+              variant="contained"
+              size="small"
+              onClick={onFinalize}
+            >
+              Finalize
+            </Button>
+
+          ) : (
+            <Button
+              disabled
+              color="error"
+              variant="contained"
+              size="small"
+              onClick={onFinalize}
+            >
+              Finalize
+            </Button>
+          )}
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 
