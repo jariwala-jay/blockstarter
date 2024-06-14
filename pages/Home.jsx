@@ -20,7 +20,7 @@ const Home = () => {
       }, []);
 
     return (
-        <Layout>
+        <Layout >
             <Hero scrollPosition={scrollPosition} />
             <ProjectsHome scrollPosition={scrollPosition} />
             <LearnMore  scrollPosition={scrollPosition} />

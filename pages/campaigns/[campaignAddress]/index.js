@@ -136,72 +136,22 @@ export default function CampaignShow(props) {
             {title}
           </Typography>
         </Box>
+        <Grid container spacing={8}>
+        <Grid item xs={12} md={8}>
         <Box sx={{ width: "100%", height: "auto", overflow: "hidden", mb: 4 }}>
           <img
             src={getIPFSImageURL(imageHash)}
             alt="Campaign Image"
-            className=" w-full h-[400px] object-cover rounded-xl"
+            className=" w-full h-[300px] object-cover rounded-xl"
           />
         </Box>
-
-        <Grid container spacing={8}>
-          <Grid item xs={12} md={8}>
-            <Paper className="bg-transparent border-none">
-              <Tabs
-                value={tabValue}
-                onChange={handleChange}
-                centered
-                TabIndicatorProps={{ style: { display: "none" } }} // Hide the indicator line
-              >
-              <Tab
-                  label="Overview"
-                  className={`font-nanum ${styles["tab-root"]} ${
-                    tabValue === 0 ? styles["selected"] : ""
-                  }`}
-                />
-                <Tab
-                  label="Description"
-                  className={`font-nanum  ${styles["tab-root"]} ${
-                    tabValue === 1 ? styles["selected"] : ""
-                  }`}
-                />
-                
-                <Tab
-                  label="Requests"
-                  className={`font-nanum ${styles["tab-root"]} ${
-                    tabValue === 2 ? styles["selected"] : ""
-                  }`}
-                />
-              </Tabs>
-            </Paper>
-            <TabPanel value={tabValue} index={0}>
-            <Typography variant="h5" sx={{ mb: 2 }}>
-                About Us :
-              </Typography>
-              <Typography variant="body1" sx={{ mb: 2 }}>
-                {Description}
-              </Typography>
-            
-            </TabPanel>
-            <TabPanel value={tabValue} index={1}>
-            <Typography variant="body1">
-            {renderCards()}
-            </Typography>
-              
-            </TabPanel>
-            <TabPanel value={tabValue} index={2}>
-              <Typography variant="body1">
-                <RequestIndex />
-              </Typography>
-            </TabPanel>
-          </Grid>
-          <Grid item xs={12} md={4}>
+        </Grid>
+        <Grid item xs={12} md={4} >
             <Card
               sx={{
                 backgroundColor: "#eefdfe",
                 boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
                 p: 2,
-                mb: 4,
                 borderRadius:'20px'
               }}
             >
@@ -285,6 +235,60 @@ export default function CampaignShow(props) {
               </CardContent>
             </Card>
           </Grid>
+        </Grid>
+
+        <Grid container spacing={8} className='mt-[-330px]'>
+          <Grid item xs={12} md={8}>
+            <Paper className="bg-transparent border-none">
+              <Tabs
+                value={tabValue}
+                onChange={handleChange}
+                centered
+                TabIndicatorProps={{ style: { display: "none" } }} // Hide the indicator line
+              >
+              <Tab
+                  label="Overview"
+                  className={`font-nanum ${styles["tab-root"]} ${
+                    tabValue === 0 ? styles["selected"] : ""
+                  }`}
+                />
+                <Tab
+                  label="Description"
+                  className={`font-nanum  ${styles["tab-root"]} ${
+                    tabValue === 1 ? styles["selected"] : ""
+                  }`}
+                />
+                
+                <Tab
+                  label="Requests"
+                  className={`font-nanum ${styles["tab-root"]} ${
+                    tabValue === 2 ? styles["selected"] : ""
+                  }`}
+                />
+              </Tabs>
+            </Paper>
+            <TabPanel value={tabValue} index={0} className='mb-[100px]'>
+            <Typography variant="h5" sx={{ mb: 2 }}>
+                About Us :
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                {Description}
+              </Typography>
+            
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
+            <Typography variant="body1">
+            {renderCards()}
+            </Typography>
+              
+            </TabPanel>
+            <TabPanel value={tabValue} index={2}>
+              <Typography variant="body1">
+                <RequestIndex />
+              </Typography>
+            </TabPanel>
+          </Grid>
+          
         </Grid>
       </div>
     </Layout>

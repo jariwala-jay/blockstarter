@@ -16,11 +16,11 @@ const Hero = ({ scrollPosition }) => {
     return (
       <>
       <div className=' bg-[#eefdfe] w-full'>
-        <div className="relative justify-center max-w-[1440px] w-[100%] bg-[#eefdfe] h-[600px] mt-[-48px] mx-auto">
+        <div className="relative z-1 justify-center max-w-[1440px] w-[100%] bg-[#eefdfe] h-[500px] sm:h-[600px] mt-[-48px] mx-auto">
 
             <DateTimeDisplay className="text-[#000000] text-right absolute top-[6%] right-[4%] font-nanum text-[13px] md:text-[14px] lg:text-[15px] xl:text-[17px]"/>
 
-          <div className="flex flex-col text-[#000000] text-[2.8rem] sm:text-[3.7rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[8rem] ml-[7%] lg:ml-[5%]  font-sofia font-bold xs:font-semibold mt-[3rem] leading-normal md:leading-tight pt-[100px] lg:pt-[0px] "
+          <div className="flex flex-col text-[#000000] text-[2.4rem] sm:text-[3.7rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[8rem] ml-[7%] lg:ml-[5%]  font-sofia font-bold xs:font-semibold mt-[3rem] leading-normal md:leading-tight pt-[80px] lg:pt-[0px] "
           style={{
             transform: `translateY(${translateY}px)`,
             opacity: opacity,
@@ -32,7 +32,7 @@ const Hero = ({ scrollPosition }) => {
           <p className="animate-slidein">project</p>
           </div>
            
-          <div className="text-[#000000] text-center xl:text-left  text-[14px] md:text-[16px] xl:pl-[40%] absolute bottom-[8rem] font-nanum w-full"
+          <div className="text-[#000000] text-center xl:text-left  text-[14px] md:text-[16px] xl:pl-[40%] absolute  bottom-[25%] font-nanum w-full"
           style={{ opacity: opacity, transition: 'opacity 0.3s ease' }}
           >
             <p className="animate-slideleft">Highly vetted ideas and teams you can trust.</p>
@@ -54,7 +54,7 @@ const Hero = ({ scrollPosition }) => {
               color: '#f36128',
               borderColor: '#f36128',
             },
-            marginBottom:'-12rem'
+            marginBottom:'-7rem'
           }}
         >
           See Upcoming Projects

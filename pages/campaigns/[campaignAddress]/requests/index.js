@@ -11,7 +11,7 @@ const NewRequestForm = ({ address, onCancel }) => {
   // Placeholder for the new request form component
   return (
     <div>
-    <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+    <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'flex-end' }}>
      <Button variant="contained" onClick={onCancel} >
         Back
       </Button>
@@ -74,7 +74,7 @@ export default function RequestIndex() {
           <NewRequestForm address={address} onCancel={() => setShowNewRequestForm(false)} />
         ) : (
           <>
-            <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'flex-end' }}>
               <Button variant="contained" color="primary" onClick={() => setShowNewRequestForm(true)}>
                 Add Request
               </Button>

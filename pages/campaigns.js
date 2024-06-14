@@ -73,13 +73,14 @@ class Campaigns extends React.Component {
     return (
       <Layout>
         <div className="max-w-[1440px] mx-auto px-[4rem]">
-          <div className="flex text-center justify-center items-center pb-[1rem]">
-            <h1 className="text-[1.2rem] md:text-3xl mt-6 mb-6 font-sofia font-semibold">
+          <div className="relative max-w-4xl flex py-[1rem] mx-auto ">
+            <h1 className="text-[1.1rem] md:text-3xl mt-3 mb-6 font-sofia font-semibold">
               Listed Projects
             </h1>
             <Button
               component={Link}
               href="/campaigns/new"
+              className='absolute right-0'
               sx={{
                 fontFamily: 'nanum',
                 backgroundColor: '#f36128',
@@ -97,12 +98,8 @@ class Campaigns extends React.Component {
                   color: '#f36128',
                   borderColor: '#f36128',
                 },
-                marginLeft: {
-                  xs: '35%', // Small devices
-                  sm:'35%',
-                  md: '35%', // Medium to large devices
-                  lg: '35%'
-                },
+
+               
               }}
             >
               <span className="block md:hidden">

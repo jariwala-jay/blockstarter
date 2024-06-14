@@ -51,7 +51,7 @@ const ProjectsHome = ({ scrollPosition }) => {
     <>
       <div className='absolute right-0 bg-[#eefdfe] h-[160px] w-full md:w-1/2'></div>
       <div className="relative max-w-[100%] md:max-w-[1440px] bg-black overflow-hidden mx-auto px-4">
-        <div className="mt-[40%] xs:mt-[5%] md:mt-[10%] lg:mt-[10%] xl:mt-[0px] max-w-[100%] md:max-w-[1440px] mx-auto md:ml-[2rem]">
+        <div className="mt-[25%] xs:mt-[15%] md:mt-[10%] lg:mt-[10%] xl:mt-[0px] max-w-[100%] md:max-w-[1440px] mx-auto md:ml-[2rem]">
           <p className="font-sofia text-[1.2rem] mt-[2.5rem] text-center md:text-left">Supported networks by</p>
           <div className="flex flex-wrap justify-center md:justify-start mt-[4rem]">
             <img
@@ -75,8 +75,8 @@ const ProjectsHome = ({ scrollPosition }) => {
               className="w-[11rem] h-auto mb-4 mx-2"
             />
             <div className="absolute h-[100px] w-[1200px] bg-[#eefdfe] top-[-30px] right-[-100px] rounded-[100px]"></div>
-            <div className="absolute h-[160px] w-[650px] bg-[#eefdfe] top-[0px] right-[-100px] rounded-[120px] text-[#000000]">
-              <div className="mt-[5rem] text-right pr-[8rem] md:pr-[10rem] font-nanum">
+            <div className="absolute z-10 h-[30px] sm:h-[160px] w-[650px] bg-[#eefdfe] top-[0px] right-[-100px] rounded-[120px] text-[#000000]">
+              <div className=" mt-[0rem] sm:mt-[5rem] text-right pr-[8rem] md:pr-[10rem] font-nanum text-[0.9rem] md:text-[1.1rem]">
                 <p>SCROLL TO SEE ONGOING BLOCKCHAIN PROJECT</p>
                 <p>AND GIVE THEM YOUR SUPPORT</p>
               </div>
