@@ -66,8 +66,8 @@ const CampaignNew = () => {
       const response = await axios.post(url, data, {
         headers: {
           'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-          pinata_api_key: '4442aaee1749f3e75c4c',
-          pinata_secret_api_key: '2da855f1fc11f97134c1e261ff17dc5a84698ac015d4bfec1fad08e8e2fbb431'
+          pinata_api_key: process.env.PINATA_API_KEY,
+          pinata_secret_api_key: process.env.PINATA_SECRET_API_KEY
         }
       });
       return response.data.IpfsHash;

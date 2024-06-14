@@ -9,7 +9,7 @@ if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
 } else {
   // We are on the server *OR* the user is not running metamask
   const provider = new Web3.providers.HttpProvider(
-    "https://eth-sepolia.g.alchemy.com/v2/X0HNuADNsseq156PHx4L83Rb-Cw766ZF"
+    process.env.ETH_API
    
   );
 

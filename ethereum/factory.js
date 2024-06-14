@@ -1,7 +1,7 @@
 import web3 from './web3';
 import CampaignFactory from './build/CampaignFactory.json';
 
-const CONTRACT_ADDRESS = '0x13b6569214e8Dc5919F70DBE8f84cC68291d0789';
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 
 const instance = new web3.eth.Contract(JSON.parse(CampaignFactory.interface),CONTRACT_ADDRESS);
 

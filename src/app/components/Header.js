@@ -50,7 +50,7 @@ const Header = () => {
 
     const initializeThirdweb = async () => {
       const thirdwebClient = createThirdwebClient({
-        clientId: "45d7da099d921451fb82e62733d35768",
+        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
       });
 
       const walletList = [

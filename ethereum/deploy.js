@@ -3,8 +3,8 @@ const Web3 = require('web3');
 const compiledFactory = require('./build/CampaignFactory.json');
 
 const provider = new HDWalletProvider(
-  'fan merry vault there position amateur tray behind vault loyal enact soft',
-  'https://eth-sepolia.g.alchemy.com/v2/X0HNuADNsseq156PHx4L83Rb-Cw766ZF'
+  process.env.ETH_SECRET_KEY,
+  process.env.ETH_API
 );
 //'https://eth-goerli.g.alchemy.com/v2/kkMPAw4ItEasHSHdfixo99T_nJzg0o2o' OLD GEORLI CHAIN
 
