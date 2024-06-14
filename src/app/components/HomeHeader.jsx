@@ -24,10 +24,9 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
   boxShadow: "unset",
 }));
 const RoundedBackground = styled(Box)(({ theme }) => ({
-  backgroundColor: "#eefdfe",
+  backgroundColor: "#000000",
   borderRadius: "0 0 0 200px",
   height: "100%",
-  textColor:'black',
   width: "100%", // Default width to cover the entire app bar
   position: "absolute",
   top: 0,
@@ -139,8 +138,8 @@ const Header = () => {
           }
         }
       `}</style>
-      <div className="relative bg-black h-[12%]">
-        <div className="absolute top-0 right-0 bg-[#eefdfe] h-[100%] w-[10%] sm:w-1/2"></div>
+      <div className="relative bg-[#eefdfe] h-[12%]">
+        <div className="absolute top-0 right-0 bg-black h-[100%] w-[10%] sm:w-1/2"></div>
         <div className="max-w-[1440px] mx-auto transition-transform duration-500 transform translate-x-0">
           <ThirdwebProvider client={client}>
             <CustomAppBar position="static">
@@ -150,8 +149,8 @@ const Header = () => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: '#000000',
-        color: 'white',
+        backgroundColor: '#eefdfe',
+        color: '#000000',
         py: '3.3%',
         px: '3.5%',
         ml: '-5%',
@@ -175,7 +174,7 @@ const Header = () => {
                 {isInitialized && (
                   <>
                     <div
-                      className="desktop-nav text-black"
+                      className="desktop-nav"
                       style={{
                         zIndex: 1,
                         flexGrow: 1,
@@ -183,7 +182,7 @@ const Header = () => {
                       }}
                     >
                       <Button
-                        color='inherit'
+                        color="inherit"
                         component={Link}
                         href="/campaigns"
                         sx={{
@@ -196,7 +195,7 @@ const Header = () => {
                         Projects
                       </Button>
                       <Button
-                        color='inherit'
+                        color="inherit"
                         component={Link}
                         href="/Faq"
                         sx={{
@@ -208,7 +207,7 @@ const Header = () => {
                         FAQ
                       </Button>
                       <Button
-                        color='inherit'
+                        color="inherit"
                         component={Link}
                         href="/community"
                         sx={{
@@ -220,7 +219,7 @@ const Header = () => {
                         Community
                       </Button>
                       <Button
-                        color='inherit'
+                        color="inherit"
                         component={Link}
                         href="/updates"
                         sx={{

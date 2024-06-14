@@ -24,7 +24,7 @@ const LearnMore = ({ scrollPosition }) => {
   return (
     <div className="max-w-[1440px] mx-auto w-full overflow-x-hidden">
       <p className="mt-[3rem] text-[#f36128] font-nanum text-center">LEARN MORE</p>
-      <div className="text-[#ffffff] text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4.3rem] xl:text-[4rem] font-sofia font-semibold leading-tight mt-[2%] text-center"
+      <div className="text-[#ffffff] text-[1.5rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4.3rem] xl:text-[4rem] font-sofia font-semibold leading-tight mt-[2%] text-center"
         style={{
           transform: `translateX(${animationParams.translateX}px)`,
           opacity: animationParams.opacity,
@@ -56,7 +56,7 @@ const LearnMore = ({ scrollPosition }) => {
               <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-[#eefdfe] translate-y-44 transition duration-300 ease-in-out group-hover:translate-y-0">
                 <div>
                   <h4 className="text-xl font-semibold text-black">Jay Jariwala</h4>
-                  <span className="block text-sm text-gray-500 pb-[10px]">Founder</span>
+                  <span className="block text-sm text-gray-500 pb-[25px]">Founder</span>
                 </div>
                 <p className="mt-4 text-black">Jay Jariwala, the visionary behind Blockstarter, leads the charge in revolutionizing crowdfunding with cutting-edge technology and a commitment to fostering community-driven support.</p>
               </div>
