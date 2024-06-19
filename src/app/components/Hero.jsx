@@ -20,7 +20,7 @@ const Hero = ({ scrollPosition }) => {
 
             <DateTimeDisplay className="text-[#000000] text-right absolute top-[6%] right-[4%] font-nanum text-[13px] md:text-[14px] lg:text-[15px] xl:text-[17px]"/>
 
-          <div className="flex flex-col text-[#000000] text-[2.4rem] sm:text-[3.7rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[8rem] ml-[7%] lg:ml-[5%]  font-sofia font-bold xs:font-semibold mt-[3rem] leading-normal md:leading-tight pt-[80px] lg:pt-[0px] "
+          <div className="flex flex-col text-[#000000] text-[2rem] xs:text-[3rem] sm:text-[3.7rem] md:text-[4.5rem] lg:text-[6rem] xl:text-[8rem] ml-[7%] lg:ml-[5%]  font-sofia font-bold xs:font-semibold mt-[3rem] leading-normal md:leading-tight pt-[80px] lg:pt-[0px] "
           style={{
             transform: `translateY(${translateY}px)`,
             opacity: opacity,
@@ -32,7 +32,7 @@ const Hero = ({ scrollPosition }) => {
           <p className="animate-slidein">project</p>
           </div>
            
-          <div className="text-[#000000] text-center xl:text-left  text-[14px] md:text-[16px] xl:pl-[40%] absolute  bottom-[25%] font-nanum w-full"
+          <div className="text-[#000000] text-center xl:text-left  text-[11px] sm:text-[14px] md:text-[16px] xl:pl-[40%] absolute  bottom-[25%] font-nanum w-full"
           style={{ opacity: opacity, transition: 'opacity 0.3s ease' }}
           >
             <p className="animate-slideleft">Highly vetted ideas and teams you can trust.</p>

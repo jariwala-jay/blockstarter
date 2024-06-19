@@ -86,7 +86,7 @@ const Header = () => {
   };
 
   const drawer = (
-    <div>
+    <div >
       <List>
         <ListItem button>
           <div className="mr-[15%] max-h-[10%] max-w-[30%]">
@@ -244,7 +244,7 @@ const Header = () => {
                       </div>
                     </div>
 
-                    <div className="absolute mobile-nav right-4">
+                    <div className="absolute mobile-nav right-[2%]">
                       <IconButton
                         color="inherit"
                         aria-label="open drawer"

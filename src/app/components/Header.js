@@ -245,7 +245,7 @@ const Header = () => {
                       </div>
                     </div>
 
-                    <div className="absolute mobile-nav right-4">
+                    <div className="absolute mobile-nav right-[2%]">
                       <IconButton
                         color="inherit"
                         aria-label="open drawer"

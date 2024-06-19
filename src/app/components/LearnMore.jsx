@@ -44,23 +44,24 @@ const LearnMore = ({ scrollPosition }) => {
             </p>
           </div>
           <div className="grid gap-6 px-4 sm:px-0 md:grid-cols-3 grid-cols-1">
-            <div className="group relative rounded-3xl space-y-6 overflow-hidden">
-              <img
-                className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src="/edited_profile.jpg"
-                alt="Jay Jariwala"
-                loading="lazy"
-                width="640"
-                height="805"
-              />
-              <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-[#eefdfe] translate-y-44 transition duration-300 ease-in-out group-hover:translate-y-0">
-                <div>
-                  <h4 className="text-xl font-semibold text-black">Jay Jariwala</h4>
-                  <span className="block text-sm text-gray-500 pb-[25px]">Founder</span>
-                </div>
-                <p className="mt-4 text-black">Jay Jariwala, the visionary behind Blockstarter, leads the charge in revolutionizing crowdfunding with cutting-edge technology and a commitment to fostering community-driven support.</p>
-              </div>
-            </div>
+  <div className="group relative rounded-3xl space-y-6 overflow-hidden">
+    <img
+      className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+      src="/edited_profile.jpg"
+      alt="Jay Jariwala"
+      loading="lazy"
+      width="640"
+      height="805"
+    />
+    <div className="absolute bottom-24 inset-x-0 h-max mt-auto px-8 py-6 bg-[#eefdfe] transform translate-y-full transition duration-300 ease-in-out group-hover:translate-y-24">
+      <div>
+        <h4 className="text-xl font-semibold text-black">Jay Jariwala</h4>
+        <span className="block text-sm text-gray-500 pb-[25px]">Founder</span>
+      </div>
+      <p className="mt-4 text-black">Jay Jariwala, the visionary behind Blockstarter, leads the charge in revolutionizing crowdfunding with cutting-edge technology and a commitment to fostering community-driven support.</p>
+    </div>
+  </div>
+
             <div className="col-span-2">
               <InfiniteCards />
             </div>

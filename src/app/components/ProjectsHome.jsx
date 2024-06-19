@@ -76,7 +76,7 @@ const ProjectsHome = ({ scrollPosition }) => {
             />
             <div className="absolute h-[100px] w-[1200px] bg-[#eefdfe] top-[-30px] right-[-100px] rounded-[100px]"></div>
             <div className="absolute z-10 h-[30px] sm:h-[160px] w-[650px] bg-[#eefdfe] top-[0px] right-[-100px] rounded-[120px] text-[#000000]">
-              <div className=" mt-[0rem] sm:mt-[5rem] text-right pr-[8rem] md:pr-[10rem] font-nanum text-[0.9rem] md:text-[1.1rem]">
+              <div className=" mt-[1rem] sm:mt-[5rem] text-right pr-[7rem] sm:pr-[8rem] md:pr-[10rem] font-nanum text-[0.8rem] sm:text-[0.9rem] md:text-[1.1rem]">
                 <p>SCROLL TO SEE ONGOING BLOCKCHAIN PROJECT</p>
                 <p>AND GIVE THEM YOUR SUPPORT</p>
               </div>
