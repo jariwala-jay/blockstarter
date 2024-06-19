@@ -32,11 +32,11 @@
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",
     "slick-carousel": "^1.8.1",
-    "solc": "^0.4.17",
+    "solc": "^0.8.18",
     "styled-components": "^5.3.6",
     "tailwind-merge": "^2.3.0",
     "thirdweb": "^5.28.0",
-    "web3": "^4.8.0"
+    "web3": "^4.10.0"
   },
   "devDependencies": {
     "postcss": "^8",

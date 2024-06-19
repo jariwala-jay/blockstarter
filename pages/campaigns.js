@@ -16,11 +16,12 @@ class Campaigns extends React.Component {
     const campaignDetails = await Promise.all(
       campaignAddresses.map(async (address) => {
         const campaign = Campaign(address);
-        const summary = await campaign.methods.getSummary().call();
 
-        const title = await campaign.methods.campaignTitle().call();
-        const description = await campaign.methods.campaignDescription().call();
-        const imageHash = summary[5].toString();
+        const BasicDetails = await campaign.methods.getBasicSummary().call();
+        const Fundingdetails = await campaign.methods.getFundingSummary().call();
+        const title = BasicDetails[8];
+        const description = Fundingdetails[3];
+        const imageHash = BasicDetails[5];
         return { address, title, description, imageHash };
       })
     );
@@ -36,38 +37,43 @@ class Campaigns extends React.Component {
   }
 
   renderCampaigns() {
-    return this.state.campaigns.map((campaign, index) => (
-      <BentoGridItem
-        key={index}
-        title={campaign.title}
-        description={
-          <div>
-            <p className="text-gray-700 mb-4">{campaign.description}</p>
-            <Link href={`/campaigns/${campaign.address}`} passHref>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: 'black', color: 'white', alignSelf: 'center'}}
-                className='text-center rounded-[20px] text-[0.7rem] mx-auto'
-              >
-                View Campaign
-              </Button>
-            </Link>
+    return this.state.campaigns.map((campaign, index) => {
+      const shortDescription = campaign.description.split(" ").slice(0, 10).join(" ") + "...";
+  
+      return (
+        <BentoGridItem
+          key={index}
+          title={campaign.title}
+          description={
+            <div>
+              <p className="text-gray-700 mb-4">{shortDescription}</p>
+              <Link href={`/campaigns/${campaign.address}`} passHref>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: 'black', color: 'white', alignSelf: 'center'}}
+                  className='text-center rounded-[20px] text-[0.7rem] mx-auto'
+                >
+                  View Campaign
+                </Button>
+              </Link>
+            </div>
+          }
+          header={
+            <img
+              src={getIPFSImageURL(campaign.imageHash)}
+              alt="Campaign Image"
+              className="w-full h-40 object-cover rounded-t-lg"
+            />
+          }
+          className={index === 3 || index === 6 ? "md:col-span-2" : ""}
+        >
+          <div className="flex flex-col justify-between h-full">
           </div>
-        }
-        header={
-          <img
-            src={getIPFSImageURL(campaign.imageHash)}
-            alt="Campaign Image"
-            className="w-full h-40 object-cover rounded-t-lg"
-          />
-        }
-        className={index === 3 || index === 6 ? "md:col-span-2" : ""}
-      >
-        <div className="flex flex-col justify-between h-full">
-        </div>
-      </BentoGridItem>
-    ));
+        </BentoGridItem>
+      );
+    });
   }
+  
 
   render() {
     return (

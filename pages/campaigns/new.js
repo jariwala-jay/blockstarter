@@ -18,7 +18,11 @@ const CampaignNew = () => {
     description: '',
     photo: null,
     successMessage: '',
-    openSnackbar: false
+    openSnackbar: false,
+    fundingGoal: '',
+    duration: '',
+    rewards: '',
+    teamMembers: ''
   });
 
   const onSubmit = async (event) => {
@@ -36,7 +40,11 @@ const CampaignNew = () => {
         state.title,
         state.description,
         web3.utils.toWei(state.minimumContribution, 'ether'),
-        ipfsHash
+        ipfsHash,
+        web3.utils.toWei(state.fundingGoal, 'ether'),
+        state.duration,
+        state.rewards,
+        state.teamMembers
       ).send({
         from: ethereum.selectedAddress
       });
@@ -49,7 +57,11 @@ const CampaignNew = () => {
         minimumContribution: '',
         title: '',
         description: '',
-        photo: null
+        photo: null,
+        fundingGoal: '',
+        duration: '',
+        rewards: '',
+        teamMembers: ''
       });
       router.push('/campaigns');
     } catch (err) {
@@ -115,6 +127,8 @@ const CampaignNew = () => {
               <TextField
                 label="Description"
                 fullWidth
+                multiline
+                rows={4}
                 value={state.description}
                 required
                 onChange={event => setState({ ...state, description: event.target.value })}
@@ -164,7 +178,111 @@ const CampaignNew = () => {
               />
             </Box>
             <Box sx={{ mb: 2 }}>
-            <label class="block mb-2 text-md font-sofia font-medium text-white pl-[12px]" for="file_input">Cover Image*</label>
+              <TextField
+                label="Funding Goal (ether)"
+                fullWidth
+                value={state.fundingGoal}
+                required
+                onChange={event => setState({ ...state, fundingGoal: event.target.value })}
+                InputProps={{
+                  endAdornment: 'Ether',
+                  style: { color: 'white' }
+                }}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                label="Campaign Duration (days)"
+                fullWidth
+                value={state.duration}
+                required
+                onChange={event => setState({ ...state, duration: event.target.value })}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                label="Rewards"
+                fullWidth
+                multiline
+                rows={4}
+                value={state.rewards}
+                required
+                onChange={event => setState({ ...state, rewards: event.target.value })}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                label="Team Members"
+                fullWidth
+                multiline
+                rows={4}
+                value={state.teamMembers}
+                required
+                onChange={event => setState({ ...state, teamMembers: event.target.value })}
+                InputLabelProps={{
+                  style: { color: 'white' }
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#f36128'
+                    },
+                    borderColor: '#f36128'
+                  },
+                  input: { color: 'white' }
+                }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <label className="block mb-2 text-md font-sofia font-medium text-white pl-[12px]" htmlFor="file_input">Cover Image*</label>
               <input
                 className='block w-full text-md text-white pl-[10px] py-[0.8rem] border border-transparent hover:border-[#f36128] rounded-md cursor-pointer  focus:outline-none '
                 type="file"
