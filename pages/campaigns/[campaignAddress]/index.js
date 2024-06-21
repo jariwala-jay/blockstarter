@@ -37,12 +37,12 @@ function TabPanel(props) {
     </div>
   );
 }
-
+ 
 export default function CampaignShow(props) {
   const {
     title,
     description,
-    contractBalance,
+    RemainingBalance,
     manager,
     minimumContribution,
     requestCount,
@@ -65,7 +65,7 @@ export default function CampaignShow(props) {
 
   // Calculate progress percentage
   const targetAmount = parseFloat(web3.utils.fromWei(target, "ether"));
-  const raisedAmount = parseFloat(web3.utils.fromWei(contractBalance, "ether"));
+  const raisedAmount = targetAmount - parseFloat(web3.utils.fromWei(RemainingBalance, "ether"));
   const progress = Math.min((raisedAmount / targetAmount) * 100, 100); // Ensure progress doesn't exceed 100%
 
   const renderCards = () => {
@@ -222,7 +222,7 @@ export default function CampaignShow(props) {
                   className="text-[20px] font-sofia font-semibold"
                   gutterBottom
                 >
-                  {web3.utils.fromWei(contractBalance, "ether")} ETH
+                  {web3.utils.fromWei(RemainingBalance, "ether")} ETH
                 </Typography>
                 <LinearProgress
                   variant="determinate"
@@ -381,7 +381,7 @@ CampaignShow.getInitialProps = async ({ query }) => {
   const imageHash = BasicDetails[5];
   const target = FundingDetails[0].toString();
   const minimumContribution = BasicDetails[0].toString();
-  const contractBalance = BasicDetails[1].toString();
+  const RemainingBalance = FundingDetails[1].toString();
   const requestCount = BasicDetails[2].toString();
   const approversCount = BasicDetails[3].toString();
   const rewards = BasicDetails[6];
@@ -399,7 +399,7 @@ CampaignShow.getInitialProps = async ({ query }) => {
     description,
     address: campaignAddress,
     minimumContribution,
-    contractBalance,
+    RemainingBalance,
     requestCount,
     approversCount,
     manager: BasicDetails[4],

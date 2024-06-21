@@ -3,9 +3,9 @@ import Layout from '../src/app/components/Layout';
 import Link from 'next/link';
 import factory from '../ethereum/factory';
 import Campaign from '../ethereum/campaign';
-import { BentoGrid, BentoGridItem } from "../src/app/components/ui/bento-grid";
-import { Button } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import InvestmentCard from '../src/app/components/InvestmentCard';
 
 // Get IPFS image URL from Pinata
 const getIPFSImageURL = (ipfsHash) => `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
@@ -21,8 +21,14 @@ class Campaigns extends React.Component {
         const Fundingdetails = await campaign.methods.getFundingSummary().call();
         const title = BasicDetails[8];
         const description = Fundingdetails[3];
+        const raise = Fundingdetails[1].toString();
+        const daysLeft = Fundingdetails[2].toString();
+        const target = Fundingdetails[0].toString();
+        const minimumContribution = BasicDetails[0].toString();
+        const investors = BasicDetails[3].toString();
+        const RemainingBalance = Fundingdetails[1].toString();
         const imageHash = BasicDetails[5];
-        return { address, title, description, imageHash };
+        return { address, title, description, imageHash, raise, daysLeft, target, minimumContribution, investors ,RemainingBalance};
       })
     );
 
@@ -39,42 +45,26 @@ class Campaigns extends React.Component {
   renderCampaigns() {
     return this.state.campaigns.map((campaign, index) => {
       const shortDescription = campaign.description.split(" ").slice(0, 10).join(" ") + "...";
+      const image = getIPFSImageURL(campaign.imageHash);
   
       return (
-        <BentoGridItem
-          key={index}
-          title={campaign.title}
-          description={
-            <div>
-              <p className="text-gray-700 mb-4">{shortDescription}</p>
-              <Link href={`/campaigns/${campaign.address}`} passHref>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: 'black', color: 'white', alignSelf: 'center'}}
-                  className='text-center rounded-[20px] text-[0.7rem] mx-auto'
-                >
-                  View Campaign
-                </Button>
-              </Link>
-            </div>
-          }
-          header={
-            <img
-              src={getIPFSImageURL(campaign.imageHash)}
-              alt="Campaign Image"
-              className="w-full h-40 object-cover rounded-t-lg"
-            />
-          }
-          className={index === 3 || index === 6 ? "md:col-span-2" : ""}
-        >
-          <div className="flex flex-col justify-between h-full">
-          </div>
-        </BentoGridItem>
+        <Grid item xs={12} sm={6} md={4} key={index}>
+          <InvestmentCard
+            title={campaign.title}
+            description={shortDescription}
+            image={image}
+            raised={campaign.raise}
+            daysLeft={campaign.daysLeft}
+            minimumContribution={campaign.minimumContribution} 
+            target={campaign.target}
+            investors={campaign.investors}
+            RemainingBalance = {campaign.RemainingBalance}
+          />
+        </Grid>
       );
     });
   }
   
-
   render() {
     return (
       <Layout>
@@ -104,8 +94,6 @@ class Campaigns extends React.Component {
                   color: '#f36128',
                   borderColor: '#f36128',
                 },
-
-               
               }}
             >
               <span className="block md:hidden">
@@ -116,9 +104,9 @@ class Campaigns extends React.Component {
               </span>
             </Button>
           </div>
-          <BentoGrid className="max-w-4xl mx-auto">
+          <Grid container spacing={4}>
             {this.renderCampaigns()}
-          </BentoGrid>
+          </Grid>
         </div>
       </Layout>
     );
