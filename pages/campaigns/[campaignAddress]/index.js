@@ -11,6 +11,7 @@ import {
   Tab,
   Paper,
   LinearProgress,
+  Button
 } from "@mui/material";
 import web3 from "../../../ethereum/web3";
 import ContributeForm from "../../../src/app/components/ContributeForm";
@@ -18,6 +19,8 @@ import Link from "next/link";
 import RequestIndex from "./requests/index";
 import styles from "./CampaignShow.module.css";
 import CampaignTimer from "../../../src/app/components/CampaignTimer";
+import UpdateDetails from "../../../src/app/components/UpdateDetails";
+import EditIcon from '@mui/icons-material/Edit';
 
 const getIPFSImageURL = (ipfsHash) =>
   `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
@@ -37,7 +40,7 @@ function TabPanel(props) {
     </div>
   );
 }
- 
+
 export default function CampaignShow(props) {
   const {
     title,
@@ -58,6 +61,16 @@ export default function CampaignShow(props) {
   } = props;
 
   const [tabValue, setTabValue] = React.useState(0);
+  const [isManager, setIsManager] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkManager = async () => {
+      const accounts = await web3.eth.getAccounts();
+      setIsManager(accounts[0] === manager);
+    };
+
+    checkManager();
+  }, [manager]);
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
@@ -134,18 +147,16 @@ export default function CampaignShow(props) {
 
   const renderLeaderboard = () => (
     <Box>
-
-      <Typography variant="h4" sx={{ mb: 2  }} className='text-center'>
+      <Typography variant="h4" sx={{ mb: 2 }} className='text-center'>
         Leaderboard
       </Typography>
-      <Typography variant="caption" sx={{ mt: 4  }} className='text-center'>
-      {(contributors == 0) ?
-        (<p>No Contributers yet Found</p>):
-        (<p></p>)
-      }
+      <Typography variant="caption" sx={{ mt: 4 }} className='text-center'>
+        {(contributors == 0) ?
+          (<p>No Contributers yet Found</p>) :
+          (<p></p>)
+        }
       </Typography>
       <Grid container spacing={2}>
-     
         {contributors.map((contributor, index) => (
           <Grid item xs={12} key={index}>
             <Card
@@ -183,6 +194,7 @@ export default function CampaignShow(props) {
           <Typography className="text-[2rem] md:text-[rem] font-sofia font-semibold">
             {title}
           </Typography>
+          
         </Box>
         <Grid container spacing={8}>
           <Grid item xs={12} md={8}>
@@ -204,7 +216,7 @@ export default function CampaignShow(props) {
               }}
             >
               <CardContent>
-              <Typography
+                <Typography
                   className="text-[15px] text-[#71797E] font-nanum mb-[1rem]"
                 >
                   Time Left
@@ -222,7 +234,7 @@ export default function CampaignShow(props) {
                   className="text-[20px] font-sofia font-semibold"
                   gutterBottom
                 >
-                  {web3.utils.fromWei(RemainingBalance, "ether")} ETH
+                  {Math.round(raisedAmount*100)/100} ETH
                 </Typography>
                 <LinearProgress
                   variant="determinate"
@@ -287,7 +299,6 @@ export default function CampaignShow(props) {
                   Invest Here
                 </Typography>
                 <ContributeForm address={address} />
-
               </CardContent>
             </Card>
           </Grid>
@@ -306,7 +317,7 @@ export default function CampaignShow(props) {
                   label="Overview"
                   className={`font-nanum ${styles["tab-root"]} ${
                     tabValue === 0 ? styles["selected"] : ""
-                                    }`}
+                  }`}
                 />
                 <Tab
                   label="Description"
@@ -326,7 +337,23 @@ export default function CampaignShow(props) {
                     tabValue === 3 ? styles["selected"] : ""
                   }`}
                 />
+                   {isManager && (
+            <Link href={`/campaigns/${address}/edit`}>
+              <Button 
+                variant="contained"
+                sx={{
+                  backgroundColor: "transparent",
+                  color: "#ffffff",
+                  mt:1
+                }}
+                className='hover:bg-transparent'
+              >
+                <EditIcon/>
+              </Button>
+            </Link>
+          )}
               </Tabs>
+            
             </Paper>
             <TabPanel value={tabValue} index={0} className="mb-[100px]">
               <Typography variant="h5" sx={{ mb: 2 }}>

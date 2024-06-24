@@ -27,6 +27,8 @@ const ContributeForm = ({ address }) => {
     const campaign = Campaign(address);
 
     try {
+
+      
       await campaign.methods.contribute().send({
         from: ethereum.selectedAddress,
         value: web3.utils.toWei(value, "ether"),

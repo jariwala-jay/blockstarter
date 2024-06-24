@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Campaign from "../../../ethereum/campaign";
+import {Divider} from "@nextui-org/divider";
 
 const CampaignTimer = ({ address }) => {
   const [timeLeft, setTimeLeft] = useState({
@@ -56,14 +57,17 @@ const CampaignTimer = ({ address }) => {
         <div className="text-xl font-bold">{timeLeft.days}</div>
         <div>Days</div>
       </div>
+      <Divider orientation="vertical" className='text-black' />
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.hours}</div>
         <div>Hours</div>
       </div>
+      <Divider orientation="vertical" />
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.minutes}</div>
         <div>Minutes</div>
       </div>
+      <Divider orientation="vertical" />
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.seconds}</div>
         <div>Seconds</div>

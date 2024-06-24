@@ -137,7 +137,7 @@ contract Campaign {
     }
 
     function updateStatus() internal {
-        if (block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days)) {
+        if (!isClosed && block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days)) {
             isClosed = true;
             emit CampaignClosed();
             CampaignFactory(managerDetails.factory).updateCampaignStatus(address(this), true);
@@ -159,6 +159,7 @@ contract Campaign {
     }
 
     function createRequest(string memory description, uint value, address recipient) public restricted {
+        updateStatus();
         Request storage newRequest = requests.push();
         newRequest.description = description;
         newRequest.value = value;
@@ -168,6 +169,7 @@ contract Campaign {
     }
 
     function approveRequest(uint index) public {
+        updateStatus();
         Request storage request = requests[index];
         require(contributions[msg.sender] > 0, "Must be a contributor");
         require(!request.approvals[msg.sender], "Already approved");
@@ -175,7 +177,13 @@ contract Campaign {
         request.approvalCount++;
     }
 
+    function hasApproved(uint index) public view returns (bool) {
+        Request storage request = requests[index];
+        return request.approvals[msg.sender];
+    }
+
     function finalizeRequest(uint index) public restricted {
+        updateStatus();
         Request storage request = requests[index];
         require(!request.complete, "Request already completed");
         require(request.approvalCount > (approversCount / 2), "Not enough approvals");
@@ -183,7 +191,6 @@ contract Campaign {
         require(fundingDetails.remainingGoal >= request.value, "Request exceeds remaining goal");
         payable(request.recipient).transfer(request.value);
         request.complete = true;
-        fundingDetails.remainingGoal -= request.value;
     }
 
     function updateCampaignDetails(
@@ -223,13 +230,14 @@ contract Campaign {
     function getFundingSummary() public view returns(
         uint, uint, uint, string memory, uint, bool
     ) {
+        bool isClosedChecked = isClosed || (block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days));
         return (
             fundingDetails.fundingGoal,
             fundingDetails.remainingGoal,
             fundingDetails.duration,
             campaignDetails.description,
             fundingDetails.creationTime,
-            isClosed
+            isClosedChecked
         );
     }
 

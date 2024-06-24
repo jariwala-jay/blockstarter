@@ -15,9 +15,13 @@ const deploy = async () => {
   console.log('Attempting to deploy from account', accounts[0]);
 
   try {
-    const result = await new web3.eth.Contract(compiledFactory.abi)
-      .deploy({ data: compiledFactory.evm.bytecode.object })
-      .send({ gas: '5000000', from: accounts[0] });
+    const gasEstimate = await new web3.eth.Contract(compiledFactory.abi)
+    .deploy({ data: compiledFactory.evm.bytecode.object })
+    .estimateGas();
+
+  const result = await new web3.eth.Contract(compiledFactory.abi)
+    .deploy({ data: compiledFactory.evm.bytecode.object })
+    .send({ gas: gasEstimate, from: accounts[0] });
 
     console.log('Contract deployed to', result.options.address);
   } catch (error) {

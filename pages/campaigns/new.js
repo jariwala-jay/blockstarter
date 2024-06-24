@@ -3,7 +3,7 @@ import Layout from '../../src/app/components/Layout';
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import { useRouter } from 'next/router';
-import { TextField, Button, CircularProgress, Snackbar, Typography, Box } from '@mui/material';
+import { TextField, Button, CircularProgress, Snackbar, Typography, Box,Paper } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 
@@ -36,6 +36,17 @@ const CampaignNew = () => {
     try {
       const ipfsHash = await uploadPhotoToPinata(state.photo);
 
+      const gasEstimate = await factory.methods.createCampaign(
+        state.title,
+        state.description,
+        web3.utils.toWei(state.minimumContribution, 'ether'),
+        ipfsHash,
+        web3.utils.toWei(state.fundingGoal, 'ether'),
+        state.duration,
+        state.rewards,
+        state.teamMembers
+      ).estimateGas({ from: ethereum.selectedAddress });
+
       await factory.methods.createCampaign(
         state.title,
         state.description,
@@ -46,7 +57,8 @@ const CampaignNew = () => {
         state.rewards,
         state.teamMembers
       ).send({
-        from: ethereum.selectedAddress
+        from: ethereum.selectedAddress,
+        gas: gasEstimate
       });
 
       setState({
@@ -95,9 +107,18 @@ const CampaignNew = () => {
 
   return (
     <Layout>
-      <div className='max-w-[1440px] mx-auto'>
-        <Box sx={{ maxWidth: '600px', mx: 'auto', mt: 4 }}>
-          <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Create New Project</h1>
+      <div className='mt-[2rem] max-w-[800px] mx-auto'>
+      <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Create New Project</h1>
+      <Paper
+          elevation={3}
+          style={{
+            padding: "20px",
+            backgroundColor: "#eefdfe",
+            borderRadius: "15px",
+
+          }}
+        >
+          
           <form onSubmit={onSubmit}>
             <Box sx={{ mb: 2 }}>
               <TextField
@@ -106,21 +127,24 @@ const CampaignNew = () => {
                 value={state.title}
                 required
                 onChange={event => setState({ ...state, title: event.target.value })}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                InputProps={{
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
@@ -132,21 +156,24 @@ const CampaignNew = () => {
                 value={state.description}
                 required
                 onChange={event => setState({ ...state, description: event.target.value })}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                InputProps={{
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
@@ -157,24 +184,24 @@ const CampaignNew = () => {
                 required
                 onChange={event => setState({ ...state, minimumContribution: event.target.value })}
                 InputProps={{
-                  endAdornment: 'Ether',
-                  style: { color: 'white' }
-                }}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                    endAdornment: 'Ether',
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
@@ -186,23 +213,23 @@ const CampaignNew = () => {
                 onChange={event => setState({ ...state, fundingGoal: event.target.value })}
                 InputProps={{
                   endAdornment: 'Ether',
-                  style: { color: 'white' }
+                  style: { color: 'black' }
                 }}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
@@ -212,21 +239,24 @@ const CampaignNew = () => {
                 value={state.duration}
                 required
                 onChange={event => setState({ ...state, duration: event.target.value })}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                InputProps={{
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
@@ -238,21 +268,24 @@ const CampaignNew = () => {
                 value={state.rewards}
                 required
                 onChange={event => setState({ ...state, rewards: event.target.value })}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                InputProps={{
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
@@ -264,27 +297,30 @@ const CampaignNew = () => {
                 value={state.teamMembers}
                 required
                 onChange={event => setState({ ...state, teamMembers: event.target.value })}
-                InputLabelProps={{
-                  style: { color: 'white' }
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#f36128'
+                InputProps={{
+                    style: { color: "#000000" },
+                  }}
+                  InputLabelProps={{
+                    style: { color: "#000000" },
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused fieldset": {
+                        borderColor: "black",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "black",
+                      },
+                      borderColor: "black",
                     },
-                    '&:hover fieldset': {
-                      borderColor: '#f36128'
-                    },
-                    borderColor: '#f36128'
-                  },
-                  input: { color: 'white' }
-                }}
+                  }}
+                  className="text-[#000000]"
               />
             </Box>
             <Box sx={{ mb: 2 }}>
-              <label className="block mb-2 text-md font-sofia font-medium text-white pl-[12px]" htmlFor="file_input">Cover Image*</label>
+              <label className="block mb-2 text-md font-sofia font-medium text-black pl-[12px]" htmlFor="file_input">Cover Image*</label>
               <input
-                className='block w-full text-md text-white pl-[10px] py-[0.8rem] border border-transparent hover:border-[#f36128] rounded-md cursor-pointer  focus:outline-none '
+                className='block w-full text-md text-black pl-[10px] py-[0.8rem] border border-[#ADAFB3] hover:border-black rounded-md cursor-pointer  focus:outline-none '
                 type="file"
                 accept="image/*"
                 required
@@ -314,10 +350,10 @@ const CampaignNew = () => {
                   backgroundColor: 'transparent'
                 },
                 marginTop: '10px',
-                marginLeft: '30%'
               }}
               type="submit"
               disabled={state.loading}
+              className='flex mx-auto'
             >
               {state.loading ? <CircularProgress size={24} className='text-[#f36128]' /> : 'Create'}
             </Button>
@@ -331,7 +367,7 @@ const CampaignNew = () => {
               </MuiAlert>
             </Snackbar>
           </form>
-        </Box>
+        </Paper>
       </div>
     </Layout>
   );
