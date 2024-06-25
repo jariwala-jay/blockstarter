@@ -7,15 +7,20 @@ const RequestRow = ({ id, request, totalApproversCount, address, manager }) => {
   const [aLoading, setALoading] = useState(false);
   const [fLoading, setFLoading] = useState(false);
   const [account, setAccount] = useState(null);
+  const [hasApproved, setHasApproved] = useState(false);
 
   useEffect(() => {
-    const fetchAccount = async () => {
+    const fetchAccountAndApprovalStatus = async () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       setAccount(accounts[0].toLowerCase());
+
+      const campaign = Campaign(address);
+      const approvalStatus = await campaign.methods.hasApproved(id).call({ from: accounts[0] });
+      setHasApproved(approvalStatus);
     };
 
-    fetchAccount();
-  }, []);
+    fetchAccountAndApprovalStatus();
+  }, [id, address]);
 
   const onApprove = async () => {
     setALoading(true);
@@ -95,13 +100,13 @@ const RequestRow = ({ id, request, totalApproversCount, address, manager }) => {
           ) : (
             <>
               <Button
-                disabled={aLoading}
+                disabled={aLoading || hasApproved}
                 color="success"
                 variant="contained"
                 size="small"
                 onClick={onApprove}
               >
-                Approve
+                {hasApproved ? 'Approved' : 'Approve'}
               </Button>
               {account === manager && (
                 <Button

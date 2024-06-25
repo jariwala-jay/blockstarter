@@ -1,16 +1,21 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, LinearProgress, Box, Grid } from '@mui/material';
 import web3 from "../../../ethereum/web3";
-import {Divider} from "@nextui-org/divider";
+import Divider from '@mui/material/Divider';
 
 const InvestmentCard = ({ title, description, image, raised, timeLeft, minimumContribution, target, investors, RemainingBalance, isClosed }) => {
   const targetAmount = parseFloat(web3.utils.fromWei(target.toString(), "ether"));
   const raisedAmount = targetAmount - parseFloat(web3.utils.fromWei(RemainingBalance.toString(), "ether"));
-  const progress = Math.round(Math.min((raisedAmount / targetAmount) * 100, 100) * 100)/100;
+  const progress = Math.round(Math.min((raisedAmount / targetAmount) * 100, 100) * 100) / 100;
   const daysLeft = Math.floor(timeLeft / (60 * 60 * 24));
 
   return (
-    <Card sx={{ maxWidth: 310, minHeight: 500, borderRadius: 2, boxShadow: 3, padding: 0.5, backgroundColor: isClosed ? "#ffcccc" : "#eefdfe", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <Card sx={{ maxWidth: 310, minHeight: 500, borderRadius: 2, boxShadow: 3, padding: 0.5, backgroundColor: isClosed ? "#ffcccc" : "#eefdfe", display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}>
+      {isClosed && (
+        <Box sx={{ position: 'absolute', top: 10, right: 10, backgroundColor: 'red', color: 'white', padding: '5px 10px', borderRadius: 2 }}>
+          Closed
+        </Box>
+      )}
       <CardMedia
         component="img"
         height="200"
@@ -29,18 +34,18 @@ const InvestmentCard = ({ title, description, image, raised, timeLeft, minimumCo
           Raised
         </Typography>
         <LinearProgress
-                  variant="determinate"
-                  value={progress}
-                  sx={{
-                    height: 10,
-                    borderRadius: 5,
-                    mt:1,
-                    backgroundColor: "#f5f5f5",
-                    "& .MuiLinearProgress-bar": {
-                      backgroundColor: "#f36128",
-                    },
-                  }}
-                />
+          variant="determinate"
+          value={progress}
+          sx={{
+            height: 10,
+            borderRadius: 5,
+            mt: 1,
+            backgroundColor: "#f5f5f5",
+            "& .MuiLinearProgress-bar": {
+              backgroundColor: "#f36128",
+            },
+          }}
+        />
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
           <Typography variant="body2" color="text.secondary">
             {progress}%
@@ -50,31 +55,41 @@ const InvestmentCard = ({ title, description, image, raised, timeLeft, minimumCo
           </Typography>
         </Box>
         <Grid container spacing={2} sx={{ mt: 2 }}>
-          <Grid item xs={4}>
-            <Typography variant="body2" color="text.secondary">
-              Min. Invest
-            </Typography>
-            <Typography variant="body2" color="text.primary">
-              {web3.utils.fromWei(minimumContribution.toString(), "ether")} ETH
-            </Typography>
-          </Grid>
-          <Divider orientation="vertical" className='text-black' />
-          <Grid item xs={4}>
-            <Typography variant="body2" color="text.secondary">
-              Target
-            </Typography>
-            <Typography variant="body2" color="text.primary">
-              {web3.utils.fromWei(target.toString(), "ether")} ETH
-            </Typography>
-          </Grid>
-          <Divider orientation="vertical" className='text-black' />
-          <Grid item xs={4}>
-            <Typography variant="body2" color="text.secondary">
-              Investors
-            </Typography>
-            <Typography variant="body2" color="text.primary">
-              {investors}
-            </Typography>
+          <Grid item xs={12}>
+            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              <Grid item xs={4}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary">
+                    Min. Invest
+                  </Typography>
+                  <Typography variant="body2" color="text.primary">
+                    {web3.utils.fromWei(minimumContribution.toString(), "ether")} ETH
+                  </Typography>
+                </Box>
+              </Grid>
+              <Divider orientation="vertical" flexItem />
+              <Grid item xs={4}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary">
+                    Target
+                  </Typography>
+                  <Typography variant="body2" color="text.primary">
+                    {web3.utils.fromWei(target.toString(), "ether")} ETH
+                  </Typography>
+                </Box>
+              </Grid>
+              <Divider orientation="vertical" flexItem />
+              <Grid item xs={4}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary">
+                    Investors
+                  </Typography>
+                  <Typography variant="body2" color="text.primary">
+                    {investors}
+                  </Typography>
+                </Box>
+              </Grid>
+            </Box>
           </Grid>
         </Grid>
       </CardContent>

@@ -37,6 +37,8 @@ contract CampaignFactory {
     }
 
     function updateCampaignStatus(address campaignAddress, bool status) public {
+        // Call the new function to get the factory address
+        require(Campaign(campaignAddress).getFactory() == msg.sender, "Unauthorized caller");
         isCampaignClosed[campaignAddress] = status;
     }
 }
@@ -136,6 +138,11 @@ contract Campaign {
         emit PhotoHashSet(_photoHash);
     }
 
+    // Add the function to get the factory address
+    function getFactory() public view returns (address) {
+        return managerDetails.factory;
+    }
+
     function updateStatus() internal {
         if (!isClosed && block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days)) {
             isClosed = true;
@@ -189,8 +196,10 @@ contract Campaign {
         require(request.approvalCount > (approversCount / 2), "Not enough approvals");
         require(address(this).balance >= request.value, "Insufficient balance");
         require(fundingDetails.remainingGoal >= request.value, "Request exceeds remaining goal");
-        payable(request.recipient).transfer(request.value);
+
+        // Update state before transferring funds
         request.complete = true;
+        payable(request.recipient).transfer(request.value);
     }
 
     function updateCampaignDetails(

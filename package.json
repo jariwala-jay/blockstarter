@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
     "@nextui-org/divider": "^2.0.28",
+    "@openzeppelin/contracts": "^5.0.2",
     "@tabler/icons-react": "^3.5.0",
     "@thirdweb-dev/react": "^4.6.31",
     "@truffle/hdwallet-provider": "^2.1.15",

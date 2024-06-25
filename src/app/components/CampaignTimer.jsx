@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Campaign from "../../../ethereum/campaign";
-import {Divider} from "@nextui-org/divider";
+import Divider from '@mui/material/Divider';
 
 const CampaignTimer = ({ address }) => {
   const [timeLeft, setTimeLeft] = useState({
@@ -9,11 +9,15 @@ const CampaignTimer = ({ address }) => {
     minutes: 0,
     seconds: 0
   });
+  const [isClosed, setIsClosed] = useState(false);
 
   useEffect(() => {
-    const fetchTimeLeft = async () => {
+    const fetchCampaignStatus = async () => {
       const campaign = Campaign(address);
+      const fundingSummary = await campaign.methods.getFundingSummary().call();
       const timeInSeconds = BigInt(await campaign.methods.getTimeLeft().call());
+
+      setIsClosed(fundingSummary[5]); // Assuming isClosed is at index 5 in fundingSummary
       convertTime(timeInSeconds);
     };
 
@@ -28,7 +32,7 @@ const CampaignTimer = ({ address }) => {
       setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    fetchTimeLeft();
+    fetchCampaignStatus();
 
     const interval = setInterval(() => {
       setTimeLeft(prevTime => {
@@ -51,23 +55,33 @@ const CampaignTimer = ({ address }) => {
     return () => clearInterval(interval);
   }, [address]);
 
+  if (isClosed || (timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0)) {
+    return (
+      <div className="flex justify-center bg-red-600 text-white p-4 rounded-lg">
+        <div className="text-center">
+          <div className="text-xl font-bold">Campaign Closed</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center bg-[#f36128] text-white p-4 rounded-lg space-x-4">
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.days}</div>
         <div>Days</div>
       </div>
-      <Divider orientation="vertical" className='text-black' />
+      <Divider orientation="vertical" variant="middle" flexItem />
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.hours}</div>
         <div>Hours</div>
       </div>
-      <Divider orientation="vertical" />
+      <Divider orientation="vertical" variant="middle" flexItem />
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.minutes}</div>
         <div>Minutes</div>
       </div>
-      <Divider orientation="vertical" />
+      <Divider orientation="vertical" variant="middle" flexItem />
       <div className="text-center">
         <div className="text-xl font-bold">{timeLeft.seconds}</div>
         <div>Seconds</div>
