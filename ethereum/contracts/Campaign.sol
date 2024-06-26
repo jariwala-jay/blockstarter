@@ -37,8 +37,7 @@ contract CampaignFactory {
     }
 
     function updateCampaignStatus(address campaignAddress, bool status) public {
-        // Call the new function to get the factory address
-        require(Campaign(campaignAddress).getFactory() == msg.sender, "Unauthorized caller");
+        require(Campaign(campaignAddress).getFactory() == address(this), "Unauthorized caller");
         isCampaignClosed[campaignAddress] = status;
     }
 }
@@ -59,33 +58,30 @@ contract Campaign {
         string photoHash;
         string rewards;
         string teamMembers;
+        
     }
 
     struct FundingDetails {
+        uint minimumContribution;
         uint fundingGoal;
         uint remainingGoal;
         uint duration;
         uint creationTime;
-    }
-
-    struct ManagerDetails {
         address manager;
         address factory;
     }
 
+
     Request[] public requests;
     mapping(address => uint) public contributions;
     address[] public contributors;
-    uint public approversCount;
 
     CampaignDetails public campaignDetails;
     FundingDetails public fundingDetails;
-    ManagerDetails public managerDetails;
-    uint public minimumContribution;
     bool public isClosed;
 
     modifier restricted() {
-        require(msg.sender == managerDetails.manager, "Only manager can call this function");
+        require(msg.sender == fundingDetails.manager, "Only manager can call this function");
         _;
     }
 
@@ -112,13 +108,8 @@ contract Campaign {
         address _factory
     ) 
     {
-        minimumContribution = minimum;
         isClosed = false;
 
-        managerDetails = ManagerDetails({
-            manager: creator,
-            factory: _factory
-        });
 
         campaignDetails = CampaignDetails({
             title: title,
@@ -129,10 +120,13 @@ contract Campaign {
         });
 
         fundingDetails = FundingDetails({
+            minimumContribution: minimum,
             fundingGoal: _fundingGoal,
             remainingGoal: _fundingGoal,
             duration: _duration,
-            creationTime: block.timestamp
+            creationTime: block.timestamp,
+            manager: creator,
+            factory: _factory
         });
 
         emit PhotoHashSet(_photoHash);
@@ -140,29 +134,29 @@ contract Campaign {
 
     // Add the function to get the factory address
     function getFactory() public view returns (address) {
-        return managerDetails.factory;
+        return fundingDetails.factory;
     }
 
     function updateStatus() internal {
-        if (!isClosed && block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days)) {
+        if (!isClosed && fundingDetails.remainingGoal == 0) {
             isClosed = true;
             emit CampaignClosed();
-            CampaignFactory(managerDetails.factory).updateCampaignStatus(address(this), true);
+            CampaignFactory(fundingDetails.factory).updateCampaignStatus(address(this), true);
         }
     }
 
     function contribute() public payable {
         updateStatus();
         require(!isClosed, "Campaign is closed");
-        require(msg.value >= minimumContribution, "Contribution is less than minimum");
+        require(msg.value >= fundingDetails.minimumContribution, "Contribution is less than minimum");
 
         if (contributions[msg.sender] == 0) {
-            approversCount++;
             contributors.push(msg.sender);
         }
         
         contributions[msg.sender] += msg.value;
         fundingDetails.remainingGoal -= msg.value;
+        updateStatus();
     }
 
     function createRequest(string memory description, uint value, address recipient) public restricted {
@@ -193,10 +187,9 @@ contract Campaign {
         updateStatus();
         Request storage request = requests[index];
         require(!request.complete, "Request already completed");
-        require(request.approvalCount > (approversCount / 2), "Not enough approvals");
+        require(request.approvalCount > (contributors.length / 2), "Not enough approvals");
         require(address(this).balance >= request.value, "Insufficient balance");
-        require(fundingDetails.remainingGoal >= request.value, "Request exceeds remaining goal");
-
+        
         // Update state before transferring funds
         request.complete = true;
         payable(request.recipient).transfer(request.value);
@@ -220,38 +213,16 @@ contract Campaign {
         emit CampaignUpdated(newTitle, newDescription, newPhotoHash, newRewards, newTeamMembers);
     }
 
-    function getBasicSummary() public view returns(
-        uint, uint, uint, uint, address, string memory, string memory, string memory, string memory
+    function getOtherDetails() public view returns(
+        uint, uint, uint, bool
     ) {
+        bool isClosedChecked = isClosed || (fundingDetails.remainingGoal == 0);
         return (
-            minimumContribution,
             address(this).balance,
             requests.length,
-            approversCount,
-            managerDetails.manager,
-            campaignDetails.photoHash,
-            campaignDetails.rewards,
-            campaignDetails.teamMembers,
-            campaignDetails.title
-        );
-    }
-
-    function getFundingSummary() public view returns(
-        uint, uint, uint, string memory, uint, bool
-    ) {
-        bool isClosedChecked = isClosed || (block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days));
-        return (
-            fundingDetails.fundingGoal,
-            fundingDetails.remainingGoal,
-            fundingDetails.duration,
-            campaignDetails.description,
-            fundingDetails.creationTime,
+            contributors.length,
             isClosedChecked
         );
-    }
-
-    function getRequestCount() public view returns (uint) {
-        return requests.length;
     }
 
     function setPhotoHash(string memory _photoHash) public restricted {
@@ -260,7 +231,7 @@ contract Campaign {
     }
 
     function getTimeLeft() public view returns (uint) {
-        if (block.timestamp >= fundingDetails.creationTime + (fundingDetails.duration * 1 days)) {
+        if (fundingDetails.remainingGoal == 0) {
             return 0;
         } else {
             return (fundingDetails.creationTime + (fundingDetails.duration * 1 days)) - block.timestamp;

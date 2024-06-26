@@ -21,8 +21,8 @@ const ContributeForm = ({ address }) => {
   useEffect(() => {
     const fetchCampaignStatus = async () => {
       const campaign = Campaign(address);
-      const fundingSummary = await campaign.methods.getFundingSummary().call();
-      setIsClosed(fundingSummary[5]); // Assuming isClosed is at index 5 in fundingSummary
+      const otherDetails = await campaign.methods.getOtherDetails().call();
+      setIsClosed(otherDetails[3]); 
     };
 
     fetchCampaignStatus();

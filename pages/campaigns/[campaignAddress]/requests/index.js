@@ -34,10 +34,11 @@ export default function RequestIndex() {
       try {
         if (address) {
           const campaign = Campaign(address);
-          const reqCount = parseInt(await campaign.methods.getRequestCount().call());
-          const totalApp = parseInt(await campaign.methods.approversCount().call());
-          const BasicDetails = await campaign.methods.getBasicSummary().call();
-          const managerAddress = BasicDetails[4].toLowerCase();
+          const OtherDetails = await campaign.methods.getOtherDetails().call();
+          const reqCount = parseInt(OtherDetails[1]);
+          const totalApp = parseInt(OtherDetails[2]);
+          const FundingDetails = await campaign.methods.fundingDetails().call();
+          const managerAddress = FundingDetails.manager.toString().toLowerCase();
           const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
           const accountAddress = accounts[0].toLowerCase();
           setManager(managerAddress);

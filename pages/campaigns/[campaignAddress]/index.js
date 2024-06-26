@@ -399,22 +399,23 @@ CampaignShow.getInitialProps = async ({ query }) => {
   const { campaignAddress } = query;
   const campaign = Campaign(campaignAddress);
 
-  const BasicDetails = await campaign.methods.getBasicSummary().call();
-  const FundingDetails = await campaign.methods.getFundingSummary().call();
+  const FundingDetails = await campaign.methods.fundingDetails().call();
+  const otherDetails = await campaign.methods.getOtherDetails().call();
+  const campaignDetails = await campaign.methods.campaignDetails().call();
   const contributorsData = await campaign.methods.getContributors().call();
 
-  const title = BasicDetails[8];
-  const description = FundingDetails[3];
-  const imageHash = BasicDetails[5];
-  const target = FundingDetails[0].toString();
-  const minimumContribution = BasicDetails[0].toString();
-  const RemainingBalance = FundingDetails[1].toString();
-  const requestCount = BasicDetails[2].toString();
-  const approversCount = BasicDetails[3].toString();
-  const rewards = BasicDetails[6];
-  const teamMembers = BasicDetails[7];
-  const creationTime = FundingDetails[4].toString();
-  const duration = BasicDetails[7].toString();
+  const title = campaignDetails.title;
+  const description = campaignDetails.description;
+  const imageHash = campaignDetails.photoHash;
+  const target = FundingDetails.fundingGoal.toString();
+  const minimumContribution = FundingDetails.minimumContribution.toString();
+  const RemainingBalance = FundingDetails.remainingGoal.toString();
+  const requestCount = otherDetails[1].toString();
+  const approversCount = otherDetails[2].toString();
+  const rewards = campaignDetails.rewards;
+  const teamMembers = campaignDetails.teamMembers;
+  const creationTime = FundingDetails.creationTime.toString();
+  const duration = FundingDetails.duration.toString();
 
   const contributors = contributorsData[0].map((address, index) => ({
     address,
@@ -429,7 +430,7 @@ CampaignShow.getInitialProps = async ({ query }) => {
     RemainingBalance,
     requestCount,
     approversCount,
-    manager: BasicDetails[4],
+    manager: FundingDetails.manager,
     imageHash,
     target,
     rewards,

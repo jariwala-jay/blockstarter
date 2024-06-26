@@ -17,15 +17,14 @@ EditCampaign.getInitialProps = async ({ query }) => {
   const { campaignAddress } = query;
   const campaign = Campaign(campaignAddress);
 
-  const BasicDetails = await campaign.methods.getBasicSummary().call();
-  const FundingDetails = await campaign.methods.getFundingSummary().call();
+  const CampaignDetails = await campaign.methods.campaignDetails().call();
 
   const initialDetails = {
-    title: BasicDetails[8],
-    description: FundingDetails[3],
-    imageHash: BasicDetails[5],
-    rewards: BasicDetails[6],
-    teamMembers: BasicDetails[7],
+    title: CampaignDetails.title,
+    description: CampaignDetails.description,
+    imageHash: CampaignDetails.photoHash,
+    rewards: CampaignDetails.rewards,
+    teamMembers: CampaignDetails.teamMembers,
   };
 
   return { address: campaignAddress, initialDetails };

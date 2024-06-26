@@ -17,18 +17,21 @@ class Campaigns extends React.Component {
       campaignAddresses.map(async (address) => {
         const campaign = Campaign(address);
 
-        const BasicDetails = await campaign.methods.getBasicSummary().call();
-        const Fundingdetails = await campaign.methods.getFundingSummary().call();
-        const title = BasicDetails[8];
-        const description = Fundingdetails[3];
-        const raise = Fundingdetails[1].toString();
+        const CampaignDetails = await campaign.methods.campaignDetails().call();
+        const Fundingdetails = await campaign.methods.fundingDetails().call();
+        const Otherdetails = await campaign.methods.getOtherDetails().call();
+        
+        const title = CampaignDetails.title.toString();
+        console.log(title)
+        const description = CampaignDetails.description.toString();
+        const raise = Fundingdetails.remainingGoal.toString();
         const timeLeft = (await campaign.methods.getTimeLeft().call()).toString();
-        const target = Fundingdetails[0].toString();
-        const minimumContribution = BasicDetails[0].toString();
-        const investors = BasicDetails[3].toString();
-        const RemainingBalance = Fundingdetails[1].toString();
-        const imageHash = BasicDetails[5];
-        const isClosed = Fundingdetails[5]; // Assuming isClosed is the 6th item in Fundingdetails
+        const target = Fundingdetails.fundingGoal.toString();
+        const minimumContribution = Fundingdetails.minimumContribution.toString();
+        const investors = Otherdetails[2].toString();
+        const RemainingBalance = Fundingdetails.remainingGoal.toString();
+        const imageHash = CampaignDetails.photoHash.toString();
+        const isClosed = Otherdetails[3];
         return { address, title, description, imageHash, raise, timeLeft, target, minimumContribution, investors, RemainingBalance, isClosed };
       })
     );

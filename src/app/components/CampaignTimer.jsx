@@ -14,10 +14,10 @@ const CampaignTimer = ({ address }) => {
   useEffect(() => {
     const fetchCampaignStatus = async () => {
       const campaign = Campaign(address);
-      const fundingSummary = await campaign.methods.getFundingSummary().call();
+      const otherDetails = await campaign.methods.getOtherDetails().call();
       const timeInSeconds = BigInt(await campaign.methods.getTimeLeft().call());
 
-      setIsClosed(fundingSummary[5]); // Assuming isClosed is at index 5 in fundingSummary
+      setIsClosed(otherDetails[3]); 
       convertTime(timeInSeconds);
     };
 
