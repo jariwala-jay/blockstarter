@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Layout from '../../../../src/app/components/Layout';
 import Campaign from '../../../../ethereum/campaign';
 import RequestRow from '../../../../src/app/components/RequestRow';
@@ -19,20 +19,30 @@ const NewRequestForm = ({ address, onCancel }) => (
 );
 
 export default function RequestIndex() {
+  
   const router = useRouter();
   const address = router.query.campaignAddress;
   const [requests, setRequests] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [totalApproversCount, setTotalApproversCount] = useState(0);
   const [showNewRequestForm, setShowNewRequestForm] = useState(false);
+  const [account, setAccount] = useState(null);
+  const [manager, setManager] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (address) {
           const campaign = Campaign(address);
-          const reqCount = parseInt(await campaign.methods.getRequestCount().call());
-          const totalApp = parseInt(await campaign.methods.approversCount().call());
+          const OtherDetails = await campaign.methods.getOtherDetails().call();
+          const reqCount = parseInt(OtherDetails[1]);
+          const totalApp = parseInt(OtherDetails[2]);
+          const FundingDetails = await campaign.methods.fundingDetails().call();
+          const managerAddress = FundingDetails.manager.toString().toLowerCase();
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const accountAddress = accounts[0].toLowerCase();
+          setManager(managerAddress);
+          setAccount(accountAddress);
           setRequestCount(reqCount);
           setTotalApproversCount(totalApp);
 
@@ -52,6 +62,7 @@ export default function RequestIndex() {
     }
   }, [address]);
 
+  
   const renderRow = () => {
     return requests.map((request, index) => (
       <RequestRow
@@ -60,6 +71,7 @@ export default function RequestIndex() {
         request={request}
         address={address}
         totalApproversCount={totalApproversCount}
+        manager={manager} 
       />
     ));
   };
@@ -67,21 +79,34 @@ export default function RequestIndex() {
   return (
     <>
       <div className="max-w-[1000px] mx-auto px-4">
-        {showNewRequestForm ? (
-          <NewRequestForm address={address} onCancel={() => setShowNewRequestForm(false)} />
+        {account && manager && account === manager ? (
+          <>
+            {showNewRequestForm ? (
+              <NewRequestForm address={address} onCancel={() => setShowNewRequestForm(false)} />
+            ) : (
+              <>
+                <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button variant="contained" color="primary" onClick={() => setShowNewRequestForm(true)}>
+                    Add Request
+                  </Button>
+                </div>
+                <div className="mt-12">
+                  {renderRow()}
+                </div>
+                <Typography variant="body2" className="mt-2">
+                  Found {requestCount} Requests
+                </Typography>
+              </>
+            )}
+          </>
         ) : (
           <>
-            <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'flex-end' }}>
-              <Button variant="contained" color="primary" onClick={() => setShowNewRequestForm(true)}>
-                Add Request
-              </Button>
-            </div>
-            <div className="mt-12">
-              {renderRow()}
-            </div>
-            <Typography variant="body2" className="mt-2">
-              Found {requestCount} Requests
-            </Typography>
+                <div className="mt-12">
+                  {renderRow()}
+                </div>
+                <Typography variant="body2" className="mt-2">
+                  Found {requestCount} Requests
+                </Typography>
           </>
         )}
       </div>

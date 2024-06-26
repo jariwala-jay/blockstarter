@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -16,6 +16,17 @@ const ContributeForm = ({ address }) => {
   const [errMessage, setErrMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isClosed, setIsClosed] = useState(false);
+
+  useEffect(() => {
+    const fetchCampaignStatus = async () => {
+      const campaign = Campaign(address);
+      const otherDetails = await campaign.methods.getOtherDetails().call();
+      setIsClosed(otherDetails[3]); 
+    };
+
+    fetchCampaignStatus();
+  }, [address]);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -48,35 +59,34 @@ const ContributeForm = ({ address }) => {
 
   return (
     <div className='text-center'>
-
       <form onSubmit={onSubmit}>
-      <TextField
-    label="Investment Amount"
-    variant="outlined"
-    value={value}
-    required
-    onChange={(event) => setValue(event.target.value)}
-    InputProps={{
-        endAdornment: 'Ether',
-        style: { color: 'black' }, // Style for the input text
-    }}
-    InputLabelProps={{
-        style: { color: 'black' }, // Style for the label text
-    }}
-    style={{ marginBottom: '10px' }}
-    sx={{
-        '& .MuiOutlinedInput-root': {
-            '&.Mui-focused fieldset': {
-                borderColor: 'black', // Color when focused
+        <TextField
+          label="Investment Amount"
+          variant="outlined"
+          value={value}
+          required
+          onChange={(event) => setValue(event.target.value)}
+          InputProps={{
+            endAdornment: 'Ether',
+            style: { color: 'black' },
+          }}
+          InputLabelProps={{
+            style: { color: 'black' },
+          }}
+          style={{ marginBottom: '10px' }}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              '&.Mui-focused fieldset': {
+                borderColor: 'black',
+              },
+              '&:hover fieldset': {
+                borderColor: 'black',
+              },
+              borderColor: 'black',
             },
-            '&:hover fieldset': {
-                borderColor: 'black', // Color when hovered
-            },
-            borderColor: 'black', // Default border color
-        },
-    }}
-    className='text-[#eefdfe] w-[100%]'
-/>
+          }}
+          className='text-[#eefdfe] w-[100%]'
+        />
 
         <Button
           variant="contained"
@@ -85,7 +95,7 @@ const ContributeForm = ({ address }) => {
             backgroundColor: "#f36128",
             color: "#ffffff",
             padding: "15px",
-            width:"100%",
+            width: "100%",
             border: "2px solid",
             borderColor: "#f36128",
             borderRadius: "30px",
@@ -95,14 +105,12 @@ const ContributeForm = ({ address }) => {
               borderColor: "#f36128",
               backgroundColor: "transparent",
             },
-            marginTop: "10px", // Adjusted from '1rem' for consistency
-            
+            marginTop: "10px",
           }}
-          type="submit" // Added to specify button type
-          disabled={loading} // Added to disable the button when loading
+          type="submit"
+          disabled={loading || isClosed}
         >
-          {loading ? <CircularProgress size={24}  className='text-[#f36128]'/> : "INVEST"}{" "}
-          {/* Conditional rendering for loading state */}
+          {loading ? <CircularProgress size={24} className='text-[#f36128]' /> : "INVEST"}
         </Button>
 
         <Snackbar
@@ -127,6 +135,11 @@ const ContributeForm = ({ address }) => {
       {successMessage && (
         <Typography variant="body2" color="success" gutterBottom className='text-center mt-[8px]'>
           {successMessage}
+        </Typography>
+      )}
+      {isClosed && (
+        <Typography variant="body2" color="error" gutterBottom className='text-center mt-[8px]'>
+          This campaign is closed for contributions.
         </Typography>
       )}
     </div>
