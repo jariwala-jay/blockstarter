@@ -55,7 +55,7 @@ export default function RequestNew(props) {
           </Typography>
 
           <form onSubmit={onSubmit}>
-            <Grid container spacing={2} className="mx-auto w-[90%]">
+            <Grid container spacing={2} className="mx-auto w-[95%]">
               <Grid item xs={12}>
                 <TextField
                   required

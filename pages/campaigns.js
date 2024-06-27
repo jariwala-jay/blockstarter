@@ -3,7 +3,7 @@ import Layout from '../src/app/components/Layout';
 import Link from 'next/link';
 import factory from '../ethereum/factory';
 import Campaign from '../ethereum/campaign';
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, IconButton, TextField, Select, MenuItem } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import InvestmentCard from '../src/app/components/InvestmentCard';
 
@@ -20,9 +20,8 @@ class Campaigns extends React.Component {
         const CampaignDetails = await campaign.methods.campaignDetails().call();
         const Fundingdetails = await campaign.methods.fundingDetails().call();
         const Otherdetails = await campaign.methods.getOtherDetails().call();
-        
+
         const title = CampaignDetails.title.toString();
-        console.log(title)
         const description = CampaignDetails.description.toString();
         const raise = Fundingdetails.remainingGoal.toString();
         const timeLeft = (await campaign.methods.getTimeLeft().call()).toString();
@@ -74,78 +73,149 @@ class Campaigns extends React.Component {
       const image = getIPFSImageURL(campaign.imageHash);
 
       return (
-        <Grid item xs={12} sm={6} md={4} key={index}>
-          <Link href={`campaigns/${campaign.address}`} passHref>
-            <InvestmentCard
-              title={campaign.title}
-              description={shortDescription}
-              image={image}
-              raised={campaign.raise}
-              timeLeft={campaign.timeLeft}
-              minimumContribution={campaign.minimumContribution}
-              target={campaign.target}
-              investors={campaign.investors}
-              RemainingBalance={campaign.RemainingBalance}
-              isClosed={campaign.isClosed}
-            />
-          </Link>
-        </Grid>
+        <Grid item xs={12} sm={6} md={4} key={index} sx={{ paddingLeft: '0 !important', paddingRight: '15px' , maxWidth:'310px' }}>
+  <Link href={`campaigns/${campaign.address}`} passHref 
+        style={{ display: 'block', textDecoration: 'none' ,maxWidth:'310px'}}>
+    <InvestmentCard
+      title={campaign.title}
+      description={shortDescription}
+      image={image}
+      raised={campaign.raise}
+      timeLeft={campaign.timeLeft}
+      minimumContribution={campaign.minimumContribution}
+      target={campaign.target}
+      investors={campaign.investors}
+      RemainingBalance={campaign.RemainingBalance}
+      isClosed={campaign.isClosed}
+    />
+  </Link>
+</Grid>
       );
     });
   }
 
   render() {
+    const { searchQuery, filter } = this.state;
     return (
       <Layout>
         <div className="max-w-[1440px] mx-auto px-[4rem]">
-          <div className="relative max-w-4xl flex py-[1rem] mx-auto justify-between items-center">
-            <h1 className="text-[1.1rem] md:text-3xl mt-3 mb-6 font-sofia font-semibold">
+        <h1 className="text-center text-[1.5rem] md:text-3xl mt-6 mb-3 font-sofia font-semibold">
               Listed Projects
             </h1>
+          <div className="relative max-w-7xl flex py-[1rem] mx-auto flex-wrap mb-3 xl:mr-[4rem]">
+            
+            <div className="flex items-center space-x-6 w-full max-w-[1440px]">
+            <TextField
+  variant="outlined"
+  placeholder="Search"
+  value={searchQuery}
+  onChange={this.handleSearchChange}
+  size="small"
+  className="bg-white text-black rounded-full w-full p-2 text-center"
+  InputProps={{
+    sx: {
+      '& .MuiOutlinedInput-notchedOutline': {
+        border: 'none',
+      },
+      '& .MuiInputBase-input': {
+        '&:focus': {
+          outline: 'none',
+        },
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          border: 'none',
+        },
+      },
+    },
+  }}
+/>
 
-              <input
-                type="text"
-                placeholder="Search"
-                value={this.state.searchQuery}
-                onChange={this.handleSearchChange}
-                className="p-2 border border-gray-300 rounded-md text-black bg-white text-center"
-              />
-              <select
-                value={this.state.filter}
+
+              <Select
+                value={filter}
                 onChange={this.handleFilterChange}
-                className="p-2 border border-gray-300 rounded-md text-black bg-white"
+                variant="outlined"
+                size="small"
+                className="bg-white text-black rounded-[30px] text-center lg:w-[100px] "
+                sx={{
+                  height: '60px',
+                  width:'70px',
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
+                  },
+                  '&:focus': {
+                    outline: 'none',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      border: 'none',
+                    },
+                  },
+                }}
               >
-                <option value="all">All</option>
-                <option value="open">Open</option>
-                <option value="closed">Closed</option>
-              </select>
-                  
-                  <Button
-                  component={Link}
-                  href="/campaigns/new"
-                  sx={{
-                    fontFamily: 'nanum',
-                    backgroundColor: '#f36128',
-                    color: '#ffffff',
-                    padding: {
-                      xs: '10px 20px',
-                      sm: '15px 25px',
-                      md: '20px 30px',
-                    },
-                    border: '3px solid',
-                    borderColor: 'black',
-                    borderRadius: '30px',
-                    transition: 'all 0.3s ease-in-out',
-                    '&:hover': {
-                      color: '#f36128',
-                      borderColor: '#f36128',
-                    },
-                  }}
-                  >Create New Project</Button>
-
+                <MenuItem value="all">All</MenuItem>
+                <MenuItem value="open">Open</MenuItem>
+                <MenuItem value="closed">Closed</MenuItem>
+              </Select>
+              <Button
+                className='md:min-w-[210px] text-center '
+                component={Link}
+                href="/campaigns/new"
+                sx={{
+                  fontFamily: 'nanum',
+                  backgroundColor: '#f36128',
+                  color: '#ffffff',
+                  padding: '15px 20px',
+                  border: '3px solid',
+                  borderColor: 'black',
+                  borderRadius: '30px',
+                  transition: 'all 0.3s ease-in-out',
+                  display: {
+                    xs: 'none',
+                    md: 'block',
+                  },
+                  '&:hover': {
+                    color: '#f36128',
+                    borderColor: '#f36128',
+                  },
+                  '&:focus': {
+                    outline: 'none',
+                  },
+                }}
+              >
+                Create New Project
+              </Button>
+              <IconButton
+                component={Link}
+                href="/campaigns/new"
+                sx={{
+                  backgroundColor: '#f36128',
+                  color: '#ffffff',
+                  border: '3px solid',
+                  borderColor: 'black',
+                  borderRadius: '50%',
+                  transition: 'all 0.3s ease-in-out',
+                  px:'15px',
+                  display: {
+                    xs: 'block',
+                    md: 'none',
+                  },
+                  '&:hover': {
+                    color: '#f36128',
+                    borderColor: '#f36128',
+                  },
+                  '&:focus': {
+                    outline: 'none',
+                  },
+                }}
+              >
+                <AddIcon />
+              </IconButton>
+            </div>
           </div>
-          <div className="max-w-[1140px] mx-auto">
-            <Grid container spacing={4}>
+          <div className="flex justify-center">
+            <Grid container style={{ margin: 'auto'}}>
               {this.renderCampaigns()}
             </Grid>
           </div>
@@ -156,4 +226,3 @@ class Campaigns extends React.Component {
 }
 
 export default Campaigns;
-

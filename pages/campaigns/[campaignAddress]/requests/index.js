@@ -78,7 +78,7 @@ export default function RequestIndex() {
 
   return (
     <>
-      <div className="max-w-[1000px] mx-auto px-4">
+      <div className="max-w-[1000px] mx-auto px-4 min-h-[300px]">
         {account && manager && account === manager ? (
           <>
             {showNewRequestForm ? (

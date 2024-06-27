@@ -110,12 +110,12 @@ const CampaignNew = () => {
       <div className='mt-[2rem] max-w-[800px] mx-auto'>
       <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Create New Project</h1>
       <Paper
+          className='mx-[2rem]'
           elevation={3}
           style={{
             padding: "20px",
             backgroundColor: "#eefdfe",
             borderRadius: "15px",
-
           }}
         >
           

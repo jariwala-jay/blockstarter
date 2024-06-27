@@ -24,7 +24,7 @@ const InvestmentCard = ({ title, description, image, raised, timeLeft, minimumCo
         className='p-[5px] h-[200px]'
       />
       <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h6" component="div" className='font-sofia font-semibold'>
+        <Typography gutterBottom variant="h6" component="div" className='font-sofia font-semibold h-[60px]'>
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary" className='h-[70px]'>
@@ -54,7 +54,7 @@ const InvestmentCard = ({ title, description, image, raised, timeLeft, minimumCo
             {daysLeft} days left
           </Typography>
         </Box>
-        <Grid container spacing={2} sx={{ mt: 2 }}>
+        <Grid container spacing={2} sx={{ mt: 2  }}>
           <Grid item xs={12}>
             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <Grid item xs={4}>
