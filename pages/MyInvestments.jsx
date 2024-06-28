@@ -16,6 +16,7 @@ const Investments = () => {
     const fetchInvestments = async () => {
       try {
         const accounts = await web3.eth.getAccounts();
+        if (accounts.length != 0){
         const deployedCampaigns = await factory.methods.getDeployedCampaigns().call();
         
         const investments = await Promise.all(deployedCampaigns.map(async (campaignAddress) => {
@@ -35,17 +36,19 @@ const Investments = () => {
         const userInvestments = investments.filter(investment => investment !== null);
 
         setState({ ...state, investments: userInvestments, loading: false });
+    }
+    setState({ ...state, loading: false });
       } catch (err) {
         setState({ ...state, errorMessage: err.message, loading: false });
       }
     };
-
+    
     fetchInvestments();
   }, []);
 
   return (
     <Layout>
-      <div className='max-w-[1440px] mx-auto'>
+      <div className='max-w-[1440px] mx-auto px-8'>
         <Box sx={{ maxWidth: '800px', mx: 'auto', mt: 4 }}>
           <h1 className="text-3xl mt-6 mb-4 font-sofia font-semibold text-center">Your Investments</h1>
           {state.loading ? (
@@ -53,7 +56,7 @@ const Investments = () => {
           ) : (
             <div>
               {state.investments.length === 0 ? (
-                <Typography variant="body1" color="primary" gutterBottom>
+                <Typography variant="body1" color="error" gutterBottom className='text-center'>
                   You haven't invested in any projects yet.
                 </Typography>
               ) : (
