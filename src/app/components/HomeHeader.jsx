@@ -107,14 +107,14 @@ const Header = () => {
         <ListItem button component={Link} href="/campaigns">
           <ListItemText primary="Projects" />
         </ListItem>
+        <ListItem button component={Link} href="/Guide">
+          <ListItemText primary="Guide" />
+        </ListItem>
         <ListItem button component={Link} href="/Faq">
           <ListItemText primary="FAQ" />
         </ListItem>
-        <ListItem button component={Link} href="/community">
-          <ListItemText primary="Community" />
-        </ListItem>
-        <ListItem button component={Link} href="/updates">
-          <ListItemText primary="Updates" />
+        <ListItem button component={Link} href="/MyInvestments">
+          <ListItemText primary="My Investments" />
         </ListItem>
       </List>
     </div>
@@ -197,6 +197,18 @@ const Header = () => {
                       <Button
                         color="inherit"
                         component={Link}
+                        href="/Guide"
+                        sx={{
+                          marginX: "2%",
+                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                        }}
+                        className="font-nanum"
+                      >
+                        Guide
+                      </Button>
+                      <Button
+                        color="inherit"
+                        component={Link}
                         href="/Faq"
                         sx={{
                           marginX: "2%",
@@ -206,22 +218,11 @@ const Header = () => {
                       >
                         FAQ
                       </Button>
+                      
                       <Button
                         color="inherit"
                         component={Link}
-                        href="/community"
-                        sx={{
-                          marginX: "2%",
-                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
-                        }}
-                        className="font-nanum"
-                      >
-                        Community
-                      </Button>
-                      <Button
-                        color="inherit"
-                        component={Link}
-                        href="/updates"
+                        href="/MyInvestments"
                         sx={{
                           marginX: "2%",
                           fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
@@ -229,7 +230,7 @@ const Header = () => {
                         }}
                         className="font-nanum"
                       >
-                        Updates
+                        My Investments
                       </Button>
                       <div className="pr-[300px] max-h-[10%] max-w-[30%]">
                         {showConnectButton ? (

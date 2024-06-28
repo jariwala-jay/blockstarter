@@ -10,7 +10,7 @@ const InvestmentCard = ({ title, description, image, raised, timeLeft, minimumCo
   const daysLeft = Math.floor(timeLeft / (60 * 60 * 24));
 
   return (
-    <Card sx={{ maxWidth: 310, minHeight: 500, borderRadius: 2, boxShadow: 3, padding: 0.5, backgroundColor: isClosed ? "#808080" : "#eefdfe", display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}>
+    <Card sx={{ maxWidth: 310, minWidth:220 ,minHeight: 500, borderRadius: 2, boxShadow: 3, padding: 0.2, backgroundColor: isClosed ? "#808080" : "#eefdfe", display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}>
       {isClosed && (
         <Box sx={{ position: 'absolute', top: 10, right: 10, backgroundColor: 'red', color: 'white', padding: '5px 10px', borderRadius: 2 }}>
           Closed

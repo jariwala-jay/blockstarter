@@ -1,33 +1,22 @@
-"use client";
 import { ThirdwebProvider, ConnectButton, darkTheme } from "thirdweb/react";
 import { useEffect, useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Typography,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  styled,
-  Box,
-} from "@mui/material";
+import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText, styled, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { createThirdwebClient } from "thirdweb";
 import { createWallet, walletConnect, inAppWallet } from "thirdweb/wallets";
+import web3, { requestAccount } from "../../../ethereum/web3"; // Import the requestAccount function
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "transparent",
   boxShadow: "unset",
 }));
+
 const RoundedBackground = styled(Box)(({ theme }) => ({
   backgroundColor: "#eefdfe",
   borderRadius: "0 0 0 200px",
   height: "100%",
-  textColor:'black',
+  textColor: 'black',
   width: "100%", // Default width to cover the entire app bar
   position: "absolute",
   top: 0,
@@ -96,6 +85,7 @@ const Header = () => {
                 client={client}
                 wallets={wallets}
                 onFailure={onFailure}
+                onClick={requestAccount} // Call requestAccount when the button is clicked
               />
             ) : (
               <div style={{ width: "195px", height: "40px" }} />
@@ -108,14 +98,14 @@ const Header = () => {
         <ListItem button component={Link} href="/campaigns">
           <ListItemText primary="Projects" />
         </ListItem>
+        <ListItem button component={Link} href="/Guide">
+          <ListItemText primary="Guide" />
+        </ListItem>
         <ListItem button component={Link} href="/Faq">
           <ListItemText primary="FAQ" />
         </ListItem>
-        <ListItem button component={Link} href="/community">
-          <ListItemText primary="Community" />
-        </ListItem>
-        <ListItem button component={Link} href="/updates">
-          <ListItemText primary="Updates" />
+        <ListItem button component={Link} href="/MyInvestments">
+          <ListItemText primary="My Investments" />
         </ListItem>
       </List>
     </div>
@@ -145,30 +135,30 @@ const Header = () => {
           <ThirdwebProvider client={client}>
             <CustomAppBar position="static">
               <Toolbar sx={{ position: "relative" }}>
-              <Typography
-      component="div"
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: '#000000',
-        color: 'white',
-        py: '3.3%',
-        px: '3.5%',
-        ml: '-5%',
-        pl: '5.5%',
-        fontFamily: 'sofia',
-        fontWeight: 'bold',
-      }}
-    >
-      <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-        <img
-          src="/fav.png"
-          alt="Logo"
-          style={{ width: '50px', maxWidth: '50px', height: 'auto', marginRight: '5px' }}
-        />
-        <span className="text-[2rem]">Blockstarter</span>
-      </Link>
-    </Typography>
+                <Typography
+                  component="div"
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    backgroundColor: '#000000',
+                    color: 'white',
+                    py: '3.3%',
+                    px: '3.5%',
+                    ml: '-5%',
+                    pl: '5.5%',
+                    fontFamily: 'sofia',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+                    <img
+                      src="/fav.png"
+                      alt="Logo"
+                      style={{ width: '50px', maxWidth: '50px', height: 'auto', marginRight: '5px' }}
+                    />
+                    <span className="text-[2rem]">Blockstarter</span>
+                  </Link>
+                </Typography>
 
                 <RoundedBackground />
 
@@ -198,6 +188,18 @@ const Header = () => {
                       <Button
                         color='inherit'
                         component={Link}
+                        href="/Guide"
+                        sx={{
+                          marginX: "2%",
+                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                        }}
+                        className="font-nanum"
+                      >
+                        Guide
+                      </Button>
+                      <Button
+                        color='inherit'
+                        component={Link}
                         href="/Faq"
                         sx={{
                           marginX: "2%",
@@ -210,19 +212,7 @@ const Header = () => {
                       <Button
                         color='inherit'
                         component={Link}
-                        href="/community"
-                        sx={{
-                          marginX: "2%",
-                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
-                        }}
-                        className="font-nanum"
-                      >
-                        Community
-                      </Button>
-                      <Button
-                        color='inherit'
-                        component={Link}
-                        href="/updates"
+                        href="/MyInvestments"
                         sx={{
                           marginX: "2%",
                           fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
@@ -230,7 +220,7 @@ const Header = () => {
                         }}
                         className="font-nanum"
                       >
-                        Updates
+                        My Investments
                       </Button>
                       <div className="pr-[300px] max-h-[10%] max-w-[30%]">
                         {showConnectButton ? (
@@ -238,6 +228,7 @@ const Header = () => {
                             client={client}
                             wallets={wallets}
                             onFailure={onFailure}
+                            onClick={requestAccount} // Call requestAccount when the button is clicked
                           />
                         ) : (
                           <div style={{ width: "195px", height: "40px" }} />
@@ -252,7 +243,7 @@ const Header = () => {
                         edge="end"
                         onClick={handleDrawerToggle}
                       >
-                        <MenuIcon className='text-black'/>
+                        <MenuIcon className='text-black' />
                       </IconButton>
                       <Drawer
                         anchor="right"
@@ -273,7 +264,7 @@ const Header = () => {
   );
 };
 
-const ConnectWalletButton = ({ client, wallets, onFailure }) => {
+const ConnectWalletButton = ({ client, wallets, onFailure, onClick }) => {
   return (
     <ConnectButton
       client={client}
@@ -302,6 +293,7 @@ const ConnectWalletButton = ({ client, wallets, onFailure }) => {
             borderColor: "#f36128",
           },
         },
+        onClick, // Add onClick to handle the connect button click
       }}
       connectModal={{
         size: "wide",

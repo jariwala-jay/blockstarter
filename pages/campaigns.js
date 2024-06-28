@@ -73,9 +73,9 @@ class Campaigns extends React.Component {
       const image = getIPFSImageURL(campaign.imageHash);
 
       return (
-        <Grid item xs={12} sm={6} md={4} key={index} sx={{ paddingLeft: '0 !important', paddingRight: '15px' , maxWidth:'310px' }}>
+        <Grid item xs={12} sm={6} md={4} key={index}  sx={{ maxWidth:'310px' }}>
   <Link href={`campaigns/${campaign.address}`} passHref 
-        style={{ display: 'block', textDecoration: 'none' ,maxWidth:'310px'}}>
+        style={{ display: 'block', textDecoration: 'none' ,maxWidth:'310px' }}>
     <InvestmentCard
       title={campaign.title}
       description={shortDescription}
@@ -214,8 +214,8 @@ class Campaigns extends React.Component {
               </IconButton>
             </div>
           </div>
-          <div className="flex justify-center">
-            <Grid container style={{ margin: 'auto'}}>
+          <div className="flex flex-center">
+          <Grid container spacing={4} className='mx-auto sm:mx-0  justify-center sm:justify-normal'>
               {this.renderCampaigns()}
             </Grid>
           </div>
