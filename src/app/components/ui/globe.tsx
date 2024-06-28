@@ -115,7 +115,14 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
   const _buildData = () => {
     const arcs = data;
-    let points = [];
+    let points: {
+      size: number;
+      order: number;
+      color: (t: number) => string;
+      lat: number;
+      lng: number;
+    }[] = [];
+  
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
       const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
@@ -134,7 +141,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
         lng: arc.endLng,
       });
     }
-
+  
     // remove duplicates for same lat and lng
     const filteredPoints = points.filter(
       (v, i, a) =>
@@ -144,10 +151,10 @@ export function Globe({ globeConfig, data }: WorldProps) {
           )
         ) === i
     );
-
+  
     setGlobeData(filteredPoints);
   };
-
+  
   useEffect(() => {
     if (globeRef.current && globeData) {
       globeRef.current
@@ -294,12 +301,12 @@ export function hexToRgb(hex: string) {
     : null;
 }
 
-export function genRandomNumbers(min: number, max: number, count: number) {
-  const arr = [];
+export function genRandomNumbers(min: number, max: number, count: number): number[] {
+  const arr: number[] = [];
   while (arr.length < count) {
-    const r = Math.floor(Math.random() * (max - min)) + min;
+    const r: number = Math.floor(Math.random() * (max - min)) + min;
     if (arr.indexOf(r) === -1) arr.push(r);
   }
-
   return arr;
 }
+
