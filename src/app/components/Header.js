@@ -20,9 +20,9 @@ const RoundedBackground = styled(Box)(({ theme }) => ({
   width: "100%", // Default width to cover the entire app bar
   position: "absolute",
   top: 0,
-  left: "calc(27% + 20px)", // Adjust this to start after the Blockstarter text
+  left: "calc(35% + 20px)", // Adjust this to start after the Blockstarter text
   zIndex: -1,
-  "@media (max-width: 600px)": {
+  "@media (max-width: 1000px)": {
     width: "0", // Set width to 0 on mobile devices
   },
 }));
@@ -120,7 +120,7 @@ const Header = () => {
         .mobile-nav {
           display: flex;
         }
-        @media (min-width: 600px) {
+        @media (min-width: 1000px) {
           .desktop-nav {
             display: flex;
           }
@@ -130,7 +130,7 @@ const Header = () => {
         }
       `}</style>
       <div className="relative bg-black h-[12%]">
-        <div className="absolute top-0 right-0 bg-[#eefdfe] h-[100%] w-[10%] sm:w-1/2"></div>
+        <div className="absolute top-0 right-0 bg-[#eefdfe] h-[100%] w-[50px] lg:w-1/2"></div>
         <div className="max-w-[1440px] mx-auto transition-transform duration-500 transform translate-x-0">
           <ThirdwebProvider client={client}>
             <CustomAppBar position="static">
@@ -144,7 +144,7 @@ const Header = () => {
                     color: 'white',
                     py: '3.3%',
                     px: '3.5%',
-                    ml: '-5%',
+                    ml: '2%',
                     pl: '5.5%',
                     fontFamily: 'sofia',
                     fontWeight: 'bold',
@@ -178,7 +178,7 @@ const Header = () => {
                         href="/campaigns"
                         sx={{
                           marginX: "2%",
-                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                          fontSize: "clamp(0.5rem, 1vw, 1rem)",
                           backgroundColor: "transparent",
                         }}
                         className="font-nanum"
@@ -191,7 +191,7 @@ const Header = () => {
                         href="/Guide"
                         sx={{
                           marginX: "2%",
-                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                          fontSize: "clamp(0.5rem, 1vw, 1rem)",
                         }}
                         className="font-nanum"
                       >
@@ -203,7 +203,7 @@ const Header = () => {
                         href="/Faq"
                         sx={{
                           marginX: "2%",
-                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                          fontSize: "clamp(0.5rem, 1vw, 1rem)",
                         }}
                         className="font-nanum"
                       >
@@ -215,20 +215,24 @@ const Header = () => {
                         href="/MyInvestments"
                         sx={{
                           marginX: "2%",
-                          fontSize: "clamp(0.5rem, 1vw, 0.9rem)",
+                          fontSize: "clamp(0.5rem, 1vw, 1rem)",
                           marginRight: "4%",
                         }}
                         className="font-nanum"
                       >
                         My Investments
                       </Button>
-                      <div className="pr-[300px] max-h-[10%] max-w-[30%]">
+                      <div className="pr-[4rem] max-h-[10%] max-w-[40%]">
                         {showConnectButton ? (
                           <ConnectWalletButton
                             client={client}
                             wallets={wallets}
                             onFailure={onFailure}
                             onClick={requestAccount} // Call requestAccount when the button is clicked
+                            sx={{
+                              marginX: "2%",
+                              fontSize: "clamp(0.5rem, 1vw, 1rem)"
+                        }}
                           />
                         ) : (
                           <div style={{ width: "195px", height: "40px" }} />
@@ -236,7 +240,7 @@ const Header = () => {
                       </div>
                     </div>
 
-                    <div className="absolute mobile-nav right-[2%]">
+                    <div className="absolute mobile-nav right-3">
                       <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -281,7 +285,7 @@ const ConnectWalletButton = ({ client, wallets, onFailure, onClick }) => {
       connectButton={{
         label: "Connect Wallet",
         style: {
-          fontSize: "0.9rem", // Smaller font size
+          fontSize: "1rem", // Smaller font size
           padding: "15px 18px", // Smaller padding
           fontFamily: "nanum",
           backgroundColor: "#f36128",

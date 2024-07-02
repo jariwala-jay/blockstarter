@@ -73,7 +73,7 @@ class Campaigns extends React.Component {
       const image = getIPFSImageURL(campaign.imageHash);
 
       return (
-        <Grid item xs={12} sm={6} md={4} key={index}  sx={{ maxWidth:'310px' }}>
+        <Grid item xs={12} sm={6} md={4} lg={3} key={index}  sx={{ maxWidth:'310px' }}>
   <Link href={`campaigns/${campaign.address}`} passHref 
         style={{ display: 'block', textDecoration: 'none' ,maxWidth:'310px' }}>
     <InvestmentCard
@@ -102,7 +102,7 @@ class Campaigns extends React.Component {
         <h1 className="text-center text-[1.5rem] md:text-3xl mt-6 mb-3 font-sofia font-semibold">
               Listed Projects
             </h1>
-          <div className="relative max-w-7xl flex py-[1rem] mx-auto flex-wrap mb-3 xl:mr-[4rem]">
+          <div className="relative max-w-7xl flex py-[1rem] mx-auto flex-wrap mb-3">
             
             <div className="flex items-center space-x-6 w-full max-w-[1440px]">
             <TextField
@@ -111,7 +111,7 @@ class Campaigns extends React.Component {
   value={searchQuery}
   onChange={this.handleSearchChange}
   size="small"
-  className="bg-white text-black rounded-full w-full p-2 text-center"
+  className="bg-white text-black rounded-full w-full p-2 text-center ml-[1.8rem]"
   InputProps={{
     sx: {
       '& .MuiOutlinedInput-notchedOutline': {
