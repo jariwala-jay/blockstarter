@@ -5,7 +5,6 @@ import Hero from '../src/app/components/Hero'
 import ProjectsHome from '../src/app/components/ProjectsHome'
 import LearnMore from '../src/app/components/LearnMore'
 import HomeHeader from '../src/app/components/HomeHeader'
-import HowToInvest from '../src/app/components/HowToInvest'
 import Footer from '../src/app/components/Footer';
 import Globe  from '../src/app/components/Globe';
 
