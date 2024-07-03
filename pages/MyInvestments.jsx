@@ -189,7 +189,13 @@ const Investments = () => {
           <div className="flex flex-center">
             <Grid container spacing={4} className='mx-auto sm:mx-0 justify-center sm:justify-normal'>
               {Array.from(new Array(4)).map((_, index) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' }}>
+                <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' ,
+                paddingRight: {
+              sm: '2rem', // Apply padding only on small screens and up
+            },
+   
+        paddingLeft: '0!important', // Apply padding only on small screens 
+                }}>
                   <InvestmentCardSkeleton />
                 </Grid>
               ))}
@@ -223,10 +229,16 @@ const Investments = () => {
             )}
 
             {investments.length > 0 && (
-              <div className='text-black'>
+              <div className=' flex flex-center text-black'>
                 <Grid container spacing={4} className='mx-auto sm:mx-0 justify-center sm:justify-normal'>
                   {investments.map((investment, index) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' }}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' ,
+                    paddingRight: {
+              sm: '2rem', // Apply padding only on small screens and up
+            },
+   
+        paddingLeft: '0!important', // Apply padding only on small screens 
+                     }}>
                       <InvestmentCard
                         title={investment.title}
                         description={investment.description}

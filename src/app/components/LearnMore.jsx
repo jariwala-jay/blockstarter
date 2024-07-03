@@ -43,8 +43,8 @@ const LearnMore = ({ scrollPosition }) => {
               Blockstarter takes pride not only in its cutting-edge technology but also in the talent and dedication of its team. Our leadership comprises some of the brightest minds and most experienced executives in the business, driving innovation and success in the world of crowdfunding.
             </p>
           </div>
-          <div className="grid gap-6 px-4 sm:px-0 md:grid-cols-3 grid-cols-1">
-  <div className="group relative rounded-3xl space-y-6 overflow-hidden">
+          <div className="grid gap-6 md:grid-cols-3 grid-cols-1">
+  <div className="group relative ml-[2rem] sm:ml-0 rounded-3xl space-y-6 overflow-hidden">
     <img
       className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
       src="/edited_profile.jpg"

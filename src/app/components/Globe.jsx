@@ -1,32 +1,14 @@
 "use client";
-import React, {useState,useEffect} from "react";
+
+import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 
 const World = dynamic(() => import("./ui/globe").then((m) => m.World), {
   ssr: false,
 });
 
-const Globe=({ scrollPosition })=> {
-    const [animationParams, setAnimationParams] = useState({ opacity: 1 });
-
-  useEffect(() => {
-    const calculateAnimationParams = () => {
-      const threshold = 1700; // Adjust the threshold as needed
-      if (typeof window !== 'undefined') {
-        if (scrollPosition > threshold) {
-          const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
-          const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
-          setAnimationParams({ translateX: newTranslateX, opacity: newOpacity });
-        } else {
-          setAnimationParams({ opacity: 1 });
-        }
-      }
-    };
-
-    calculateAnimationParams();
-  }, [scrollPosition]);
-
-  const globeConfig = {
+const Globe = () => {
+  const globeConfig = useMemo(() => ({
     pointSize: 4,
     globeColor: "#062056",
     showAtmosphere: true,
@@ -47,9 +29,9 @@ const Globe=({ scrollPosition })=> {
     initialPosition: { lat: 22.3193, lng: 114.1694 },
     autoRotate: true,
     autoRotateSpeed: 0.5,
-  };
+  }), []);
   const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
-  const sampleArcs = [
+  const sampleArcs = useMemo(() => [
     {
       order: 1,
       startLat: -19.885592,
@@ -410,23 +392,11 @@ const Globe=({ scrollPosition })=> {
       arcAlt: 0.3,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
-  ];
+  ], []);
 
   return (
-    <div className="flex flex-col items-center justify-center pt-20 h-[600px] md:h-[900px] relative w-full">
+    <div className="flex flex-col items-center justify-center pt-20 h-[350px] md:h-[650px] relative w-full">
   <div className="max-w-[1440px] mx-auto w-full relative overflow-hidden h-full md:h-[70rem] px-4">
-    <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold leading-tight"
-      style={{
-        transform: `translateX(${animationParams.translateX}px)`,
-        opacity: animationParams.opacity,
-        transition: 'transform 0.3s ease, opacity 0.3s ease',
-      }}
-    >
-      <p>Empowering Global Innovation</p>
-    </div>
-    <p className="text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-[700px] mt-2 ml-[7%] lg:ml-[5%]">
-      Blockstarter harnesses blockchain technology to fuel crowdfunding for creative projects worldwide, empowering innovators to turn ideas into reality.
-    </p>
     <div className="a" />
     <div className="absolute w-full bottom-0 h-72 md:h-[600px] z-10 flex justify-center items-center">
       <div className="relative w-[25rem] h-[20rem] md:w-[48rem] md:h-[40rem]">

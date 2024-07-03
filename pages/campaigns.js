@@ -79,7 +79,13 @@ const Campaigns = () => {
       return (
         <Grid container spacing={4} className='mx-auto sm:mx-0 justify-center sm:justify-normal'>
           {Array.from(new Array(numSkeletons)).map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' ,marginTop:'2rem'}}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' ,marginTop:'2rem', 
+             paddingRight: {
+              sm: '2rem', // Apply padding only on small screens and up
+            },
+   
+        paddingLeft: '0!important', // Apply padding only on small screens 
+            }}>
                   <InvestmentCardSkeleton />
             </Grid>
           ))}
@@ -92,7 +98,15 @@ const Campaigns = () => {
       const image = getIPFSImageURL(campaign.imageHash);
 
       return (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ maxWidth: '310px' }}>
+        <Grid item xs={12} sm={6} md={4} lg={3} key={index}  
+        sx={{ maxWidth: '310px',
+        paddingRight: {
+              sm: '2rem', // Apply padding only on small screens and up
+            },
+   
+        paddingLeft: '0!important', // Apply padding only on small screens and up
+   
+        }}>
           <Link href={`campaigns/${campaign.address}`} passHref style={{ display: 'block', textDecoration: 'none', maxWidth: '310px' }}>
             <InvestmentCard
               title={campaign.title}
@@ -114,19 +128,19 @@ const Campaigns = () => {
 
   return (
     <Layout>
-      <div className="max-w-[1440px] mx-auto px-[4rem]">
+      <div className="max-w-[1440px] mx-auto px-[1rem] sm:px-[4rem]">
         <h1 className="text-center text-[1.5rem] md:text-3xl mt-6 mb-3 font-sofia font-semibold">
           Listed Projects
         </h1>
-        <div className="relative max-w-7xl flex py-[1rem] mx-auto flex-wrap mb-3">
-          <div className="flex items-center space-x-6 w-full max-w-[1440px]">
+        <div className="relative max-w-[1440px] flex py-[1rem] flex-wrap mb-3">
+          <div className="flex justify-between space-x-6 w-full max-w-[1280px]">
             <TextField
               variant="outlined"
               placeholder="Search"
               value={searchQuery}
               onChange={handleSearchChange}
               size="small"
-              className="bg-white text-black rounded-full w-full p-2 text-center ml-[1.8rem]"
+              className="bg-white text-black rounded-full w-full p-2 text-center "
               InputProps={{
                 sx: {
                   '& .MuiOutlinedInput-notchedOutline': {

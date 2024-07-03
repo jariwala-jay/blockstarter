@@ -14,7 +14,7 @@ const FaqComp = () => {
             <Typography align="center" gutterBottom className='text-3xl mt-6 mb-4 font-sofia font-semibold'>
                 FAQ
             </Typography>
-            <Box sx={{ width: '70%', marginLeft: '15%', marginBottom: '40px' }}>
+            <Box sx={{ width: '80%', marginBottom: '40px' ,marginX:'auto'}} >
                 <Accordion
                     expanded={expanded === 'panel1'}
                     onChange={handleChange('panel1')}
