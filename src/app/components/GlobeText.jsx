@@ -10,7 +10,9 @@ const GlobeText =({scrollPosition}) => {
 
     useEffect(() => {
       const calculateAnimationParams = () => {
-        const threshold = 1700; // Adjust the threshold as needed
+        const isMobile = window.innerWidth <= 768;
+        const threshold = isMobile ? 1400 : 1650; // Adjust the thresholds as needed
+  
         if (scrollPosition > threshold) {
           const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
           const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
@@ -26,7 +28,7 @@ const GlobeText =({scrollPosition}) => {
 
    return(
       <>
-    
+    <div className='max-w-[1440px] mx-auto'>
     <div className="flex flex-col text-[#ffffff] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[4rem] ml-[7%] lg:ml-[5%] font-sofia font-semibold leading-tight"
       style={{
         transform: `translateX(${animationParams.translateX}px)`,
@@ -39,7 +41,7 @@ const GlobeText =({scrollPosition}) => {
     <p className="text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-[700px] mt-2 ml-[7%] lg:ml-[5%]">
       Blockstarter harnesses blockchain technology to fuel crowdfunding for creative projects worldwide, empowering innovators to turn ideas into reality.
     </p>
-   
+    </div>
     </>
    );
     

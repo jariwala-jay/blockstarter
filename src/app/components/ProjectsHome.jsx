@@ -11,7 +11,8 @@ const ProjectsHome = ({ scrollPosition }) => {
 
   useEffect(() => {
     const calculateAnimationParams = () => {
-      const threshold = 900; // Adjust the threshold as needed
+      const isMobile = window.innerWidth <= 768;
+        const threshold = isMobile ? 750 : 850; // Adjust the thresholds as needed
       if (typeof window !== 'undefined') {
         if (scrollPosition > threshold) {
           const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);

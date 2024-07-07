@@ -8,7 +8,9 @@ const LearnMore = ({ scrollPosition }) => {
 
   useEffect(() => {
     const calculateAnimationParams = () => {
-      const threshold = 2600; // Adjust the threshold as needed
+      const isMobile = window.innerWidth <= 768;
+      const threshold = isMobile ? 2050 : 2600; // Adjust the thresholds as needed
+
       if (scrollPosition > threshold) {
         const newTranslateX = Math.max(0, (scrollPosition - threshold) / 3 - 100);
         const newOpacity = Math.max(0, 1 - (scrollPosition - threshold) / 400);
