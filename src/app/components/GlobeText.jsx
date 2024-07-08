@@ -38,7 +38,7 @@ const GlobeText =({scrollPosition}) => {
     >
       <p>Empowering Global Innovation</p>
     </div>
-    <p className="text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-[700px] mt-2 ml-[7%] lg:ml-[5%]">
+    <p className="text-base md:text-lg font-normal text-neutral-700  max-w-[700px] mt-2 ml-[7%] lg:ml-[5%]">
       Blockstarter harnesses blockchain technology to fuel crowdfunding for creative projects worldwide, empowering innovators to turn ideas into reality.
     </p>
     </div>
