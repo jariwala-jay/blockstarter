@@ -136,29 +136,31 @@ contract Campaign {
     function getFactory() public view returns (address) {
         return fundingDetails.factory;
     }
-
     function updateStatus() internal {
-        if (!isClosed && fundingDetails.remainingGoal == 0) {
-            isClosed = true;
-            emit CampaignClosed();
-            CampaignFactory(fundingDetails.factory).updateCampaignStatus(address(this), true);
-        }
+    uint endTime = fundingDetails.creationTime + (fundingDetails.duration * 1 days);
+        if (!isClosed && (block.timestamp >= endTime || fundingDetails.remainingGoal == 0)) {
+        isClosed = true;
+        emit CampaignClosed();
+        CampaignFactory(fundingDetails.factory).updateCampaignStatus(address(this), true);
+    }
+}
+function contribute() public payable {
+    updateStatus();
+    require(!isClosed, "Campaign is closed");
+    require(msg.value >= fundingDetails.minimumContribution, "Contribution is less than minimum");
+
+    // Check if the campaign duration has expired
+    uint endTime = fundingDetails.creationTime + (fundingDetails.duration * 1 days);
+    require(block.timestamp <= endTime, "Campaign duration has expired");
+
+    if (contributions[msg.sender] == 0) {
+        contributors.push(msg.sender);
     }
 
-    function contribute() public payable {
-        updateStatus();
-        require(!isClosed, "Campaign is closed");
-        require(msg.value >= fundingDetails.minimumContribution, "Contribution is less than minimum");
-
-        if (contributions[msg.sender] == 0) {
-            contributors.push(msg.sender);
-        }
-        
-        contributions[msg.sender] += msg.value;
-        fundingDetails.remainingGoal -= msg.value;
-        updateStatus();
-    }
-
+    contributions[msg.sender] += msg.value;
+    fundingDetails.remainingGoal -= msg.value;
+    updateStatus();
+}
     function createRequest(string memory description, uint value, address recipient) public restricted {
         updateStatus();
         Request storage newRequest = requests.push();
@@ -229,14 +231,15 @@ contract Campaign {
         campaignDetails.photoHash = _photoHash;
         emit PhotoHashSet(_photoHash);
     }
-
+    
     function getTimeLeft() public view returns (uint) {
-        if (fundingDetails.remainingGoal == 0) {
-            return 0;
-        } else {
-            return (fundingDetails.creationTime + (fundingDetails.duration * 1 days)) - block.timestamp;
-        }
+    uint endTime = fundingDetails.creationTime + (fundingDetails.duration * 1 days);
+    if (block.timestamp >= endTime || fundingDetails.remainingGoal == 0) {
+        return 0;
+    } else {
+        return endTime - block.timestamp;
     }
+}
 
     function getContributors() public view returns (address[] memory, uint[] memory) {
         uint contributorCount = contributors.length;

@@ -33,11 +33,8 @@ const Investments = () => {
               const campaignDetails = await campaign.methods.campaignDetails().call();
               const fundingDetails = await campaign.methods.fundingDetails().call();
               const otherDetails = await campaign.methods.getOtherDetails().call();
-
-              const remainingGoal = fundingDetails.remainingGoal.toString();
               const timeLeft = (await campaign.methods.getTimeLeft().call()).toString();
               const targetAmount = fundingDetails.fundingGoal.toString();
-              const investors = otherDetails[2].toString();
               const remainingBalance = fundingDetails.remainingGoal.toString();
               const imageHash = campaignDetails.photoHash.toString();
               const req = otherDetails[1].toString();
