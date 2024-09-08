@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blockstarter
+
+[Live Demo](https://www.blockstarter.online) | [GitHub Repository](https://github.com/jariwala-jay/blockstarter)
+
+Blockstarter is a crowdfunding blockchain application built on the Sepolia testnet. It allows users to create and fund campaigns securely through individual smart contracts. This decentralized platform ensures that all transactions are safe, trustworthy, and transparent.
+
+## Features
+
+- **Create Campaigns**: Anyone can create a campaign, setting the funding goal, duration, and campaign details.
+- **Fund Campaigns**: Users can contribute to any campaign, with each contribution recorded on the blockchain.
+- **Edit Campaigns**: Campaign owners can update the campaign details after creation.
+- **Smart Contract Integration**: Each campaign is associated with an individual smart contract, ensuring secure handling of funds.
+- **Fund Safety**: Campaign owners cannot withdraw funds directly. They must create a request, and contributors vote to approve or reject the withdrawal.
+- **Voting System**: Contributors have the power to vote on withdrawal requests, making the funding process democratic and transparent.
+- **Leaderboard**: A leaderboard showcases the top contributors for each campaign, promoting engagement and competition.
+- **Campaign Closure**: Campaigns close automatically when the timer ends or when the funding goal is reached.
+- **Investment Tracking**: Users can view all the campaigns they have contributed to under the "My Investments" tab.
+- **Responsive Design**: The application is designed to work seamlessly on all devices, providing a great user experience.
 
 ## Getting Started
 
-First, run the development server:
+To get started with Blockstarter locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js and npm installed
+- MetaMask or another Ethereum-compatible wallet installed in your browser
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+   git clone https://github.com/jariwala-jay/blockstarter.git
+    ```
+2. Navigate to the project directory:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    cd blockstarter
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+4. Start the development server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm start
+    ```
+The app should now be running on http://localhost:3000.
+## Smart Contracts
+The core functionality of Blockstarter is powered by Ethereum smart contracts. These contracts handle campaign creation, funding, and withdrawal processes, ensuring that all funds are securely managed on the blockchain.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Testnet
+Blockstarter is currently deployed on the Sepolia testnet. Ensure that your wallet is connected to the Sepolia network to interact with the application.
 
-## Deploy on Vercel
+## Contributing
+Contributions are welcome! Please fork the repository, make your changes, and submit a pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+For any inquiries or feedback, feel free to contact me via GitHub or [LinkedIn](https://www.linkedin.com/in/jariwala-jay/).
+
+Happy Crowdfunding with Blockstarter!
